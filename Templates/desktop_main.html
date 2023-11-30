@@ -4,35 +4,44 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Key Maxter</title>
-    <link href="style.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet" />
   </head>
   <body>
     <header id="header-principal">
-      <img id="imagen-principal"
-        src="/pruebaAi.ai"
-        alt="Logo principal de KeyMaxter"
+      <img
+        id="imagen-principal"
+        src="/Images/panoramica.jpg"
+        alt="Logo principal de
+      KeyMaxter"
       />
     </header>
     <main>
       <body>
-        <h5>Filtros:<h5>
-        <form action="aplicar a la vista">
-          <label for="precio ascendente"
-            ><input
-              id="precio ascendente"
-              type="radio"
-              name="ordenar_precio"
-            />Precio ascendente</label
-          >
-          <label for="precio descendente"
-            ><input
-              id="precio descendente"
-              type="radio"
-              name="ordenar_precio"
-            />Precio descendente</label
-          >
-          <p>Marca:</p>
-        </form>
+        <search>
+          <form action="aplicar a la vista">
+            <p>Filtros:</p>
+            <label for="precio ascendente"
+              ><input
+                id="precio ascendente"
+                type="radio"
+                name="ordenar_precio"
+              />Precio ascendente</label
+            >
+            <label for="precio descendente"
+              ><input
+                id="precio descendente"
+                type="radio"
+                name="ordenar_precio"
+              />Precio descendente</label
+            >
+            <p>Marca:</p>
+            <select id="marca">
+              <option value="marca1">Marca 1</option>
+              <option value="marca2">Marca 2</option>
+              <option value="marca3">Marca 3</option>
+            </select>
+          </form>
+        </search>
       </body>
     </main>
 
