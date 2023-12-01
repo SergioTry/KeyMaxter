@@ -8,3 +8,45 @@
   width: 80%;
   margin: 0 auto;
 }
+
+.contenedor-general {
+  display: flex;
+  margin-top: 8px;
+}
+#imagen-side-bar {
+  display: block;
+  width: 100px; /* ajusta el ancho de la imagen */
+  height: auto;
+  margin: 10px;
+}
+
+aside {
+  display: flex;
+  justify-content: center;
+  background-color: aqua;
+  border-radius: 20px;
+  margin-right: 4px;
+}
+
+a {
+  display: block;
+}
+
+article {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: blueviolet;
+}
+.contenedor-teclado {
+  display: flex;
+  align-items: center;
+  margin: 1px;
+  flex-wrap: wrap;
+  background-color: yellow;
+}
+#imagen-teclado {
+  height: 250px;
+  width: 350px;
+  margin: 12px;
+}
