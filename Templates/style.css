@@ -21,8 +21,6 @@
 }
 
 aside {
-  display: flex;
-  justify-content: center;
   background-color: aqua;
   border-radius: 20px;
   margin-right: 4px;
