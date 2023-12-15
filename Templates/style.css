@@ -9,27 +9,29 @@
   margin: 0 auto;
 }
 
-.contenedor-general {
+#contenedor-general {
   display: flex;
   margin-top: 8px;
-}
-#imagen-side-bar {
-  display: block;
-  width: 100px; /* ajusta el ancho de la imagen */
-  height: auto;
-  margin: 10px;
 }
 
 aside {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: aqua;
   border-radius: 20px;
   margin-right: 4px;
 }
 
-a {
-  display: block;
+#imagen-side-bar {
+  width: 100px;
+  height: auto;
+  margin: 10px;
+}
+
+aside a {
+  display: flex;
 }
 
 article {
