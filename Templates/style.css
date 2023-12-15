@@ -2,6 +2,7 @@
   height: 15vh;
   width: 80vw;
 }
+
 #header-principal {
   display: flex;
   justify-content: center;
@@ -11,25 +12,52 @@
 
 #contenedor-general {
   display: flex;
-  margin-top: 8px;
+  margin-top: 10px;
 }
 
 aside {
+  position: sticky;
+  top: 10px;
+  right: 8px;
+  width: 15vw;
+  height: 90vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: aqua;
   border-radius: 20px;
   margin-right: 4px;
 }
 
 #imagen-side-bar {
-  width: 100px;
-  height: auto;
+  
   margin: 10px;
+}
+
+aside a img{
+  width: 2vw;
+  height: 2vh;
 }
 
 aside a {
   display: flex;
+  font-size: 0.5rem;
+}
+
+fieldset {
+  display: block;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  min-inline-size: min-content;
+  border-width: 2px;
+  border-style: groove;
+  border-color: rgb(192, 192, 192);
+  border-image: initial;
 }
 
 article {
