@@ -1,3 +1,7 @@
+html {
+  font-size: 32px;
+}
+
 #imagen-principal {
   height: 15vh;
   width: 80vw;
@@ -13,6 +17,36 @@
 #contenedor-general {
   display: flex;
   margin-top: 10px;
+}
+
+ul {
+  display: none;
+}
+
+input:checked ~ ul {
+  display: block;
+}
+
+aside label {
+  box-sizing: border-box;
+  display: inline-block;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+  user-select: none;
+}
+
+aside li {
+  display: block;
+  background: lightgrey;
+  margin: 0;
+  padding: 10px;
+  list-style: none;
+  border-bottom: 1px solid grey;
 }
 
 aside {
@@ -31,18 +65,19 @@ aside {
 }
 
 #imagen-side-bar {
-  
   margin: 10px;
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
-aside a img{
-  width: 2vw;
-  height: 2vh;
+aside a img {
+  width: 1rem;
+  height: 1rem;
 }
 
 aside a {
   display: flex;
-  font-size: 0.5rem;
+  font-size: 1rem;
 }
 
 fieldset {
