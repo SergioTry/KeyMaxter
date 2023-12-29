@@ -7,16 +7,40 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <header id="header-principal">
-      <img
-        id="imagen-principal"
-        src="/Images/prueba.png"
-        alt="Logo principal de
+    <header>
+      <div id="header-principal">
+        <img
+          id="imagen-principal"
+          src="/Images/prueba.png"
+          alt="Logo principal de
       KeyMaxter"
-      />
+        />
+      </div>
     </header>
+    <span class="contenedor-menu-horizontal">
+      <nav>
+        <ul class="menu-horizontal">
+          <li>
+            <a>
+              <img
+                src="/Images/account_settings.ico"
+                alt="Icono de ajustes del usuario"
+              />
+            </a>
+          </li>
+          <li>
+            <a>
+              <img
+                src="/Images/account_settings.ico"
+                alt="Icono de ajustes del usuario"
+              />
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </span>
     <div id="contenedor-general">
-      <aside>
+      <aside class="contenedor-menu-lateral">
         <img
           id="imagen-side-bar"
           src="/Images/desktop_bar_side_keyboard.ico"
@@ -24,9 +48,7 @@
         />
         <hr />
         <nav>
-          <input type="checkbox" id="menu" />
-          <label for="menu"> ☰ </label>
-          <ul>
+          <ul class="menu-lateral">
             <li>
               <a href="https://www.google.com/?hl=es"
                 ><img
@@ -242,5 +264,6 @@
         />Sugerencias</a
       >
     </footer>
+    <script src="main.js"></script>
   </body>
 </html>
