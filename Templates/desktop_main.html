@@ -10,73 +10,98 @@
     <header>
       <div id="header-principal">
         <img
-          id="imagen-principal"
+          id="imagenHeader"
           src="/Images/prueba.png"
           alt="Logo principal de
       KeyMaxter"
         />
       </div>
     </header>
-    <span class="contenedor-menu-horizontal">
-      <nav>
-        <ul class="menu-horizontal">
-          <li>
-            <a>
-              <img
-                src="/Images/account_settings.ico"
-                alt="Icono de ajustes del usuario"
-              />
-            </a>
-          </li>
-          <li>
-            <a>
-              <img
-                src="/Images/account_settings.ico"
-                alt="Icono de ajustes del usuario"
-              />
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </span>
-    <div id="contenedor-general">
-      <aside class="contenedor-menu-lateral">
-        <img
-          id="imagen-side-bar"
-          src="/Images/desktop_bar_side_keyboard.ico"
-          alt="Logo secundario de KeyMaxter"
-        />
-        <hr />
+    <div class="contenedor-general">
+      <div class="contenedor-menu-horizontal" id="imagenSticky">
         <nav>
-          <ul class="menu-lateral">
+          <ul class="menu-horizontal">
             <li>
-              <a href="https://www.google.com/?hl=es"
-                ><img
-                  src="/Images/home_bar_side_keyboard.ico"
-                  alt="Icono de home"
-                />Home</a
-              >
+              <a>
+                <img
+                  src="/Images/account_settings.ico"
+                  alt="Icono de ajustes del usuario"
+                />
+              </a>
             </li>
             <li>
-              <a href="https://www.google.com/?hl=es"
-                ><img
-                  src="/Images/info_bar_side_keyboard.ico"
-                  alt="Icono de info"
-                />Info</a
-              >
-            </li>
-            <li>
-              <a href="https://www.google.com/?hl=es"
-                ><img
-                  src="/Images/gallery_bar_side_keyboard.ico"
-                  alt="Icono de galería"
-                />Galería</a
-              >
+              <a>
+                <img
+                  src="/Images/account_settings.ico"
+                  alt="Icono de ajustes del usuario"
+                />
+              </a>
             </li>
           </ul>
         </nav>
-      </aside>
-      <main>
+      </div>
+      <div>
+        <div class="contenedor-menu-lateral">
+          <aside class="menu-lateral">
+            <img
+              class="imagen-side-bar"
+              src="/Images/desktop_bar_side_keyboard.ico"
+              alt="Logo secundario de KeyMaxter"
+            />
+            <hr />
+            <nav>
+              <ul>
+                <li>
+                  <a
+                    class="enlace-side-bar"
+                    href="https://www.google.com/?hl=es"
+                  >
+                    <div class="contenedor-enlace">
+                      <img
+                        class="iconos-side-bar"
+                        src="/Images/home_bar_side_keyboard.ico"
+                        alt="Icono de galería"
+                      />
+                      <p>Teclados custom</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="enlace-side-bar"
+                    href="https://www.google.com/?hl=es"
+                  >
+                    <div class="contenedor-enlace">
+                      <img
+                        class="iconos-side-bar"
+                        src="/Images/home_bar_side_keyboard.ico"
+                        alt="Icono de galería"
+                      />
+                      <p>Productos</p>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    class="enlace-side-bar"
+                    href="https://www.google.com/?hl=es"
+                  >
+                    <div class="contenedor-enlace">
+                      <img
+                        class="iconos-side-bar"
+                        src="/Images/home_bar_side_keyboard.ico"
+                        alt="Icono de galería"
+                      />
+                      <p>Diséñalo tú mismo</p>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </aside>
+        </div>
+      </div>
+      <main id="content">
         <search>
           <form action="aplicar a la vista">
             <fieldset>
@@ -252,7 +277,7 @@
         </article>
       </main>
     </div>
-    <footer>
+    <footer id="hola">
       <a href="https://www.google.com/?hl=es"
         ><img src="/Images/instagram.ico" alt="Icono de rss" />Redes sociales</a
       >
