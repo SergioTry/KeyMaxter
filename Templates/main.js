@@ -18,5 +18,6 @@ function situarBotonesHorizontales() {
   } else {
     imagenSticky.style.position = "absolute";
     imagenSticky.style.top = imagenPosicionInicial + "px";
+    imagenSticky.style.right = "1px";
   }
 }
