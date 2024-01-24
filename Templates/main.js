@@ -1,4 +1,4 @@
-const imagenSticky = document.getElementById("imagenSticky");
+const imagenSticky = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
 
 var alturaImagenHeader = imagenHeader.clientHeight;
@@ -12,12 +12,18 @@ window.addEventListener("load", function () {
 });
 
 function situarBotonesHorizontales() {
-  if (window.scrollY > alturaImagenHeader) {
+  if (window.getComputedStyle(imagenHeader).display != "none") {
+    if (window.scrollY > alturaImagenHeader) {
+      imagenSticky.style.position = "fixed";
+      imagenSticky.style.top = "8px";
+    } else {
+      imagenSticky.style.position = "absolute";
+      imagenSticky.style.right = "1px";
+      imagenSticky.style.top = imagenPosicionInicial + "px";
+    }
+  } else {
     imagenSticky.style.position = "fixed";
     imagenSticky.style.top = "8px";
-  } else {
-    imagenSticky.style.position = "absolute";
-    imagenSticky.style.top = imagenPosicionInicial + "px";
-    imagenSticky.style.right = "1px";
+    imagenSticky.style.right = "0px";
   }
 }

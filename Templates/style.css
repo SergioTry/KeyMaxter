@@ -32,8 +32,7 @@ html {
 }
 
 .contenedor-menu-horizontal {
-  position: absolute !;
-  right: 20px;
+  position: absolute;
   z-index: 1000;
 }
 
@@ -48,6 +47,7 @@ html {
   height: 70px;
   width: 70px;
   margin-right: 20px;
+  margin-bottom: 8px;
   background-color: gray;
   border-radius: 50%;
   overflow: hidden;
@@ -249,22 +249,11 @@ html {
   max-width: 100%;
 }
 
-.grid-box .me-gusta-teclado {
-  background-color: rgb(6, 94, 40);
-}
-
-#hola {
-  position: relative;
-  z-index: 50;
-}
-.hu {
+.grid-box .me-gusta-contenedor {
   display: flex;
   width: 100%;
   align-items: flex-end;
   justify-content: flex-end;
-}
-.like input {
-  display: none;
 }
 
 .like {
@@ -279,6 +268,10 @@ html {
   margin: 0px 8px 0px 0px;
 }
 
+.like input {
+  display: none;
+}
+
 .hearth {
   background-image: url("https://assets.codepen.io/23500/Hashflag-CountdownToMars.svg");
   background-size: calc(var(--size) * var(--frames)) var(--size);
@@ -289,7 +282,7 @@ html {
   height: var(--size);
 }
 
-input:checked + .hearth {
+.me-gusta-contenedor input:checked + .hearth {
   animation: like 1s steps(calc(var(--frames) - 3));
   animation-fill-mode: forwards;
 }
@@ -310,4 +303,47 @@ input:checked + .hearth {
       background-position-x: calc(var(--size) * (var(--frames) * -1 + 1));
     }
   }
+}
+
+.burger {
+  background-color: chocolate;
+  display: none;
+}
+
+@media screen and (max-width: 870px) {
+  * {
+    font-size: 16px;
+  }
+  body {
+    background-color: red;
+  }
+  #imagenHeader {
+    display: none;
+  }
+  .contenedor-menu-horizontal nav .menu-horizontal {
+    flex-direction: column;
+  }
+  .contenedor-menu-lateral {
+    display: none;
+  }
+  .burger {
+    display: block;
+    position: fixed;
+    top: 12px;
+    left: 8px;
+    background-color: green;
+  }
+  .burger nav * {
+    list-style: none;
+    width: 50%;
+    height: 50%;
+  }
+  .flex-layout {
+    margin-left: 0px;
+  }
+}
+
+footer {
+  position: relative;
+  z-index: 50;
 }
