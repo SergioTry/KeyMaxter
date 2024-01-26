@@ -1,8 +1,7 @@
-const imagenSticky = document.getElementById("menuHorizontal");
+const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
 
-var alturaImagenHeader = imagenHeader.clientHeight;
-var imagenPosicionInicial = imagenSticky.offsetTop;
+var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
 window.addEventListener("scroll", function () {
   situarBotonesHorizontales();
@@ -11,19 +10,24 @@ window.addEventListener("load", function () {
   situarBotonesHorizontales();
 });
 
+function esElementoNoVisible(elemento) {
+  var rect = elemento.getBoundingClientRect();
+  return rect.bottom <= 0 || rect.top >= window.innerHeight;
+}
+
 function situarBotonesHorizontales() {
   if (window.getComputedStyle(imagenHeader).display != "none") {
-    if (window.scrollY > alturaImagenHeader) {
-      imagenSticky.style.position = "fixed";
-      imagenSticky.style.top = "8px";
+    if (esElementoNoVisible(imagenHeader)) {
+      menuHorizontal.style.position = "fixed";
+      menuHorizontal.style.top = "0.25rem";
     } else {
-      imagenSticky.style.position = "absolute";
-      imagenSticky.style.right = "1px";
-      imagenSticky.style.top = imagenPosicionInicial + "px";
+      menuHorizontal.style.position = "absolute";
+      menuHorizontal.style.right = "0.03125rem";
+      menuHorizontal.style.top = menuHorizontalPosicionInicial + "px";
     }
   } else {
-    imagenSticky.style.position = "fixed";
-    imagenSticky.style.top = "8px";
-    imagenSticky.style.right = "0px";
+    menuHorizontal.style.position = "fixed";
+    menuHorizontal.style.top = "1rem";
+    menuHorizontal.style.right = "0.5rem";
   }
 }

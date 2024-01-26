@@ -44,10 +44,10 @@ html {
 }
 
 .contenedor-menu-horizontal nav .menu-horizontal li {
-  height: 70px;
-  width: 70px;
-  margin-right: 20px;
-  margin-bottom: 8px;
+  height: 3rem;
+  width: 3rem;
+  margin-left: 0.625rem;
+  margin-bottom: 0.25rem;
   background-color: gray;
   border-radius: 50%;
   overflow: hidden;
@@ -78,7 +78,7 @@ html {
   align-content: center;
   align-items: center;
   justify-items: center;
-  width: 425px;
+  width: 11.5rem;
   height: 100%;
   background-color: aqua;
   border-radius: 20px;
@@ -87,10 +87,10 @@ html {
 .contenedor-menu-lateral .menu-lateral hr {
   margin-inline: 0;
   margin-block: 0;
-  margin: 40px;
+  margin: 1.25rem;
   unicode-bidi: normal;
   border: none;
-  height: 16px;
+  height: 0.5rem;
   background-image: linear-gradient(
     45deg,
     hsla(0, 0%, 5%, 0),
@@ -100,17 +100,18 @@ html {
     hsla(0, 0%, 5%, 0) 66.67%,
     hsla(0, 0%, 5%, 0) 100%
   );
-  background-size: 16px 100%;
+  background-size: 0.5rem 100%;
   width: 80%;
 }
 
 .contenedor-menu-lateral .menu-lateral nav {
   display: flex;
-  width: 65%;
+  width: 75%;
   justify-content: center;
 }
 
-.contenedor-menu-lateral .menu-lateral nav ul {
+.contenedor-menu-lateral .menu-lateral nav ul,
+.burger nav ul {
   list-style: none;
   margin: 0;
   margin-inline: 0;
@@ -118,14 +119,17 @@ html {
   padding: 0;
   padding-inline: 0;
 }
-.contenedor-menu-lateral .menu-lateral nav ul li {
+.contenedor-menu-lateral .menu-lateral nav ul li,
+.burger nav ul li {
   list-style: none;
   text-align: center;
   width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 0.375rem;
 }
-.contenedor-menu-lateral .menu-lateral .contenedor-enlace {
+.contenedor-menu-lateral .menu-lateral .contenedor-enlace,
+.burger .contenedor-enlace {
   display: flex;
+  justify-content: center;
   align-items: center;
   transition: 0.5s;
   overflow: hidden;
@@ -149,15 +153,15 @@ html {
 }
 
 .imagen-side-bar {
-  margin: 10px;
-  width: 8.2rem;
+  margin: 0.3125em;
+  width: 8.2em;
   height: auto;
   object-fit: cover;
 }
 .iconos-side-bar {
-  margin: 10px;
-  margin-right: 1rem;
-  width: 2.8rem;
+  margin: 0.3125em;
+  margin-right: 1em;
+  width: 2.8em;
   height: auto;
   object-fit: cover;
 }
@@ -176,6 +180,7 @@ html {
 .grid-search fieldset {
   display: flex;
   width: 100%;
+  height: 3rem;
   margin-block: 0;
   align-items: center;
 }
@@ -184,7 +189,7 @@ html {
 }
 
 .grid-search span {
-  margin-left: 0.5rem;
+  margin-left: 0.5em;
   display: flex;
   align-items: center;
   width: 100%;
@@ -195,16 +200,16 @@ html {
   align-items: center;
   justify-content: center;
   align-self: center;
-  margin-right: 10px;
+  margin-right: 0.3125em;
 }
 .grid-search span label input {
-  margin-left: 10px;
+  margin-left: 0.3125em;
   transition: all 0.2s ease-in-out;
   padding-block: 0;
   padding-inline: 0;
 }
 .grid-search span label input:checked {
-  border: 2px solid #344056;
+  border: 0.0625em solid #344056;
   background-color: rgba(2, 228, 231, 0.8);
 }
 
@@ -223,7 +228,7 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 65% 17.5% 17.5%;
-  border: 2px solid black;
+  border: 0.0625em solid black;
   width: 100%;
 }
 
@@ -231,16 +236,16 @@ html {
   grid-column: 1/3;
   height: 100%;
   width: 100%;
-  padding: 10px;
+  padding: 0.3125em;
   object-fit: cover;
 }
 .grid-box p {
   margin-block: 0;
-  padding: 10px;
+  padding: 0.3125em;
 }
 .grid-box a {
   margin-block: 0;
-  padding: 10px;
+  padding: 0.3125em;
 }
 
 .grid-box .modelo-teclado {
@@ -261,11 +266,11 @@ html {
   width: var(--size);
   height: var(--size);
   cursor: pointer;
-  border-radius: 999px;
+  border-radius: 31.21875em;
   overflow: visible;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
-  margin: 0px 8px 0px 0px;
+  margin: 0px 0.25em 0px 0px;
 }
 
 .like input {
@@ -306,12 +311,41 @@ html {
 }
 
 .burger {
-  background-color: chocolate;
+  display: none;
+  height: 50vh;
+  width: 50vw;
+  overflow: hidden;
+}
+
+.burger input {
   display: none;
 }
 
-@media screen and (max-width: 870px) {
-  * {
+.burger nav {
+  width: 100%;
+  height: 100%;
+}
+
+.burger label {
+  background-color: cyan;
+  border-radius: 25%;
+  border: 1px solid black;
+}
+.burger ul {
+  display: none;
+}
+
+.burger input:checked ~ ul {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: cyan;
+}
+
+@media screen and (max-width: 1306px) {
+  html {
     font-size: 16px;
   }
   body {
@@ -320,24 +354,26 @@ html {
   #imagenHeader {
     display: none;
   }
-  .contenedor-menu-horizontal nav .menu-horizontal {
+  .menu-horizontal {
     flex-direction: column;
+  }
+
+  .contenedor-menu-horizontal nav .menu-horizontal li {
+    margin-bottom: 0.7rem;
   }
   .contenedor-menu-lateral {
     display: none;
   }
+  .flex-layout-content {
+    font-size: 1.5rem;
+  }
   .burger {
     display: block;
     position: fixed;
-    top: 12px;
-    left: 8px;
-    background-color: green;
+    top: 0.75rem;
+    left: 0.5rem;
   }
-  .burger nav * {
-    list-style: none;
-    width: 50%;
-    height: 50%;
-  }
+
   .flex-layout {
     margin-left: 0px;
   }
