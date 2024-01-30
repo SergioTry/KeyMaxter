@@ -354,25 +354,33 @@ html {
 }
 .burger .btn_span {
   position: absolute;
-  top: 2.8px;
-  width: 2.22rem;
-  height: 0.25rem;
-  background: #1663cc;
+  top: 5px;
+  width: 2.7rem;
+  height: 0.3rem;
+  background: black;
   transition: all 0.3s ease;
   border-radius: 20px;
 }
 
+.burger input:checked ~ .btn_menu {
+  background-color: rgba(2, 0, 36, 1);
+}
+
+.burger input:checked ~ .btn_menu .btn_span {
+  background: blueviolet;
+}
+
 .btn_menu {
   position: fixed;
-  padding: 0.08rem;
-  top: 0.75rem;
+  padding: 0.13rem;
+  top: 1.1rem;
   left: 0.5rem;
-  z-index: 3;
-  width: 2.55rem;
-  height: 2.3rem;
-  border-radius: 20%;
+  z-index: -1;
+  width: 3.12rem;
+  height: 3rem;
   border: 1px solid black;
-  background-color: rgba(2, 0, 36, 1);
+  border-radius: 1px;
+  background-color: white;
 }
 
 .burger .cont-span {
@@ -380,21 +388,21 @@ html {
 }
 
 .burger .btn_span:nth-child(2) {
-  top: 12.8px;
+  top: 17px;
 }
 .burger .btn_span:nth-child(3) {
-  top: 22.8px;
+  top: 29px;
 }
 
 .burger input:checked ~ .btn_menu #btn_span_1 {
-  top: 13px;
+  top: 17px;
   transform: rotate(45deg);
 }
 .burger input:checked ~ .btn_menu #btn_span_2 {
   opacity: 0;
 }
 .burger input:checked ~ .btn_menu #btn_span_3 {
-  top: 13px;
+  top: 17px;
   transform: rotate(-45deg);
 }
 
@@ -421,6 +429,7 @@ html {
   border-bottom-left-radius: 5%;
 }
 .burger li {
+  color: white;
   border: blueviolet 4px outset;
   border-radius: 20px;
   transition: border 0.4s ease;
@@ -431,7 +440,7 @@ html {
   border: white 4px outset;
   background-color: blueviolet;
 }
-.burger li:hover p {
+.burger li p {
   color: white;
 }
 .burger li a {
@@ -476,8 +485,9 @@ html {
   .burger {
     display: block;
     position: fixed;
-    top: 2.5rem;
+    top: 4.05rem;
     left: 0.5rem;
+    z-index: 10000;
   }
 }
 
