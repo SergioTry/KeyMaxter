@@ -43,7 +43,13 @@
       <div class="burger">
         <nav>
           <input type="checkbox" id="menu" />
-          <label for="menu"> ☰ </label>
+
+          <label for="menu" class="btn_menu flex_column">
+            <span id="btn_span_1" class="btn_span"></span>
+            <span id="btn_span_2" class="btn_span"></span>
+            <span id="btn_span_3" class="btn_span"></span>
+          </label>
+
           <ul>
             <li>
               <a class="enlace-side-bar" href="https://www.google.com/?hl=es">
@@ -157,12 +163,14 @@
                     name="ordenar_precio"
                     value="radio2"
                 /></label>
-                Marca:
-                <select id="marca">
-                  <option value="marca1">Marca 1</option>
-                  <option value="marca2">Marca 2</option>
-                  <option value="marca3">Marca 3</option>
-                </select>
+                <div>
+                  Marca:
+                  <select id="marca">
+                    <option value="marca1">Marca 1</option>
+                    <option value="marca2">Marca 2</option>
+                    <option value="marca3">Marca 3</option>
+                  </select>
+                </div>
               </span>
             </fieldset>
           </form>
