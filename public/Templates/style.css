@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-image: url("/public/Images/key_rain_purple.jpg");
+}
+
 html {
   font-size: 32px;
   font-family: "Nova Square", sans-serif;
@@ -81,11 +85,10 @@ html {
   justify-items: center;
   width: 11.5rem;
   height: 100%;
-  background: rgb(2, 0, 36);
   background: linear-gradient(
     180deg,
     rgba(2, 0, 36, 1) 0%,
-    rgba(69, 21, 140, 1) 28%,
+    rgba(69, 21, 140, 1) 50%,
     rgba(255, 255, 255, 1) 100%
   );
   border-radius: 20px;
@@ -100,13 +103,14 @@ html {
   height: 0.5rem;
   background-image: linear-gradient(
     45deg,
-    hsla(0, 0%, 5%, 0),
-    hsla(0, 0%, 5%, 0) 33.33%,
-    hsla(0, 0%, 5%, 1) 33.33%,
-    hsla(0, 0%, 5%, 1) 66.67%,
-    hsla(0, 0%, 5%, 0) 66.67%,
+    hsl(0deg 0% 0% / 0%),
+    hsl(0deg 0% 0% / 0%) 33.33%,
+    hsl(0, 0%, 100%) 33.33%,
+    hsl(0, 0%, 100%) 66.67%,
+    hsla(0, 0%, 100%, 0) 66.67%,
     hsla(0, 0%, 5%, 0) 100%
   );
+
   background-size: 0.5rem 100%;
   width: 80%;
 }
@@ -133,6 +137,10 @@ html {
   width: 100%;
   margin-bottom: 0.375rem;
 }
+.contenedor-menu-lateral .menu-lateral nav ul li p,
+.burger nav ul li p {
+  color: white;
+}
 .contenedor-menu-lateral .menu-lateral .contenedor-enlace {
   height: 3.875rem;
   display: flex;
@@ -140,15 +148,18 @@ html {
   align-items: center;
   transition: 0.5s;
   overflow: hidden;
+  border-radius: 20px;
+  border: blueviolet 6px outset;
   z-index: -1;
 }
 
 .contenedor-menu-lateral .menu-lateral .contenedor-enlace:hover {
   transform: scale(1.2);
-  border: 1px solid #000;
-  border-radius: 15%;
+  border-radius: 20px;
   box-shadow: 5px 8px 10px black;
   z-index: 34252345;
+  border: white 6px outset;
+  background-color: blueviolet;
 }
 
 .enlace-side-bar {
@@ -166,15 +177,17 @@ html {
 
 .imagen-side-bar {
   margin: 0.3125em;
-  width: 8.2em;
+  width: 9em;
+  border-radius: 48%;
+  border: white 6px outset;
   height: auto;
+  box-shadow: 11px 10px 10px 0px rgba(0, 0, 0, 0.75);
   object-fit: cover;
 }
 .iconos-side-bar {
   margin: 0.3125em;
-  margin-right: 1em;
   width: 2.8em;
-  height: auto;
+  height: 3.7em;
   object-fit: cover;
 }
 
@@ -188,12 +201,15 @@ html {
   align-items: center;
 }
 .grid-search {
+  color: black;
   margin-bottom: 0.09em;
   border: 0.125em solid black;
   padding-left: 0.3em;
   padding-right: 0.3em;
   margin-right: 0.5em;
   margin-left: 0.5em;
+  border-radius: 20px;
+  background-color: white;
 }
 
 .grid-search fieldset {
@@ -252,8 +268,9 @@ html {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 65% 17.5% 17.5%;
-  border: 0.15em solid black;
+  border: 0.15em solid white;
   max-width: 16.5625em;
+  background-color: grey;
   /*max-height: 21.53125rem; */
 }
 
@@ -360,10 +377,11 @@ html {
   top: 5px;
   width: 2.7rem;
   height: 0.3rem;
-  background: black;
+  background: blueviolet;
   transition: all 0.3s ease;
   border-radius: 20px;
 }
+
 .btn_menu {
   position: fixed;
   padding: 0.06rem;
@@ -374,7 +392,7 @@ html {
   height: 3rem;
   border: 2px solid black;
   border-radius: 1px;
-  background-color: white;
+  background-color: black;
 }
 
 .burger input:checked ~ .btn_menu {
@@ -385,7 +403,6 @@ html {
 .burger input:checked ~ .btn_menu .btn_span {
   background: blueviolet;
 }
-
 
 .burger .cont-span {
   display: flex;
@@ -464,7 +481,6 @@ html {
     font-size: 13.5px;
   }
   body {
-    background-color: red;
     margin: 0px;
   }
   #imagenHeader {
