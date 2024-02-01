@@ -1,7 +1,5 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
-const icons = document.getElementsByClassName("rss-icon");
-const footer = document.querySelector("footer");
 
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
@@ -11,16 +9,6 @@ window.addEventListener("scroll", function () {
 window.addEventListener("load", function () {
   situarBotonesHorizontales();
 });
-
-for (const icon of icons) {
-  icon.addEventListener("mouseover", function () {
-    footer.style = "backdrop-filter: blur(2.5px)";
-  });
-
-  icon.addEventListener("mouseout", function () {
-    footer.style = "none";
-  });
-}
 
 function esElementoNoVisible(elemento) {
   var rect = elemento.getBoundingClientRect();

@@ -64,6 +64,17 @@ html {
   object-fit: cover;
   margin: auto;
 }
+.settings{
+-webkit-transition: 1s ease-out;
+-moz-transition: 1s ease-out;
+transition: 6s ease-out;
+}
+.settings:hover {
+  cursor: pointer;
+  -webkit-transform: rotateZ(720deg);
+    -moz-transform: rotateZ(720deg);
+    transform: rotateZ(720deg);
+}
 
 .contenedor-menu-lateral {
   position: sticky;
@@ -212,12 +223,12 @@ main {
 }
 .burger .btn_span {
   position: absolute;
-  top: 5px;
+  top: 0.37rem;
   width: 2.7rem;
   height: 0.3rem;
   background: blueviolet;
   transition: all 0.3s ease;
-  border-radius: 20px;
+  border-radius: 1.481rem;
 }
 
 .btn_menu {
@@ -228,8 +239,8 @@ main {
   z-index: 3245235;
   width: 3.12rem;
   height: 3rem;
-  border: 2px solid black;
-  border-radius: 1px;
+  border: 0.148rem solid black;
+  border-radius: 0.074rem;
   background-color: black;
   cursor: pointer;
 }
@@ -248,21 +259,21 @@ main {
 }
 
 .burger .btn_span:nth-child(2) {
-  top: 17px;
+  top: 1.259rem;
 }
 .burger .btn_span:nth-child(3) {
-  top: 28px;
+  top: 2.074rem;
 }
 
 .burger input:checked ~ .btn_menu #btn_span_1 {
-  top: 17px;
+  top: 1.259rem;
   transform: rotate(45deg);
 }
 .burger input:checked ~ .btn_menu #btn_span_2 {
   opacity: 0;
 }
 .burger input:checked ~ .btn_menu #btn_span_3 {
-  top: 17px;
+  top: 1.259rem;
   transform: rotate(-45deg);
 }
 
@@ -286,18 +297,18 @@ main {
   border-top-right-radius: 5%;
   border-bottom-right-radius: 5%;
   border-bottom-left-radius: 5%;
-  border: 2px solid black;
+  border: 0.148rem solid black;
 }
 .burger li {
   color: white;
-  border: blueviolet 4px outset;
-  border-radius: 20px;
+  border: blueviolet 0.296rem outset;
+  border-radius: 1.481rem;
   transition: border 0.4s ease;
 }
 
 .burger li:hover {
   color: white;
-  border: white 4px outset;
+  border: white 0.296rem outset;
   background-color: blueviolet;
 }
 .burger li p {
@@ -310,7 +321,7 @@ main {
 
 @media screen and (max-width: 1306px) {
   html {
-    font-size: 13.5px;
+    font-size: 16px;
   }
   body {
     margin: 0px;
@@ -366,4 +377,8 @@ footer {
   transform: scale(1.25);
   background-color: white;
   transition: background-color 0.5s, transform 0.5s ease-out;
+}
+
+footer:has(.rss-icon:hover){
+  backdrop-filter: blur(2.5px);
 }
