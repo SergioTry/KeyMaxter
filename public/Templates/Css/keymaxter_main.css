@@ -14,9 +14,9 @@ html {
 }
 
 #imagenHeader {
-  height: 7rem;
+  height: 9rem;
   width: 65rem;
-  max-width: 100%;
+  object-fit: none;
 }
 
 #header-principal {
@@ -49,9 +49,11 @@ html {
   width: 3rem;
   margin-left: 0.625rem;
   margin-bottom: 0.25rem;
-  background-color: gray;
+  background-color: blueviolet;
   border-radius: 50%;
   overflow: hidden;
+  border: 0.1rem solid #26d9d9;
+  transition: border 0.3s ease;
 }
 .contenedor-menu-horizontal nav .menu-horizontal li a {
   display: flex;
@@ -63,17 +65,46 @@ html {
   width: 75%;
   object-fit: cover;
   margin: auto;
+  filter: invert(100%) sepia(0%) saturate(7500%) hue-rotate(23deg)
+    brightness(118%) contrast(118%);
 }
-.settings{
--webkit-transition: 1s ease-out;
--moz-transition: 1s ease-out;
-transition: 6s ease-out;
+
+.rotate {
+  transition: transform 6.5s ease-out;
 }
-.settings:hover {
+
+.rotate:hover {
   cursor: pointer;
-  -webkit-transform: rotateZ(720deg);
-    -moz-transform: rotateZ(720deg);
-    transform: rotateZ(720deg);
+  transform: rotateZ(900deg);
+}
+
+.icon-login {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.icon-login img {
+  z-index: 2345;
+}
+
+.icon-login::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #26d9d9; /* Cambia los colores según tu preferencia */
+  transition: left 0.3s ease;
+}
+.contenedor-menu-horizontal nav .menu-horizontal li:has(img:hover) {
+  border: 0.1rem solid white;
+}
+
+.icon-login:hover::before {
+  left: 0;
 }
 
 .contenedor-menu-lateral {
@@ -234,7 +265,7 @@ main {
 .btn_menu {
   position: fixed;
   padding: 0.06rem;
-  top: 1.2rem;
+  top: 3.05rem;
   left: 0.5rem;
   z-index: 3245235;
   width: 3.12rem;
@@ -335,7 +366,10 @@ main {
 
   .contenedor-menu-horizontal nav .menu-horizontal li {
     margin-bottom: 0.7rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
+
   .contenedor-menu-lateral {
     display: none;
   }
@@ -348,7 +382,7 @@ main {
   .burger {
     display: block;
     position: fixed;
-    top: 4.05rem;
+    top: 5.9rem;
     left: 0.5rem;
     z-index: 10000;
   }
@@ -362,10 +396,16 @@ footer {
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  height: 6rem;
+  height: 20rem;
   transition: backdrop-filter 0.5s ease-out;
 }
-
+.rss-content {
+  grid-column: 1/3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
 .rss-icon {
   fill: #26d9d9;
   margin: 0.2rem;
@@ -379,6 +419,24 @@ footer {
   transition: background-color 0.5s, transform 0.5s ease-out;
 }
 
-footer:has(.rss-icon:hover){
+footer:has(.rss-icon:hover) {
   backdrop-filter: blur(2.5px);
+}
+
+.info-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 2px solid black;
+  background-color: white;
+  align-items: center;
+  justify-items: center;
+  width: 25.75rem;
+}
+
+.info-content #developer {
+  grid-column: 1/3;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
 }
