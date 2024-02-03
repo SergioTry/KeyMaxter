@@ -15,8 +15,48 @@
       />
     </div>
     <main>
+      <h1>Gestión de productos</h1>
       <form>
-        <p>hola</p>
+        <div class="contenedor-select">
+          <label for="tipo-producto">Tipo de producto:</label>
+          <select id="tipo-producto">
+            <option value="0">Teclado</option>
+            <option value="1" selected>Switch</option>
+          </select>
+        </div>
+        <div class="contenedor-campo">
+          <label for="modelo">Modelo:</label>
+          <input
+            id="modelo"
+            placeholder="SGX43"
+            name="modelo"
+            class="input-text"
+          />
+        </div>
+        <div class="contenedor-imagen">
+          <div class="add-imagen">
+            <label for="image"></label>
+            <input type="file" id="image" name="image" />
+          </div>
+          <div class="contenedor-radio">
+            <input type="radio" id="image1" name="image1" />
+            <input type="radio" id="image2" name="image2" />
+          </div>
+        </div>
+        <div class="contenedor-campo">
+          <label for="modelo">Precio</label>
+          <input id="modelo" placeholder="$" name="modelo" class="input-text" />
+        </div>
+        <div class="contenedor-campo">
+          <label for="modelo">Enlace</label>
+          <input
+            id="modelo"
+            placeholder="SGX43"
+            name="modelo"
+            class="input-text"
+          />
+        </div>
+        <button></button>
       </form>
     </main>
   </body>
