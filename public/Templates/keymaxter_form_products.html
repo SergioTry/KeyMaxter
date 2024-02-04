@@ -18,10 +18,15 @@
       <h1>Gestión de productos</h1>
       <form>
         <div class="contenedor-select">
+          <label for="tipo-accion">¿Qué deseas?:</label>
+          <select id="tipo-accion">
+            <option value="0" selected>Añadir</option>
+            <option value="1">Modificar</option>
+          </select>
           <label for="tipo-producto">Tipo de producto:</label>
           <select id="tipo-producto">
-            <option value="0">Teclado</option>
-            <option value="1" selected>Switch</option>
+            <option value="0" selected>Teclado</option>
+            <option value="1">Switch</option>
           </select>
         </div>
         <div class="contenedor-campo">
@@ -35,7 +40,13 @@
         </div>
         <div class="contenedor-imagen">
           <div class="add-imagen">
-            <label for="image"></label>
+            <label for="image">
+              <img
+                id="newImage"
+                src="/public/Images/add_photo.png"
+                alt="Inserte imagen aquí"
+              />
+            </label>
             <input type="file" id="image" name="image" />
           </div>
           <div class="contenedor-radio">
@@ -44,19 +55,23 @@
           </div>
         </div>
         <div class="contenedor-campo">
-          <label for="modelo">Precio</label>
+          <label for="modelo">Precio:</label>
           <input id="modelo" placeholder="$" name="modelo" class="input-text" />
         </div>
         <div class="contenedor-campo">
-          <label for="modelo">Enlace</label>
+          <label for="enlace">Enlace:</label>
           <input
-            id="modelo"
-            placeholder="SGX43"
-            name="modelo"
+            id="enlace"
+            placeholder="www.google.com"
+            name="enlace"
             class="input-text"
           />
         </div>
-        <button></button>
+        <div class="contenedor-button">
+          <button>
+            <p>Añadir</p>
+          </button>
+        </div>
       </form>
     </main>
   </body>
