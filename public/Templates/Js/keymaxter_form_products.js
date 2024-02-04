@@ -21,7 +21,7 @@ tipoAccion.addEventListener("change", function () {
 function borrarBanner() {
   const anchoVentana = document.documentElement.clientWidth;
   const altoVentana = document.documentElement.clientHeight;
-  const imagenHeader = document.getElementById("header-principal");
+  const imagenHeader = document.getElementById("headerPrincipal");
   let formulario = document.querySelector("form");
   let titulo = document.querySelector("h1");
   if (anchoVentana <= 950) {
