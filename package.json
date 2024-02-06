@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "run": "node db.js"
+    "run": "node db.js",
+    "comp": "pug -c -D -n crearTeclados -o public plant_teclado"
   },
   "keywords": [],
   "author": "",
