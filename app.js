@@ -1,6 +1,7 @@
 const express = require("express");
 const db = require("./db.js");
-const fs = require("fs");
+const multer = require("multer");
+const upload = multer();
 
 const app = express();
 
@@ -14,15 +15,15 @@ const HTTP_INTERNAL_SERVER_ERROR = 500;
 app.use(express.json());
 app.use(express.static("public"));
 
-async function demo() {
-  await db.altaTeclado({
-    modelo: "Teclado129",
-    precio: 59.99,
-    enlace: "http://ejemplo.com",
-  });
-  console.log(JSON.stringify(await db.listarTeclados(), null, 2));
-}
-demo();
+// async function demo() {
+//   await db.altaTeclado({
+//     modelo: "Teclado129",
+//     precio: 59.99,
+//     enlace: "http://ejemplo.com",
+//   });
+//   console.log(JSON.stringify(await db.listarTeclados(), null, 2));
+// }
+// demo();
 
 app.get("/teclados", async (req, res) => {
   // /teclados?marca=hola
@@ -37,7 +38,7 @@ app.get("/teclados", async (req, res) => {
   res.send(await db.listarTeclados());
 });
 
-app.post("/teclados", (req, res) => {
+app.post("/teclados", upload.none(), (req, res) => {
   console.log(req.body);
   res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
   // try {
@@ -53,7 +54,7 @@ app.post("/teclados", (req, res) => {
   // }
 });
 
-app.listen(5000, () => {
+app.listen(5500, () => {
   try {
     console.log("Servicio escuchando");
   } catch {}

@@ -38,7 +38,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -55,7 +55,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -72,7 +72,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -89,7 +89,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -106,7 +106,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -123,7 +123,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -140,7 +140,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -157,7 +157,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 
@@ -174,7 +174,7 @@ boton.addEventListener("click", function () {
   <div class="grid-box">
     <img
       class="imagen-teclado"
-      src="/public/Images/teclado.avif"
+      src="/Images/teclado.avif"
       alt="Icono de rss"
     />
 

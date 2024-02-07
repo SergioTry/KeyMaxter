@@ -1,6 +1,8 @@
 const tipoAccion = document.getElementById("tipo-accion");
 const boton = document.getElementById("button");
-const addImg = document.getElementById("image");
+const inputImg = document.getElementById("image");
+const imgLocation = document.getElementById("image-location");
+const form = document.querySelector("form");
 
 const radio1 = document.getElementById("radio1");
 const radio2 = document.getElementById("radio2");
@@ -14,8 +16,29 @@ window.addEventListener("load", function () {
 window.addEventListener("resize", function () {
   borrarBanner();
 });
-addImg.addEventListener("change", function () {
+inputImg.addEventListener("change", function () {
   imagesPreview();
+});
+form.addEventListener("submit", async function (evt) {
+  const formData = new FormData(form);
+  // var file;
+  // try {
+  //   file = new File([blob], image1, {
+  //     type: "image/png",
+  //   });
+  // } catch (Err) {
+  //   alert(Err);
+  // }
+  // alert("terrorista");
+  formData.delete("imagenes");
+  formData.append("imagen1", image1);
+  formData.append("hola", "Sergio");
+
+  const response = await fetch("/teclados", {
+    method: "POST",
+    body: formData,
+  });
+  evt.preventDefault();
 });
 radio1.addEventListener("change", mostrarPreviewImage);
 radio2.addEventListener("change", mostrarPreviewImage);
@@ -23,35 +46,38 @@ radio2.addEventListener("change", mostrarPreviewImage);
 document.addEventListener("DOMContentLoaded", function () {
   //preguntar
 });
-boton.addEventListener("click", async function () {
-  alert("adsf");
-  const nuevo = {
-    modelo: "mk2",
-    precio: 20,
-    marca: "singleGold",
-    enlance: "www.google.com",
-    image1: "image1",
-  };
-  const resp = await fetch("/teclados", {
-    method: "POST",
-    body: JSON.stringify(nuevo),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-});
+// boton.addEventListener("click", async function () {
+//   alert("adsf");
+//   const nuevo = {
+//     modelo: "mk2",
+//     precio: 20,
+//     marca: "singleGold",
+//     enlance: "www.google.com",
+//     image1: "image1",
+//   };
+//   const resp = await fetch("/teclados", {
+//     method: "POST",
+//     body: JSON.stringify(nuevo),
+//     headers: {
+//       "Content-type": "application/json",
+//     },
+//   });
+// });
 function mostrarPreviewImage() {
   var newImage = document.getElementById("newImage");
+  const imgLocation = document.getElementById("image-location");
   if (radio1.checked) {
     if (image1) {
-      var reader = new FileReader();
+      const reader = new FileReader();
       reader.onload = function (e) {
         newImage.src = image1;
+        imgLocation.style.border = "none";
       };
       // Leer el archivo como una URL de datos
-      reader.readAsDataURL(addImg.files[0]);
+      reader.readAsDataURL(inputImg.files[0]);
     } else {
-      newImage.src = "/public/Images/add_photo.png";
+      newImage.src = "/Images/add_photo.png";
+      imgLocation.style.border = "dashed";
     }
   } else {
     if (radio2.checked) {
@@ -59,26 +85,21 @@ function mostrarPreviewImage() {
         var reader = new FileReader();
         reader.onload = function (e) {
           newImage.src = image2;
+          imgLocation.style.border = "none";
         };
-        reader.readAsDataURL(addImg.files[0]);
+        reader.readAsDataURL(inputImg.files[0]);
       } else {
-        newImage.src = "/public/Images/add_photo.png";
+        newImage.src = "/Images/add_photo.png";
+        imgLocation.style.border = "dashed";
       }
     }
   }
 }
 
-tipoAccion.addEventListener("change", function () {
-  if (tipoAccion.value == "1") {
-    boton.childNodes[1].textContent = "Modificar";
-  } else {
-    boton.childNodes[1].textContent = "Añadir";
-  }
-});
-
 var imagesPreview = function () {
-  if (addImg.files && addImg.files[0]) {
+  if (inputImg.files && inputImg.files[0]) {
     var reader = new FileReader();
+    const imgLocation = document.getElementById("image-location");
     var newImage = document.getElementById("newImage");
     reader.onload = function (e) {
       newImage.src = e.target.result;
@@ -87,11 +108,20 @@ var imagesPreview = function () {
       } else {
         image2 = e.target.result;
       }
+      imgLocation.style.border = "none";
     };
     // Leer el archivo como una URL de datos
-    reader.readAsDataURL(addImg.files[0]);
+    reader.readAsDataURL(inputImg.files[0]);
   }
 };
+
+tipoAccion.addEventListener("change", function () {
+  if (tipoAccion.value == "1") {
+    boton.childNodes[1].textContent = "Modificar";
+  } else {
+    boton.childNodes[1].textContent = "Añadir";
+  }
+});
 
 function borrarBanner() {
   const anchoVentana = document.documentElement.clientWidth;

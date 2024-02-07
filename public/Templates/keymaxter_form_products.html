@@ -8,10 +8,10 @@
   </head>
   <body>
     <div id="headerPrincipal">
-      <a href="/public/Templates/keymaxter_main.html">
+      <a href="/Templates/keymaxter_main.html">
         <img
           id="imagenHeader"
-          src="/public/Images/bannerKeymaxter.png"
+          src="/Images/bannerKeymaxter.png"
           alt="Banner de KeyMaxter"
         />
       </a>
@@ -33,23 +33,18 @@
         </div>
         <div class="contenedor-campo">
           <label for="modelo">Modelo:</label>
-          <input
-            id="modelo"
-            placeholder="SGX43"
-            name="modelo"
-            class="input-text"
-          />
+          <input id="modelo" placeholder="SGX43" class="input-text" />
         </div>
-        <div class="contenedor-imagen">
-          <div class="add-imagen">
+        <div class="contenedor-imagenes">
+          <div id="image-location">
             <label for="image">
               <img
                 id="newImage"
-                src="/public/Images/add_photo.png"
+                src="/Images/add_photo.png"
                 alt="Inserte imagen aquí"
               />
             </label>
-            <input type="file" id="image" name="image" />
+            <input type="file" id="image" />
           </div>
           <div class="contenedor-radio">
             <input type="radio" id="radio1" name="imagenes" checked />
@@ -58,19 +53,14 @@
         </div>
         <div class="contenedor-campo">
           <label for="precio">Precio:</label>
-          <input id="precio" placeholder="$" name="modelo" class="input-text" />
+          <input id="precio" placeholder="$" class="input-text" />
         </div>
         <div class="contenedor-campo">
           <label for="enlace">Enlace:</label>
-          <input
-            id="enlace"
-            placeholder="www.google.com"
-            name="enlace"
-            class="input-text"
-          />
+          <input id="enlace" placeholder="www.google.com" class="input-text" />
         </div>
         <div class="contenedor-button">
-          <button id="button">
+          <button type="submit" id="button">
             <p>Añadir</p>
           </button>
         </div>
