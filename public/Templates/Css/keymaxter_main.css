@@ -99,6 +99,7 @@ html {
   background: #26d9d9; /* Cambia los colores según tu preferencia */
   transition: left 0.3s ease;
 }
+
 .contenedor-menu-horizontal nav .menu-horizontal li:has(img:hover) {
   border: 0.1rem solid white;
 }
@@ -200,10 +201,15 @@ html {
   background-color: blueviolet;
 }
 
+button {
+  all: unset;
+}
+
 .enlace-side-bar {
   box-sizing: border-box;
   text-decoration: none;
-  width: 85%;
+  width: 100%;
+  display: block;
 }
 
 .enlace-side-bar p {

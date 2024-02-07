@@ -17,13 +17,28 @@ const ModeloTeclado = sequelize.define(
     },
     precio: {
       field: "PRECIO",
-      type: DataTypes.DOUBLE,
+      type: DataTypes.NUMBER,
       allowNull: false,
     },
     enlace: {
       field: "ENLACE",
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    marca: {
+      field: "MARCA",
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image1: {
+      field: "IMAGE_1",
+      type: DataTypes.BLOB,
+      allowNull: true,
+    },
+    image2: {
+      field: "IMAGE_2",
+      type: DataTypes.BLOB,
+      allowNull: true,
     },
   },
   {
@@ -33,12 +48,75 @@ const ModeloTeclado = sequelize.define(
   }
 );
 
+const ModeloSwitch = sequelize.define(
+  "switch",
+  {
+    modelo: {
+      field: "MODELO",
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    precio: {
+      field: "PRECIO",
+      type: DataTypes.NUMBER,
+      allowNull: false,
+    },
+    enlace: {
+      field: "ENLACE",
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    marca: {
+      field: "MARCA",
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+  },
+  {
+    tableName: "PROD_SWITCH",
+    timestamps: false,
+  }
+);
+
 exports.altaTeclado = async function (datosTeclado) {
-  return await ModeloTeclado.create({ datosTeclado });
+  // Esto es necesario para que en caso de que no exista la tabla
+  // se cree en el momento
+  await ModeloTeclado.sync({ force: true });
+  return await ModeloTeclado.create(datosTeclado);
 };
-// const nuevoTeclado = await Teclado.create({
-//   modelo: "Teclado123",
-//   precio: 59.99,
-//   enlace: "http://ejemplo.com",
-// });
-// const teclados = await Teclado.findAll();
+
+exports.altaSwitch = async function (datosSwitch) {
+  await ModeloSwitch.sync({ force: true });
+  return await ModeloSwitch.create(datosSwitch);
+};
+
+exports.borrarTeclado = async function (idTeclado) {
+  return await ModeloTeclado.destroy({ where: { id: idTeclado } });
+};
+
+exports.borrarSwitch = async function (idSwitch) {
+  return await ModeloSwitch.destroy({ where: { id: idSwitch } });
+};
+
+exports.modificarTeclado = async function (idTeclado, datosTeclado) {
+  return await ModeloTeclado.update(datosTeclado, {
+    where: {
+      id: idTeclado,
+    },
+  });
+};
+
+exports.listarTeclados = async function (orden = undefined, marca = undefined) {
+  if (marca) {
+    if (orden) {
+    }
+  }
+  if (orden) {
+  }
+  return await ModeloTeclado.findAll();
+};
+
+exports.listarSwitchs = async function () {
+  return await ModeloSwitch.findAll();
+};
