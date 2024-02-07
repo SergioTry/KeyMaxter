@@ -37,6 +37,22 @@ app.get("/teclados", async (req, res) => {
   res.send(await db.listarTeclados());
 });
 
+app.post("/teclados", (req, res) => {
+  console.log(req.body);
+  res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
+  // try {
+  //   const nuevo = db.crearContacto(req.body);
+  //   if (nuevo)
+  //     res
+  //       .status(HTTP_CREATED)
+  //       .location(`/contactos/${nuevo.id}`)
+  //       .send("Contacto creado.");
+  //   else res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
+  // } catch (err) {
+  //   res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
+  // }
+});
+
 app.listen(5000, () => {
   try {
     console.log("Servicio escuchando");

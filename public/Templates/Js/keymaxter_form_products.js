@@ -20,6 +20,26 @@ addImg.addEventListener("change", function () {
 radio1.addEventListener("change", mostrarPreviewImage);
 radio2.addEventListener("change", mostrarPreviewImage);
 
+document.addEventListener("DOMContentLoaded", function () {
+  //preguntar
+});
+boton.addEventListener("click", async function () {
+  alert("adsf");
+  const nuevo = {
+    modelo: "mk2",
+    precio: 20,
+    marca: "singleGold",
+    enlance: "www.google.com",
+    image1: "image1",
+  };
+  const resp = await fetch("/teclados", {
+    method: "POST",
+    body: JSON.stringify(nuevo),
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+});
 function mostrarPreviewImage() {
   var newImage = document.getElementById("newImage");
   if (radio1.checked) {
