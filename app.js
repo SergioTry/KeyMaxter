@@ -71,10 +71,8 @@ app.post(
     // en files se encuentran los archivos subidos
     // en body se encuentran los campos de texto
 
-    console.log(req.files);
     req.body.image1 = req.files.imagen1[0].filename;
-    req.files.image2;
-    console.log(req.body);
+    req.body.image2 = req.files.imagen2[0].filename;
 
     const nuevo = await db.altaTeclado(req.body);
     try {

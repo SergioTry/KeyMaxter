@@ -118,14 +118,64 @@ exports.modificarTeclado = async function (idTeclado, datosTeclado) {
   });
 };
 
-exports.listarTeclados = async function (orden = undefined, marca = undefined) {
+exports.listarProductos = async function (
+  producto,
+  orden = undefined,
+  marca = undefined
+) {
   if (marca) {
     if (orden) {
+      if (orden == 1) {
+        return await ModeloTeclado.findAll({
+          where: {
+            marca: marca,
+          },
+          order: {
+            precio: "DESC",
+          },
+        });
+      } else {
+        return await ModeloTeclado.findAll({
+          where: {
+            marca: marca,
+          },
+          order: {
+            precio: "ASC",
+          },
+        });
+      }
+    } else {
+      return await ModeloTeclado.findAll({
+        where: {
+          marca: marca,
+        },
+      });
     }
   }
   if (orden) {
+    if (orden == 1) {
+      return await ModeloTeclado.findAll({
+        order: {
+          precio: "DESC",
+        },
+      });
+    } else {
+      return await ModeloTeclado.findAll({
+        order: {
+          precio: "ASC",
+        },
+      });
+    }
   }
   return await ModeloTeclado.findAll();
+};
+
+exports.listarMarcas = async function (producto) {
+  if (producto) {
+    return await ModeloTeclado.findAll({ attributes: ["marca"] });
+  } else {
+    return await ModeloSwitch.findAll({ attributes: ["marca"] });
+  }
 };
 
 exports.listarSwitchs = async function () {
