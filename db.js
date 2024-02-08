@@ -48,12 +48,12 @@ const ModeloTeclado = sequelize.define(
     },
     image1: {
       field: "IMAGE_1",
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
       allowNull: true,
     },
     image2: {
       field: "IMAGE_2",
-      type: DataTypes.BLOB,
+      type: DataTypes.STRING,
       allowNull: true,
     },
   },

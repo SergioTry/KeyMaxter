@@ -1,5 +1,5 @@
 const express = require("express");
-const db = require("./db.js");
+const database = require("./db.js");
 const multer = require("multer");
 
 const app = express();
@@ -14,23 +14,25 @@ const HTTP_INTERNAL_SERVER_ERROR = 500;
 app.use(express.json());
 app.use(express.static("public"));
 
-// async function demo() {
-//   await db.altaTeclado({
-//     modelo: "Teclado129",
-//     precio: 59.99,
-//     enlace: "http://ejemplo.com",
-//   });
-//   console.log(JSON.stringify(await db.listarTeclados(), null, 2));
-// }
-// demo();
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "public/Images/Products"); // Aceptar el archivo
   },
   filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, file.originalname);
+    let fechaActual = new Date(Date.now());
+    let filename =
+      fechaActual.getDate() +
+      "-" +
+      fechaActual.getMonth() +
+      "-" +
+      +fechaActual.getFullYear() +
+      "_" +
+      fechaActual.getHours() +
+      fechaActual.getMinutes() +
+      fechaActual.getSeconds() +
+      "_" +
+      file.originalname;
+    cb(null, filename);
   },
 });
 
@@ -52,12 +54,7 @@ app.get("/teclados", async (req, res) => {
   const marca = req.query.marca;
   const orden = req.query.orden;
   console.log(marca);
-  // if (filtro) {
-  //   res.send(db.buscarContactos(filtro));
-  // } else {
-  //   res.send(db.listarContactos());
-  // }
-  res.send(await db.listarTeclados());
+  res.send(await database.listarTeclados());
 });
 
 app.post(
@@ -69,42 +66,26 @@ app.post(
     { name: "imagen1", maxCount: 1 },
     { name: "imagen2", maxCount: 1 },
   ]),
-  (req, res) => {
-    //res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
+  async (req, res) => {
     // en files se encuentran los archivos subidos
     // en body se encuentran los campos de texto
-    console.log(req.body);
+
     console.log(req.files);
-    // res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
-    // try {
-    //   const nuevo = db.crearTeclado(req.body);
-    //   if (nuevo)
-    //     res
-    //       .status(HTTP_CREATED)
-    //       .location(`/contactos/${nuevo.id}`)
-    //       .send("Contacto creado.");
-    //   else res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
-    // } catch (err) {
-    //   res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
-    // }
-    const error = true;
+    req.body.image1 = req.files.imagen1[0].filename;
+    console.log(req.body);
 
-    if (error) {
-      // Si hay un error, devuelve una respuesta con un código de estado 500 (Error interno del servidor) y un mensaje de error
-      console.log("juh");
-      res
-        .status(500)
-        .send(
-          "Error: La operación POST ha fallado. El archivo no se ha guardado."
-        );
-    } else {
-      // Si la operación es exitosa, guarda el archivo en la ruta
-      const rutaImagen = req.file.path;
-
-      res.send(
-        "Operación POST exitosa. El archivo se ha guardado en la ruta: " +
-          rutaImagen
-      );
+    const nuevo = await database.altaTeclado(req.body);
+    try {
+      if (nuevo) {
+        res
+          .status(HTTP_CREATED)
+          .location(`/teclados/${nuevo.id}`)
+          .send("Teclado creado.");
+        console.log("teclado creado");
+      } else res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
     }
   }
 );
