@@ -73,6 +73,7 @@ app.post(
 
     console.log(req.files);
     req.body.image1 = req.files.imagen1[0].filename;
+    req.files.image2;
     console.log(req.body);
 
     const nuevo = await db.altaTeclado(req.body);

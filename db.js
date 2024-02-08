@@ -73,6 +73,16 @@ const ModeloSwitch = sequelize.define(
       type: DataTypes.STRING,
       allowNull: true,
     },
+    image1: {
+      field: "IMAGE_1",
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    image2: {
+      field: "IMAGE_2",
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
   },
   {
     tableName: "PROD_SWITCH",
