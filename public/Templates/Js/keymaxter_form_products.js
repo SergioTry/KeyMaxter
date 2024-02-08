@@ -16,32 +16,26 @@ window.addEventListener("load", function () {
 window.addEventListener("resize", function () {
   borrarBanner();
 });
-inputImg.addEventListener("change", function () {
-  imagesPreview();
-});
-form.addEventListener("submit", async function (evt) {
-  const formData = new FormData(form);
-  // var file;
-  // try {
-  //   file = new File([blob], image1, {
-  //     type: "image/png",
-  //   });
-  // } catch (Err) {
-  //   alert(Err);
-  // }
-  // alert("terrorista");
-  formData.delete("imagenes");
-  formData.append("imagen1", image1);
-  formData.append("hola", "Sergio");
+inputImg.addEventListener("change", saveImg);
 
-  const response = await fetch("/teclados", {
+form.addEventListener("submit", async function (evt) {
+  evt.preventDefault();
+  const formData = new FormData(form);
+  formData.delete("imagenes");
+
+  if (image1) formData.append("imagen1", image1);
+  if (image2) formData.append("imagen2", image2);
+
+  const resp = await fetch("/teclados", {
     method: "POST",
     body: formData,
   });
-  evt.preventDefault();
+
+  if (resp.ok) alert("Todo ha ido bien");
+  else alert(resp.statusText);
 });
-radio1.addEventListener("change", mostrarPreviewImage);
-radio2.addEventListener("change", mostrarPreviewImage);
+radio1.addEventListener("change", radioChanged);
+radio2.addEventListener("change", radioChanged);
 
 document.addEventListener("DOMContentLoaded", function () {
   //preguntar
@@ -63,18 +57,24 @@ document.addEventListener("DOMContentLoaded", function () {
 //     },
 //   });
 // });
-function mostrarPreviewImage() {
+
+function saveImg() {
+  if (inputImg.files && inputImg.files[0]) {
+    if (radio1.checked) {
+      image1 = inputImg.files[0];
+    } else {
+      image2 = inputImg.files[0];
+    }
+    cargarPreview(inputImg.files[0], newImage);
+  }
+}
+
+function radioChanged() {
   var newImage = document.getElementById("newImage");
   const imgLocation = document.getElementById("image-location");
   if (radio1.checked) {
     if (image1) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        newImage.src = image1;
-        imgLocation.style.border = "none";
-      };
-      // Leer el archivo como una URL de datos
-      reader.readAsDataURL(inputImg.files[0]);
+      cargarPreview(image1, newImage);
     } else {
       newImage.src = "/Images/add_photo.png";
       imgLocation.style.border = "dashed";
@@ -82,12 +82,7 @@ function mostrarPreviewImage() {
   } else {
     if (radio2.checked) {
       if (image2) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          newImage.src = image2;
-          imgLocation.style.border = "none";
-        };
-        reader.readAsDataURL(inputImg.files[0]);
+        cargarPreview(image2, newImage);
       } else {
         newImage.src = "/Images/add_photo.png";
         imgLocation.style.border = "dashed";
@@ -96,24 +91,16 @@ function mostrarPreviewImage() {
   }
 }
 
-var imagesPreview = function () {
-  if (inputImg.files && inputImg.files[0]) {
-    var reader = new FileReader();
-    const imgLocation = document.getElementById("image-location");
-    var newImage = document.getElementById("newImage");
-    reader.onload = function (e) {
-      newImage.src = e.target.result;
-      if (radio1.checked) {
-        image1 = e.target.result;
-      } else {
-        image2 = e.target.result;
-      }
-      imgLocation.style.border = "none";
-    };
-    // Leer el archivo como una URL de datos
-    reader.readAsDataURL(inputImg.files[0]);
-  }
-};
+function cargarPreview(file, imgElement) {
+  const reader = new FileReader();
+  const imgLocation = document.getElementById("image-location");
+  reader.onload = function (e) {
+    imgElement.src = e.target.result;
+    imgLocation.style.border = "none";
+  };
+  // Leer el archivo como una URL de datos
+  reader.readAsDataURL(file);
+}
 
 tipoAccion.addEventListener("change", function () {
   if (tipoAccion.value == "1") {
