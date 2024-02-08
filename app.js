@@ -1,6 +1,7 @@
 const express = require("express");
-const database = require("./db.js");
 const multer = require("multer");
+
+const db = require("./db.js");
 
 const app = express();
 
@@ -54,7 +55,7 @@ app.get("/teclados", async (req, res) => {
   const marca = req.query.marca;
   const orden = req.query.orden;
   console.log(marca);
-  res.send(await database.listarTeclados());
+  res.send(await db.listarTeclados());
 });
 
 app.post(
@@ -74,7 +75,7 @@ app.post(
     req.body.image1 = req.files.imagen1[0].filename;
     console.log(req.body);
 
-    const nuevo = await database.altaTeclado(req.body);
+    const nuevo = await db.altaTeclado(req.body);
     try {
       if (nuevo) {
         res
