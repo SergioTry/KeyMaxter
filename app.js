@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 
 const db = require("./db.js");
+const { Sequelize } = require("sequelize");
 
 const app = express();
 
@@ -54,8 +55,10 @@ app.get("/teclados", async (req, res) => {
   // /teclados?marca=hola
   const marca = req.query.marca;
   const orden = req.query.orden;
-  console.log(marca);
-  res.send(await db.listarTeclados());
+  res.send(await db.listarProductos(marca, orden));
+});
+app.get("/tecladosMarcas", async (req, res) => {
+  res.send(await db.listarMarcasTeclados());
 });
 
 app.post(
@@ -67,33 +70,49 @@ app.post(
     { name: "imagen1", maxCount: 1 },
     { name: "imagen2", maxCount: 1 },
   ]),
-  async (req, res) => {
-    // en files se encuentran los archivos subidos
-    // en body se encuentran los campos de texto
-
-    req.body.image1 = req.files.imagen1[0].filename;
-    req.body.image2 = req.files.imagen2[0].filename;
-
-    const nuevo = await db.altaTeclado(req.body);
+  async (req, res, next) => {
     try {
-      if (nuevo) {
-        res
-          .status(HTTP_CREATED)
-          .location(`/teclados/${nuevo.id}`)
-          .send("Teclado creado.");
-        console.log("teclado creado");
-      } else res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
+      // en files se encuentran los archivos subidos
+      // en body se encuentran los campos de texto
+      const nuevoTeclado = {
+        modelo: req.body.modelo,
+        enlace: req.body.enlace,
+        precio: req.body.precio,
+        marca: req.body.marca ? req.body.marca : null,
+        image1:
+          req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
+        image2:
+          req.files && req.files.imagen2 ? req.files.imagen2[0].filename : null,
+      };
+      const nuevo = await db.altaTeclado(nuevoTeclado);
+      res
+        .status(HTTP_CREATED)
+        .location(`/teclados/${nuevo.id}`)
+        .send("Teclado creado.");
+      console.log("teclado creado");
     } catch (err) {
-      console.log(err);
-      res.sendStatus(HTTP_INTERNAL_SERVER_ERROR);
+      // El next lo uso para que los errores sean controlados
+      // por el control general de errores
+      next(err);
     }
   }
 );
 
 app.use(function (err, req, res, next) {
-  if (err instanceof multer.MulterError) {
-    res.status(400).send("Error al subir el archivo: " + err.message);
-  } else {
+  console.error(err);
+  if (err instanceof multer.MulterError)
+    res
+      .status(HTTP_BAD_REQUEST)
+      .send("Error al subir el archivo: " + err.message);
+  else {
+    // El ValidationError valida que los campos son correctos
+    // (valida que no se intentan añadir campos diferentes a los de la db)
+    if (err instanceof Sequelize.ValidationError)
+      res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
+    // El Database controla que no se intente añadir un modelo ya existente
+    // (unique constraint)
+    if (err instanceof Sequelize.DatabaseError)
+      res.status(HTTP_BAD_REQUEST).send("Ese modelo ya existe.");
     res.status(500).send("Error interno del servidor");
   }
 });

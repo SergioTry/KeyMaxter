@@ -19,7 +19,6 @@ window.addEventListener("resize", function () {
 inputImg.addEventListener("change", saveImg);
 
 form.addEventListener("submit", async function (evt) {
-  evt.preventDefault();
   const formData = new FormData(form);
   formData.delete("imagenes");
 
@@ -30,7 +29,7 @@ form.addEventListener("submit", async function (evt) {
     method: "POST",
     body: formData,
   });
-
+  evt.preventDefault();
   if (resp.ok) alert("Todo ha ido bien");
   else alert(resp.statusText);
 });
@@ -40,23 +39,6 @@ radio2.addEventListener("change", radioChanged);
 document.addEventListener("DOMContentLoaded", function () {
   //preguntar
 });
-// boton.addEventListener("click", async function () {
-//   alert("adsf");
-//   const nuevo = {
-//     modelo: "mk2",
-//     precio: 20,
-//     marca: "singleGold",
-//     enlance: "www.google.com",
-//     image1: "image1",
-//   };
-//   const resp = await fetch("/teclados", {
-//     method: "POST",
-//     body: JSON.stringify(nuevo),
-//     headers: {
-//       "Content-type": "application/json",
-//     },
-//   });
-// });
 
 function saveImg() {
   if (inputImg.files && inputImg.files[0]) {

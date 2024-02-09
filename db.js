@@ -93,12 +93,12 @@ const ModeloSwitch = sequelize.define(
 exports.altaTeclado = async function (datosTeclado) {
   // Esto es necesario para que en caso de que no exista la tabla
   // se cree en el momento
-  await ModeloTeclado.sync({ force: true });
+  await ModeloTeclado.sync();
   return await ModeloTeclado.create(datosTeclado);
 };
 
 exports.altaSwitch = async function (datosSwitch) {
-  await ModeloSwitch.sync({ force: true });
+  await ModeloSwitch.sync();
   return await ModeloSwitch.create(datosSwitch);
 };
 
@@ -170,12 +170,8 @@ exports.listarProductos = async function (
   return await ModeloTeclado.findAll();
 };
 
-exports.listarMarcas = async function (producto) {
-  if (producto) {
-    return await ModeloTeclado.findAll({ attributes: ["marca"] });
-  } else {
-    return await ModeloSwitch.findAll({ attributes: ["marca"] });
-  }
+exports.listarMarcasTeclados = async function () {
+  return await ModeloTeclado.findAll({ attributes: ["marca"] });
 };
 
 exports.listarSwitchs = async function () {

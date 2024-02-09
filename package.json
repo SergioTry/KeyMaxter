@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "node app.js",
-    "comp": "pug -c -D -n crearTeclados -o public plant_teclado"
+    "comp": "pug -c -D -n crearTeclados -o public/Templates/Js plant_teclado.pug"
   },
   "keywords": [],
   "author": "",
