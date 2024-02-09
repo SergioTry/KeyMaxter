@@ -424,7 +424,10 @@ footer:has(.rss-icon:hover) {
   text-align: center;
   width: 100%;
 }
-
+iframe {
+  height: 100dvh;
+  width: 100%;
+}
 @media screen and (max-width: 1306px) {
   html {
     font-size: 16px;
@@ -448,6 +451,11 @@ footer:has(.rss-icon:hover) {
   .contenedor-menu-lateral {
     display: none;
   }
+
+  main {
+    /* height: 100dvh; */
+  }
+
   .flex-layout {
     margin-left: 0px;
   }

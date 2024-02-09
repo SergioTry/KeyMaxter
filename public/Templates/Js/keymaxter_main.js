@@ -1,8 +1,9 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
-const boton = document.getElementById("boton1");
+const botonProductos = document.getElementById("boton-productos");
+const botonSimulador = document.getElementById("boton-simulador");
 
-boton.addEventListener("click", async function () {
+botonProductos.addEventListener("click", async function () {
   const mainElement = document.querySelector("main");
   const respProductos = await fetch("/teclados", { method: "GET" });
   const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
@@ -14,6 +15,12 @@ boton.addEventListener("click", async function () {
   const marcas = await respMarcas.json();
   const html = crearTeclados({ marcas: marcas, productos: productos });
   mainElement.innerHTML = html;
+});
+botonSimulador.addEventListener("click", async function () {
+  const mainElement = document.querySelector("main");
+  const enlaceSimulador =
+    '<iframe src="https://keyboardsimulator.xyz/" title="Contenido incrustado" allowfullscreen="true" ></iframe>';
+  mainElement.innerHTML = enlaceSimulador;
 });
 
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
