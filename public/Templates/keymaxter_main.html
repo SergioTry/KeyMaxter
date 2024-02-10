@@ -65,27 +65,36 @@
                   src="/Images/info_icon_sidebar.png"
                   alt="Icono de galería"
                 />
-                <p>Teclados custom</p>
+                <p class="button-text">Teclados custom</p>
               </button>
             </li>
             <li>
-              <button class="enlace-side-bar">
+              <div class="enlace-side-bar productos-button-contanier">
                 <img
                   class="iconos-side-bar"
                   src="/Images/teclado_icon_sidebar.png"
                   alt="Icono de galería"
                 />
-                <p>Productos</p>
-              </button>
+                <div class="sub-button-container">
+                  <button id="1botonTeclados">
+                    <p class="sub-button-text">Teclados</p>
+                  </button>
+                  <button id="botonSwitchs">
+                    <p class="sub-button-text">Switchs</p>
+                  </button>
+                </div>
+                <p class="button-text">Productos</p>
+              </div>
             </li>
             <li>
-              <button class="enlace-side-bar">
+              <button id="1botonSimulador" class="enlace-side-bar">
                 <img
                   class="iconos-side-bar"
                   src="/Images/edit_icon_sidebar.png"
                   alt="Icono de galería"
                 />
-                <p>Diséñalo tú mismo</p>
+
+                <p class="button-text">Diséñalo tú mismo</p>
               </button>
             </li>
           </ul>
@@ -110,39 +119,40 @@
                         src="/Images/info_icon_sidebar.png"
                         alt="Icono de galería"
                       />
-                      <p>Teclados custom</p>
+                      <p class="button-text">Teclados custom</p>
                     </div>
                   </button>
                 </li>
                 <li>
-                  <button
-                    id="boton-productos"
-                    class="enlace-side-bar"
-                    href="https://www.google.com/?hl=es"
-                  >
-                    <div class="contenedor-enlace">
+                  <div class="enlace-side-bar">
+                    <div class="contenedor-enlace productos-button-contanier">
                       <img
                         class="iconos-side-bar"
                         src="/Images/teclado_icon_sidebar.png"
                         alt="Icono de galería"
                       />
-                      <p>Productos</p>
+                      <div class="sub-button-container">
+                        <button id="botonTeclados">
+                          <p class="sub-button-text">Teclados</p>
+                        </button>
+                        <button id="botonSwitchs">
+                          <p class="sub-button-text">Switchs</p>
+                        </button>
+                      </div>
+                      <p class="button-text">Productos</p>
                     </div>
-                  </button>
+                  </div>
                 </li>
                 <li>
-                  <button
-                    id="boton-simulador"
-                    class="enlace-side-bar"
-                    href="https://www.google.com/?hl=es"
-                  >
+                  <button id="botonSimulador" class="enlace-side-bar">
                     <div class="contenedor-enlace">
                       <img
                         class="iconos-side-bar"
                         src="/Images/edit_icon_sidebar.png"
                         alt="Icono de galería"
                       />
-                      <p>Diséñalo tú mismo</p>
+
+                      <p class="button-text">Diséñalo tú mismo</p>
                     </div>
                   </button>
                 </li>
@@ -183,11 +193,21 @@
         </search>
         <article class="grid-layout-content">
           <div class="grid-box">
-            <img
-              class="imagen-producto"
-              src="/Images/teclado.avif"
-              alt="Icono de rss"
-            />
+            <div class="image-container">
+              <button class="delete-button">
+                <img src="/Images/delete.ico" alt="Icono de galería" />
+              </button>
+              <img
+                class="imagen-1-producto"
+                src="/Images/teclado.avif"
+                alt="Icono de rss"
+              />
+              <img
+                class="imagen-2-producto"
+                src="/Images/boceto.png"
+                alt="Icono de rss"
+              />
+            </div>
             <p class="modelo-producto">Mk3</p>
             <a class="enlace-producto">Pc Componentes</a>
             <p class="marca-producto">Mars Gaming</p>
@@ -201,11 +221,13 @@
             </div>
           </div>
           <div class="grid-box">
-            <img
-              class="imagen-producto"
-              src="/Images/teclado.avif"
-              alt="Icono de rss"
-            />
+            <div class="image-container">
+              <img
+                class="imagen-alone-producto"
+                src="/Images/teclado.avif"
+                alt="Icono de rss"
+              />
+            </div>
             <p class="modelo-producto">Mk45</p>
             <a class="enlace-producto">Enlace</a>
             <p class="marca-producto">Mars Gaming</p>

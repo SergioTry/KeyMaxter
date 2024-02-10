@@ -117,7 +117,8 @@ html {
 }
 
 .contenedor-menu-lateral .menu-lateral {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-content: center;
   align-items: center;
@@ -167,6 +168,7 @@ html {
   padding: 0;
   padding-inline: 0;
   height: 12.5rem;
+  width: 9.21875rem;
   z-index: -1;
 }
 .contenedor-menu-lateral .menu-lateral nav ul li,
@@ -176,9 +178,10 @@ html {
   width: 100%;
   margin-bottom: 0.375rem;
 }
-.contenedor-menu-lateral .menu-lateral nav ul li p,
-.burger nav ul li p {
+.contenedor-menu-lateral .menu-lateral nav ul li .button-text,
+.burger nav ul li .button-text {
   color: white;
+  transition: 0.5s;
 }
 .contenedor-menu-lateral .menu-lateral .contenedor-enlace {
   height: 3.875rem;
@@ -199,6 +202,47 @@ html {
   z-index: 34252345;
   border: white 6px outset;
   background-color: blueviolet;
+}
+
+.sub-button-container {
+  display: none;
+}
+
+.sub-button-container .sub-button-text {
+  font-size: 0.5rem;
+  color: black;
+}
+
+.productos-button-contanier:hover {
+  width: 100%;
+  .sub-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    flex-wrap: wrap;
+    height: 1.40625rem;
+    width: 100%;
+    button {
+      height: 100%;
+      border-radius: 0.625rem;
+      box-shadow: 0.09375rem 0.1875rem 0.3125rem black;
+      z-index: 34252345;
+      border: #26d9d9 0.1875rem outset;
+      background-color: white;
+      transition: 0.5s;
+      p {
+        color: black;
+      }
+    }
+    button:hover {
+      transform: scale(1.2);
+    }
+  }
+  .button-text {
+    font-size: 0px;
+    height: 0px;
+    width: 0px;
+  }
 }
 
 button {
@@ -428,6 +472,7 @@ iframe {
   height: 100dvh;
   width: 100%;
 }
+
 @media screen and (max-width: 1306px) {
   html {
     font-size: 16px;
@@ -452,15 +497,9 @@ iframe {
     display: none;
   }
 
-  main {
-    /* height: 100dvh; */
-  }
-
-  .flex-layout {
-    margin-left: 0px;
-  }
-  .flex-layout-content {
-    font-size: 1.5rem;
+  .enlace-side-bar {
+    display: flex;
+    align-items: center;
   }
   .burger {
     display: block;
@@ -468,5 +507,19 @@ iframe {
     top: 5.9rem;
     left: 0.5rem;
     z-index: 10000;
+    width: 16.0625rem;
+  }
+
+  .productos-button-contanier:hover button {
+    height: 33px !important;
+    display: flex;
+    align-items: center;
+  }
+
+  .flex-layout {
+    margin-left: 0px;
+  }
+  .flex-layout-content {
+    font-size: 1.5rem;
   }
 }

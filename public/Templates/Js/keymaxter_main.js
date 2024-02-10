@@ -1,16 +1,25 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
-const botonProductos = document.getElementById("boton-productos");
-const botonSimulador = document.getElementById("boton-simulador");
+const botonTeclados = document.getElementById("botonTeclados");
+const botonSwitchs = document.getElementById("botonSwitchs");
+const botonSimulador = document.getElementById("botonSimulador");
 
-botonProductos.addEventListener("click", async function () {
+botonTeclados.addEventListener("click", async function () {
   const mainElement = document.querySelector("main");
   const respProductos = await fetch("/teclados", { method: "GET" });
   const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
   const productos = await respProductos.json();
   const prefix = "/Images/Products/";
-  //TODO
-  productos[3].image1 = prefix + productos[3].image1;
+
+  productos.forEach((producto) => {
+    console.log(producto);
+    if (producto.image1) {
+      producto.image1 = prefix + producto.image1;
+      if (producto.image2) {
+        producto.image2 = prefix + producto.image2;
+      }
+    }
+  });
 
   const marcas = await respMarcas.json();
   const html = crearTeclados({ marcas: marcas, productos: productos });
