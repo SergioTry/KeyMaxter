@@ -112,7 +112,7 @@ app.use(function (err, req, res, next) {
     // El Database controla que no se intente añadir un modelo ya existente
     // (unique constraint)
     if (err instanceof Sequelize.DatabaseError)
-      res.status(HTTP_BAD_REQUEST).send("Ese modelo ya existe.");
+      res.status(HTTP_BAD_REQUEST).send("Error en la base de datos.");
     res.status(500).send("Error interno del servidor");
   }
 });

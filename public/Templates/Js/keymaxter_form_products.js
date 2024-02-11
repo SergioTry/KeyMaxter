@@ -19,19 +19,24 @@ window.addEventListener("resize", function () {
 inputImg.addEventListener("change", saveImg);
 
 form.addEventListener("submit", async function (evt) {
+  evt.preventDefault();
   const formData = new FormData(form);
   formData.delete("imagenes");
 
   if (image1) formData.append("imagen1", image1);
   if (image2) formData.append("imagen2", image2);
-
+  console.log(formData);
   const resp = await fetch("/teclados", {
     method: "POST",
     body: formData,
   });
-  evt.preventDefault();
+  const data = await resp.text();
+  // Manejar la respuesta exitosa
+  console.log(data);
   if (resp.ok) alert("Todo ha ido bien");
-  else alert(resp.statusText);
+  else {
+    alert(resp.status + ": " + data);
+  }
 });
 radio1.addEventListener("change", radioChanged);
 radio2.addEventListener("change", radioChanged);

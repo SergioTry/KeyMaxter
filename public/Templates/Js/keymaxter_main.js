@@ -9,6 +9,7 @@ botonTeclados.addEventListener("click", async function () {
   const respProductos = await fetch("/teclados", { method: "GET" });
   const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
   const productos = await respProductos.json();
+  console.log(productos);
   const prefix = "/Images/Products/";
 
   productos.forEach((producto) => {
