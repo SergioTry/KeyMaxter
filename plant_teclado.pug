@@ -22,10 +22,10 @@ search.grid-search
               option(value=marca.marca) #{marca.marca}
 article.grid-layout-content
   each producto in productos
-    .grid-box 
+    .grid-box(data-id=producto.id) 
       .image-container
-        button.delete-button(data-id=producto.id)
-          img(src='/Images/delete.ico' alt='Icono de borrado')
+        button.delete-button
+          img(src='/Images/delete.png' alt='Icono de borrado')
         if producto.image1 && !producto.image2
           img.imagen-alone-producto(src=producto.image1 alt='Imagen del producto')
         else
@@ -44,7 +44,7 @@ article.grid-layout-content
       .multicampo-contenedor
         if producto.color
           p.color-switch #{producto.color}
-        p.precio-producto #{producto.precio}$
+        p.precio-producto #{producto.precio}€
         label.like
           input(type='checkbox')
           .hearth

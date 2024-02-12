@@ -41,25 +41,36 @@
           />
         </div>
         <div class="contenedor-campo">
-          <label for="modelo">Modelo:</label>
+          <label for="modelo">Modelo*:</label>
           <input
             id="modelo"
             name="modelo"
             placeholder="SGX43"
             class="input-text"
+            required
           />
         </div>
         <div class="contenedor-campo">
-          <label for="precio">Precio:</label>
-          <input id="precio" name="precio" placeholder="$" class="input-text" />
+          <label for="precio">Precio*:</label>
+          <input
+            id="precio"
+            pattern="^\d+([\.,]\d+)?$"
+            name="precio"
+            placeholder="$"
+            class="input-text"
+            required
+            title="Valor numérico positivo."
+          />
         </div>
         <div class="contenedor-campo enlace">
-          <label for="enlace">Enlace de compra:</label>
+          <label for="enlace">Enlace de compra*:</label>
           <input
             id="enlace"
             name="enlace"
             placeholder="www.google.com"
             class="input-text"
+            type="url"
+            required
           />
         </div>
         <div class="contenedor-imagenes">

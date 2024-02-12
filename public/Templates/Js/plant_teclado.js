@@ -26,7 +26,7 @@ pug_html = pug_html + "\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E\u003C\u002F
   if ('number' == typeof $$obj.length) {
       for (var pug_index1 = 0, $$l = $$obj.length; pug_index1 < $$l; pug_index1++) {
         var producto = $$obj[pug_index1];
-pug_html = pug_html + "\u003Cdiv class=\"grid-box\"\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton" + (" class=\"delete-button\""+pug_attr("data-id", producto.id, true, false)) + "\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.ico\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
 if (producto.image1 && !producto.image2) {
 pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-alone-producto\""+pug_attr("src", producto.image1, true, false)+" alt=\"Imagen del producto\"") + "\u002F\u003E";
 }
@@ -52,14 +52,14 @@ pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
 pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "$\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
     for (var pug_index1 in $$obj) {
       $$l++;
       var producto = $$obj[pug_index1];
-pug_html = pug_html + "\u003Cdiv class=\"grid-box\"\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton" + (" class=\"delete-button\""+pug_attr("data-id", producto.id, true, false)) + "\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.ico\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
 if (producto.image1 && !producto.image2) {
 pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-alone-producto\""+pug_attr("src", producto.image1, true, false)+" alt=\"Imagen del producto\"") + "\u002F\u003E";
 }
@@ -85,7 +85,7 @@ pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
 pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "$\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);

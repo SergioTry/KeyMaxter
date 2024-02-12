@@ -83,8 +83,9 @@
   top: 0.09375em;
   width: 1.5625em;
   right: 0.09375em;
-  z-index: 23542534;
+  z-index: 534;
 }
+
 .grid-box .delete-button:hover img {
   border: 0.1em solid white;
   border-radius: 50%;
@@ -92,6 +93,8 @@
 
 .grid-box .delete-button img {
   width: 100%;
+  z-index: -1;
+  position: relative;
 }
 
 .grid-box .enlace-producto,
@@ -103,6 +106,10 @@
 .grid-box p {
   margin-inline: 0px;
   margin-block: 0px;
+}
+
+.grid-box a {
+  color: #26d9d9;
 }
 
 .image-container {

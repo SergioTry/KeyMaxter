@@ -98,6 +98,60 @@ app.post(
   }
 );
 
+app.put(
+  "/teclados/:modelo",
+  upload.fields([
+    { name: "modelo", maxCount: 1 },
+    { name: "precio", maxCount: 1 },
+    { name: "enlace", maxCount: 1 },
+    { name: "imagen1", maxCount: 1 },
+    { name: "imagen2", maxCount: 1 },
+  ]),
+  async (req, res, next) => {
+    try {
+      const nuevoTeclado = {
+        modelo: req.params.modelo,
+        enlace: req.body.enlace,
+        precio: req.body.precio,
+        marca: req.body.marca ? req.body.marca : null,
+        image1:
+          req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
+        image2:
+          req.files && req.files.imagen2 ? req.files.imagen2[0].filename : null,
+      };
+      const nuevo = await db.modificarTeclado(nuevoTeclado);
+
+      // Número de productos modificados
+      if (nuevo[0] >= 1) {
+        res.status(HTTP_OK).send("Teclado modificado.");
+        console.log("teclado modificado");
+      } else {
+        res.status(HTTP_NOT_FOUND).send(" modelo no encontrado.");
+      }
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+app.delete("/teclados/:id", async (req, res, next) => {
+  try {
+    const id = parseFloat(req.params.id);
+    if (!id) res.status(HTTP_BAD_REQUEST).send(" id de teclado incorrecto");
+
+    const borrado = await db.borrarTeclado(id);
+    // Número de productos borrados
+    if (borrado >= 1) {
+      res.status(HTTP_NO_CONTENT).send("Teclado borrado.");
+      console.log("teclado borrado");
+    } else {
+      res.status(HTTP_NOT_FOUND).send(" id de teclado no encontrado.");
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.use(function (err, req, res, next) {
   console.error(err);
   if (err instanceof multer.MulterError)
@@ -106,11 +160,10 @@ app.use(function (err, req, res, next) {
       .send("Error al subir el archivo: " + err.message);
   else {
     // El ValidationError valida que los campos son correctos
-    // (valida que no se intentan añadir campos diferentes a los de la db)
+    // (valida que no se intentan añadir campos diferentes a los de la db
+    // o errores de validación)
     if (err instanceof Sequelize.ValidationError)
-      res.status(HTTP_BAD_REQUEST).send("Datos incorrectos.");
-    // El Database controla que no se intente añadir un modelo ya existente
-    // (unique constraint)
+      res.status(HTTP_BAD_REQUEST).send("Datos incorrectos, " + err.message);
     if (err instanceof Sequelize.DatabaseError)
       res.status(HTTP_BAD_REQUEST).send("Error en la base de datos.");
     res.status(500).send("Error interno del servidor");

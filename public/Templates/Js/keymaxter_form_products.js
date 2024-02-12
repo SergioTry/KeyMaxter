@@ -22,19 +22,35 @@ form.addEventListener("submit", async function (evt) {
   evt.preventDefault();
   const formData = new FormData(form);
   formData.delete("imagenes");
+  const precio = formData.get("precio");
+  const precioFormateado = precio.replace(".", ",");
+  formData.set("precio", precioFormateado);
 
   if (image1) formData.append("imagen1", image1);
   if (image2) formData.append("imagen2", image2);
-  console.log(formData);
-  const resp = await fetch("/teclados", {
-    method: "POST",
-    body: formData,
-  });
+
+  let resp;
+  if (tipoAccion.value == "0") {
+    console.log("add");
+    resp = await fetch("/teclados", {
+      method: "POST",
+      body: formData,
+    });
+  } else {
+    console.log("mod");
+    resp = await fetch(`/teclados/${formData.get("modelo")}`, {
+      method: "PUT",
+      body: formData,
+    });
+  }
   const data = await resp.text();
+
   // Manejar la respuesta exitosa
   console.log(data);
-  if (resp.ok) alert("Todo ha ido bien");
-  else {
+  if (resp.ok) {
+    alert("Todo ha ido bien");
+    form.reset();
+  } else {
     alert(resp.status + ": " + data);
   }
 });

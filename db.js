@@ -94,11 +94,13 @@ exports.altaTeclado = async function (datosTeclado) {
   // Esto es necesario para que en caso de que no exista la tabla
   // se cree en el momento
   await ModeloTeclado.sync();
+  await validacionAlta(datosTeclado, ModeloTeclado);
   return await ModeloTeclado.create(datosTeclado);
 };
 
 exports.altaSwitch = async function (datosSwitch) {
   await ModeloSwitch.sync();
+  await validacionAlta(datosSwitch, ModeloSwitch);
   return await ModeloSwitch.create(datosSwitch);
 };
 
@@ -110,10 +112,22 @@ exports.borrarSwitch = async function (idSwitch) {
   return await ModeloSwitch.destroy({ where: { id: idSwitch } });
 };
 
-exports.modificarTeclado = async function (idTeclado, datosTeclado) {
+exports.modificarTeclado = async function (datosTeclado) {
+  if (!/^\d+(,\d+)?$/.test(datosTeclado.precio))
+    throw new Sequelize.ValidationError("formato de precio no válido");
   return await ModeloTeclado.update(datosTeclado, {
     where: {
-      id: idTeclado,
+      modelo: datosTeclado.modelo,
+    },
+  });
+};
+
+exports.modificarSwitch = async function (datosSwitch) {
+  if (!/^\d+(,\d+)?$/.test(datosSwitch.precio))
+    throw new Sequelize.ValidationError("formato de precio no válido");
+  return await ModeloSwitch.update(datosSwitch, {
+    where: {
+      modelo: datosSwitch.modelo,
     },
   });
 };
@@ -177,3 +191,16 @@ exports.listarMarcasTeclados = async function () {
 exports.listarSwitchs = async function () {
   return await ModeloSwitch.findAll();
 };
+
+async function validacionAlta(datosProducto, modelo) {
+  // Validación de precio mediante regex
+  if (!/^\d+(,\d+)?$/.test(datosProducto.precio))
+    throw new Sequelize.ValidationError("formato de precio no válido");
+  const resultados = await modelo.findAll({
+    where: {
+      modelo: datosProducto.modelo,
+    },
+  });
+  if (resultados.length >= 1)
+    throw new Sequelize.ValidationError("modelo ya existente");
+}

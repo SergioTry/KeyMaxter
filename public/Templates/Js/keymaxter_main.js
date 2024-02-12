@@ -3,29 +3,12 @@ const imagenHeader = document.getElementById("imagenHeader");
 const botonTeclados = document.getElementById("botonTeclados");
 const botonSwitchs = document.getElementById("botonSwitchs");
 const botonSimulador = document.getElementById("botonSimulador");
+const mainElement = document.querySelector("main");
 
-botonTeclados.addEventListener("click", async function () {
-  const mainElement = document.querySelector("main");
-  const respProductos = await fetch("/teclados", { method: "GET" });
-  const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
-  const productos = await respProductos.json();
-  console.log(productos);
-  const prefix = "/Images/Products/";
+mainElement.addEventListener("click", outputClicado);
 
-  productos.forEach((producto) => {
-    console.log(producto);
-    if (producto.image1) {
-      producto.image1 = prefix + producto.image1;
-      if (producto.image2) {
-        producto.image2 = prefix + producto.image2;
-      }
-    }
-  });
+botonTeclados.addEventListener("click", cargarProductos);
 
-  const marcas = await respMarcas.json();
-  const html = crearTeclados({ marcas: marcas, productos: productos });
-  mainElement.innerHTML = html;
-});
 botonSimulador.addEventListener("click", async function () {
   const mainElement = document.querySelector("main");
   const enlaceSimulador =
@@ -62,5 +45,48 @@ function situarBotonesHorizontales() {
     menuHorizontal.style.position = "fixed";
     menuHorizontal.style.top = "1rem";
     menuHorizontal.style.right = "0.5rem";
+  }
+}
+
+async function cargarProductos() {
+  const mainElement = document.querySelector("main");
+  const respProductos = await fetch("/teclados", { method: "GET" });
+  const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
+  const productos = await respProductos.json();
+  const prefix = "/Images/Products/";
+
+  productos.forEach((producto) => {
+    console.log(producto);
+    if (producto.image1) {
+      producto.image1 = prefix + producto.image1;
+      if (producto.image2) {
+        producto.image2 = prefix + producto.image2;
+      }
+    }
+  });
+
+  const marcas = await respMarcas.json();
+  const html = crearTeclados({ marcas: marcas, productos: productos });
+  mainElement.innerHTML = html;
+}
+
+async function outputClicado(evt) {
+  if (evt.target.classList.contains("delete-button")) {
+    const item = evt.target.closest(".grid-box");
+    const id = item.dataset.id;
+
+    const confir = confirm("¿Estás seguro de que quierers borrarlo?");
+    if (confir == true) {
+      const resp = await fetch(`/teclados/${id}`, {
+        method: "DELETE",
+        body: id,
+      });
+      const data = await resp.text();
+      if (resp.ok) {
+        cargarProductos();
+      } else {
+        alert(resp.status + ": " + data);
+      }
+    }
   }
 }
