@@ -3,22 +3,23 @@ const boton = document.getElementById("button");
 const inputImg = document.getElementById("image");
 const imgLocation = document.getElementById("image-location");
 const form = document.querySelector("form");
-
 const radio1 = document.getElementById("radio1");
 const radio2 = document.getElementById("radio2");
 
 var image1;
 var image2;
 
-window.addEventListener("load", function () {
-  borrarBanner();
+document.addEventListener("DOMContentLoaded", function () {
+  window.addEventListener("load", borrarBanner);
+  window.addEventListener("resize", borrarBanner);
+  inputImg.addEventListener("change", saveImg);
+  form.addEventListener("submit", enviarFormulario);
+  radio1.addEventListener("change", radioChanged);
+  radio2.addEventListener("change", radioChanged);
+  tipoAccion.addEventListener("change", changeAction);
 });
-window.addEventListener("resize", function () {
-  borrarBanner();
-});
-inputImg.addEventListener("change", saveImg);
 
-form.addEventListener("submit", async function (evt) {
+async function enviarFormulario(evt) {
   evt.preventDefault();
   const formData = new FormData(form);
   formData.delete("imagenes");
@@ -45,7 +46,6 @@ form.addEventListener("submit", async function (evt) {
   }
   const data = await resp.text();
 
-  // Manejar la respuesta exitosa
   console.log(data);
   if (resp.ok) {
     alert("Todo ha ido bien");
@@ -53,13 +53,7 @@ form.addEventListener("submit", async function (evt) {
   } else {
     alert(resp.status + ": " + data);
   }
-});
-radio1.addEventListener("change", radioChanged);
-radio2.addEventListener("change", radioChanged);
-
-document.addEventListener("DOMContentLoaded", function () {
-  //preguntar
-});
+}
 
 function saveImg() {
   if (inputImg.files && inputImg.files[0]) {
@@ -74,7 +68,6 @@ function saveImg() {
 
 function radioChanged() {
   var newImage = document.getElementById("newImage");
-  const imgLocation = document.getElementById("image-location");
   if (radio1.checked) {
     if (image1) {
       cargarPreview(image1, newImage);
@@ -96,7 +89,6 @@ function radioChanged() {
 
 function cargarPreview(file, imgElement) {
   const reader = new FileReader();
-  const imgLocation = document.getElementById("image-location");
   reader.onload = function (e) {
     imgElement.src = e.target.result;
     imgLocation.style.border = "none";
@@ -105,13 +97,13 @@ function cargarPreview(file, imgElement) {
   reader.readAsDataURL(file);
 }
 
-tipoAccion.addEventListener("change", function () {
+function changeAction() {
   if (tipoAccion.value == "1") {
     boton.childNodes[1].textContent = "Modificar";
   } else {
     boton.childNodes[1].textContent = "Añadir";
   }
-});
+}
 
 function borrarBanner() {
   const anchoVentana = document.documentElement.clientWidth;

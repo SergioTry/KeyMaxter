@@ -1,29 +1,33 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
-const botonTeclados = document.getElementById("botonTeclados");
-const botonSwitchs = document.getElementById("botonSwitchs");
-const botonSimulador = document.getElementById("botonSimulador");
+const botonesTeclados = document.getElementsByClassName("boton-teclados");
+const botonesSwitchs = document.getElementsByClassName("boton-switchs");
+const botonesSimulador = document.getElementsByClassName("boton-simulador");
 const mainElement = document.querySelector("main");
 
-mainElement.addEventListener("click", outputClicado);
+document.addEventListener("DOMContentLoaded", function () {
+  for (botonT of botonesTeclados) {
+    botonT.addEventListener("click", cargarProductos);
+  }
+  for (botonS of botonesSwitchs) {
+    botonS.addEventListener("click", cargarProductos);
+  }
+  for (botonSimu of botonesSimulador) {
+    botonSimu.addEventListener("click", mostrarSimulador);
+  }
+  mainElement.addEventListener("click", outputClicado);
 
-botonTeclados.addEventListener("click", cargarProductos);
-
-botonSimulador.addEventListener("click", async function () {
-  const mainElement = document.querySelector("main");
-  const enlaceSimulador =
-    '<iframe src="https://keyboardsimulator.xyz/" title="Contenido incrustado" allowfullscreen="true" ></iframe>';
-  mainElement.innerHTML = enlaceSimulador;
+  window.addEventListener("scroll", situarBotonesHorizontales);
+  window.addEventListener("load", situarBotonesHorizontales);
 });
 
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
-window.addEventListener("scroll", function () {
-  situarBotonesHorizontales();
-});
-window.addEventListener("load", function () {
-  situarBotonesHorizontales();
-});
+function mostrarSimulador() {
+  const enlaceSimulador =
+    '<iframe src="https://keyboardsimulator.xyz/" title="Contenido incrustado" allowfullscreen="true" ></iframe>';
+  mainElement.innerHTML = enlaceSimulador;
+}
 
 function esElementoNoVisible(elemento) {
   var rect = elemento.getBoundingClientRect();
