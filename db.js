@@ -149,7 +149,6 @@ exports.modificarSwitch = async function (datosSwitch) {
 };
 
 exports.listarProductos = async function (
-  producto,
   orden = undefined,
   autor = undefined
 ) {

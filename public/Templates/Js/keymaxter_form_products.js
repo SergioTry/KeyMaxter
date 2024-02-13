@@ -50,8 +50,8 @@ async function enviarFormulario(evt) {
 
   console.log(data);
   if (resp.ok) {
-    alert("Todo ha ido bien");
     form.reset();
+    alert("Todo ha ido bien");
   } else {
     alert(resp.status + ": " + data);
   }

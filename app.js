@@ -67,6 +67,7 @@ app.get("/teclados", async (req, res, next) => {
   try {
     const autor = req.query.autor;
     const orden = req.query.orden;
+    console.log(autor, orden);
     res.send(await db.listarProductos(autor, orden));
   } catch (err) {
     next(err);

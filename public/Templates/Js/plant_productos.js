@@ -48,7 +48,7 @@ pug_html = pug_html + "\u003C\u002Foption\u003E\u003C\u002Fselect\u003E\u003C\u0
 }
 }
 else {
-pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-marca\"\u003EFiltro:\u003Cselect id=\"filtro\"\u003E\u003Coption" + (" value=\"\""+pug_attr("selected", true, true, false)) + "\u003E\u003C\u002Foption\u003E\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-marca\"\u003EFiltro:\u003Cselect id=\"filtro\"\u003E\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E";
 }
 pug_html = pug_html + "\u003C\u002Fspan\u003E\u003C\u002Ffieldset\u003E\u003C\u002Fform\u003E\u003C\u002Fsearch\u003E\u003Carticle class=\"grid-layout-content\"\u003E";
 // iterate productos
