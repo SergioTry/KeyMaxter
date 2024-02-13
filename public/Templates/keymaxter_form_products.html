@@ -20,24 +20,27 @@
       <h1>Gestión de productos</h1>
       <form>
         <div class="contenedor-select">
-          <label for="tipo-accion">¿Qué deseas?:</label>
-          <select id="tipo-accion">
+          <label for="tipoAccion">¿Qué deseas?:</label>
+          <select id="tipoAccion">
             <option value="0" selected>Añadir</option>
             <option value="1">Modificar</option>
           </select>
-          <label for="tipo-producto">Tipo de producto:</label>
-          <select id="tipo-producto">
+          <label for="tipoProducto">Tipo de producto:</label>
+          <select id="tipoProducto">
             <option value="0" selected>Teclado</option>
             <option value="1">Switch</option>
           </select>
         </div>
         <div class="contenedor-campo">
-          <label for="marca">Marca/Diseñador:</label>
+          <label id="autorLabel" for="autor">Autor*:</label>
           <input
-            id="marca"
-            name="marca"
-            placeholder="Mars Gaming"
+            id="autor"
+            name="autor"
+            pattern=".{0,15}"
+            title="Introduce como máximo 15 caracteres."
+            placeholder="Alberto Álvarez"
             class="input-text"
+            required
           />
         </div>
         <div class="contenedor-campo">
@@ -60,6 +63,17 @@
             class="input-text"
             required
             title="Valor numérico positivo."
+          />
+        </div>
+        <div class="contenedor-campo campo-color">
+          <label for="color">Color*:</label>
+          <input
+            id="color"
+            name="color"
+            placeholder="ROJO"
+            class="input-text"
+            required
+            disabled
           />
         </div>
         <div class="contenedor-campo enlace">

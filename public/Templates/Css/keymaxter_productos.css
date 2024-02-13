@@ -45,15 +45,26 @@
   align-self: center;
   margin-right: 0.3125em;
 }
+
 .grid-search span label input {
   margin-left: 0.3125em;
   transition: all 0.2s ease-in-out;
   padding-block: 0;
   padding-inline: 0;
 }
+
 .grid-search span label input:checked {
   border: 0.0625em solid #344056;
   background-color: rgba(2, 228, 231, 0.8);
+}
+
+.contenedor-select-marca {
+  display: flex;
+}
+
+#marca {
+  width: 15ch;
+  font-size: 0.8em;
 }
 
 .grid-layout-content {

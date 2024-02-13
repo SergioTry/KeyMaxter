@@ -400,9 +400,6 @@ main {
   align-items: center;
 }
 
-@media screen and (max-width: 376px) {
-}
-
 footer {
   display: flex;
   flex-wrap: wrap;
@@ -521,5 +518,8 @@ iframe {
   }
   .flex-layout-content {
     font-size: 1.5rem;
+  }
+  .contenedor-select-marca {
+    flex-direction: column;
   }
 }

@@ -1,8 +1,8 @@
 const express = require("express");
 const multer = require("multer");
-
-const db = require("./db.js");
+const fs = require("fs");
 const { Sequelize } = require("sequelize");
+const db = require("./db.js");
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(express.static("public"));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/Images/Products"); // Aceptar el archivo
+    cb(null, "public/Images/Products");
   },
   filename: function (req, file, cb) {
     let fechaActual = new Date(Date.now());
@@ -51,14 +51,34 @@ const fileFilter = function (req, file, cb) {
 // Inicializar el middleware de Multer
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-app.get("/teclados", async (req, res) => {
+function crearCarpetaSiNoExiste() {
+  // Verificar si la carpeta no existe
+  const ruta = "public/Images/Products";
+  if (!fs.existsSync(ruta)) {
+    fs.mkdirSync(ruta);
+    console.log("Se ha creado la carpeta Products");
+  }
+}
+
+crearCarpetaSiNoExiste();
+
+app.get("/teclados", async (req, res, next) => {
   // /teclados?marca=hola
-  const marca = req.query.marca;
-  const orden = req.query.orden;
-  res.send(await db.listarProductos(marca, orden));
+  try {
+    const autor = req.query.autor;
+    const orden = req.query.orden;
+    res.send(await db.listarProductos(autor, orden));
+  } catch (err) {
+    next(err);
+  }
 });
-app.get("/tecladosMarcas", async (req, res) => {
-  res.send(await db.listarMarcasTeclados());
+
+app.get("/tecladosAutores", async (req, res, next) => {
+  try {
+    res.send(await db.listarAutoresTeclados());
+  } catch (err) {
+    next(err);
+  }
 });
 
 app.post(
@@ -67,6 +87,8 @@ app.post(
     { name: "modelo", maxCount: 1 },
     { name: "precio", maxCount: 1 },
     { name: "enlace", maxCount: 1 },
+    { name: "autor", maxCount: 1 },
+    { name: "marca", maxCount: 1 },
     { name: "imagen1", maxCount: 1 },
     { name: "imagen2", maxCount: 1 },
   ]),
@@ -78,7 +100,7 @@ app.post(
         modelo: req.body.modelo,
         enlace: req.body.enlace,
         precio: req.body.precio,
-        marca: req.body.marca ? req.body.marca : null,
+        autor: req.body.autor,
         image1:
           req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
         image2:
@@ -104,6 +126,8 @@ app.put(
     { name: "modelo", maxCount: 1 },
     { name: "precio", maxCount: 1 },
     { name: "enlace", maxCount: 1 },
+    { name: "autor", maxCount: 1 },
+    { name: "marca", maxCount: 1 },
     { name: "imagen1", maxCount: 1 },
     { name: "imagen2", maxCount: 1 },
   ]),
@@ -113,7 +137,7 @@ app.put(
         modelo: req.params.modelo,
         enlace: req.body.enlace,
         precio: req.body.precio,
-        marca: req.body.marca ? req.body.marca : null,
+        autor: req.body.autor,
         image1:
           req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
         image2:
@@ -165,8 +189,8 @@ app.use(function (err, req, res, next) {
     if (err instanceof Sequelize.ValidationError)
       res.status(HTTP_BAD_REQUEST).send("Datos incorrectos, " + err.message);
     if (err instanceof Sequelize.DatabaseError)
-      res.status(HTTP_BAD_REQUEST).send("Error en la base de datos.");
-    res.status(500).send("Error interno del servidor");
+      res.status(HTTP_INTERNAL_SERVER_ERROR).send("Error en la base de datos.");
+    res.status(HTTP_INTERNAL_SERVER_ERROR).send("Error interno del servidor");
   }
 });
 

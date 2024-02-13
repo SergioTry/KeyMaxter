@@ -1,12 +1,3 @@
-//- each teclado in teclados
-//-   .clase1.clase2#id1
-//-     p.monoMataRatas #{contacto.nombre}
-
-
-//-   <div class="clase1 clase2" id="id1">
-//-     <p class="monoMataRatas">Pepe</p>
-//-   </div> 
-
 search.grid-search
   form(action='aplicar a la vista')
     fieldset
@@ -16,10 +7,20 @@ search.grid-search
           input(type='radio' name='ordenar_precio' value='radio1')
         label Precio descendente: 
           input(type='radio' name='ordenar_precio' value='radio2')
-        div Marca:
-          select#marca
-            each marca in marcas
-              option(value=marca.marca) #{marca.marca}
+        if filtros.length > 0
+          if filtros[0].marca 
+            div.contenedor-select-marca Marca:
+              select#marca
+                each filtro in filtros
+                  option(value=filtro.marca) #{filtro.marca}
+          else
+            div.contenedor-select-marca Autor:
+              select#marca
+                each filtro in filtros
+                  option(value=filtro.autor) #{filtro.autor}
+        else
+          div.contenedor-select-marca Filtro:
+            select#marca
 article.grid-layout-content
   each producto in productos
     .grid-box(data-id=producto.id) 

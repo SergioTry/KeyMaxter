@@ -12,9 +12,12 @@ const ModeloTeclado = sequelize.define(
   {
     modelo: {
       field: "MODELO",
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(30),
       allowNull: false,
       unique: true,
+      validate: {
+        len: [0, 30],
+      },
     },
     precio: {
       field: "PRECIO",
@@ -26,10 +29,13 @@ const ModeloTeclado = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    marca: {
-      field: "MARCA",
-      type: DataTypes.STRING,
-      allowNull: true,
+    autor: {
+      field: "AUTOR",
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      validate: {
+        len: [0, 15], // Validación de longitud máxima de 15 caracteres
+      },
     },
     image1: {
       field: "IMAGE_1",
@@ -54,9 +60,12 @@ const ModeloSwitch = sequelize.define(
   {
     modelo: {
       field: "MODELO",
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(30),
       allowNull: false,
       unique: true,
+      validate: {
+        len: [0, 30],
+      },
     },
     precio: {
       field: "PRECIO",
@@ -70,8 +79,11 @@ const ModeloSwitch = sequelize.define(
     },
     marca: {
       field: "MARCA",
-      type: DataTypes.STRING,
-      allowNull: true,
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      validate: {
+        len: [0, 15],
+      },
     },
     image1: {
       field: "IMAGE_1",
@@ -93,26 +105,29 @@ const ModeloSwitch = sequelize.define(
 exports.altaTeclado = async function (datosTeclado) {
   // Esto es necesario para que en caso de que no exista la tabla
   // se cree en el momento
-  await ModeloTeclado.sync();
+  await sincronizarDB();
   await validacionAlta(datosTeclado, ModeloTeclado);
   return await ModeloTeclado.create(datosTeclado);
 };
 
 exports.altaSwitch = async function (datosSwitch) {
-  await ModeloSwitch.sync();
+  await sincronizarDB();
   await validacionAlta(datosSwitch, ModeloSwitch);
   return await ModeloSwitch.create(datosSwitch);
 };
 
 exports.borrarTeclado = async function (idTeclado) {
+  await sincronizarDB();
   return await ModeloTeclado.destroy({ where: { id: idTeclado } });
 };
 
 exports.borrarSwitch = async function (idSwitch) {
+  await sincronizarDB();
   return await ModeloSwitch.destroy({ where: { id: idSwitch } });
 };
 
 exports.modificarTeclado = async function (datosTeclado) {
+  await sincronizarDB();
   if (!/^\d+(,\d+)?$/.test(datosTeclado.precio))
     throw new Sequelize.ValidationError("formato de precio no válido");
   return await ModeloTeclado.update(datosTeclado, {
@@ -123,6 +138,7 @@ exports.modificarTeclado = async function (datosTeclado) {
 };
 
 exports.modificarSwitch = async function (datosSwitch) {
+  await sincronizarDB();
   if (!/^\d+(,\d+)?$/.test(datosSwitch.precio))
     throw new Sequelize.ValidationError("formato de precio no válido");
   return await ModeloSwitch.update(datosSwitch, {
@@ -135,14 +151,15 @@ exports.modificarSwitch = async function (datosSwitch) {
 exports.listarProductos = async function (
   producto,
   orden = undefined,
-  marca = undefined
+  autor = undefined
 ) {
-  if (marca) {
+  await sincronizarDB();
+  if (autor) {
     if (orden) {
       if (orden == 1) {
         return await ModeloTeclado.findAll({
           where: {
-            marca: marca,
+            autor: autor,
           },
           order: {
             precio: "DESC",
@@ -151,7 +168,7 @@ exports.listarProductos = async function (
       } else {
         return await ModeloTeclado.findAll({
           where: {
-            marca: marca,
+            autor: autor,
           },
           order: {
             precio: "ASC",
@@ -161,7 +178,7 @@ exports.listarProductos = async function (
     } else {
       return await ModeloTeclado.findAll({
         where: {
-          marca: marca,
+          autor: autor,
         },
       });
     }
@@ -184,11 +201,24 @@ exports.listarProductos = async function (
   return await ModeloTeclado.findAll();
 };
 
-exports.listarMarcasTeclados = async function () {
-  return await ModeloTeclado.findAll({ attributes: ["marca"] });
+exports.listarAutoresTeclados = async function () {
+  await sincronizarDB();
+  return await ModeloTeclado.findAll({
+    attributes: ["autor"],
+    group: ["AUTOR"],
+  });
+};
+
+exports.listarMarcasSwitchs = async function () {
+  await sincronizarDB();
+  return await ModeloSwitch.findAll({
+    attributes: ["marca"],
+    group: ["marca"],
+  });
 };
 
 exports.listarSwitchs = async function () {
+  await sincronizarDB();
   return await ModeloSwitch.findAll();
 };
 
@@ -203,4 +233,9 @@ async function validacionAlta(datosProducto, modelo) {
   });
   if (resultados.length >= 1)
     throw new Sequelize.ValidationError("modelo ya existente");
+}
+
+async function sincronizarDB() {
+  await ModeloTeclado.sync({ forze: true });
+  await ModeloSwitch.sync();
 }

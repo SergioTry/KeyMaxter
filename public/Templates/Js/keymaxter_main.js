@@ -55,7 +55,7 @@ function situarBotonesHorizontales() {
 async function cargarProductos() {
   const mainElement = document.querySelector("main");
   const respProductos = await fetch("/teclados", { method: "GET" });
-  const respMarcas = await fetch("/tecladosMarcas", { method: "GET" });
+  const respAutores = await fetch("/tecladosAutores", { method: "GET" });
   const productos = await respProductos.json();
   const prefix = "/Images/Products/";
 
@@ -69,8 +69,8 @@ async function cargarProductos() {
     }
   });
 
-  const marcas = await respMarcas.json();
-  const html = crearTeclados({ marcas: marcas, productos: productos });
+  const autores = await respAutores.json();
+  const html = crearTeclados({ filtros: autores, productos: productos });
   mainElement.innerHTML = html;
 }
 

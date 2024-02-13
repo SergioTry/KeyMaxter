@@ -1,4 +1,5 @@
-const tipoAccion = document.getElementById("tipo-accion");
+const tipoAccion = document.getElementById("tipoAccion");
+const tipoProducto = document.getElementById("tipoProducto");
 const boton = document.getElementById("button");
 const inputImg = document.getElementById("image");
 const imgLocation = document.getElementById("image-location");
@@ -6,8 +7,8 @@ const form = document.querySelector("form");
 const radio1 = document.getElementById("radio1");
 const radio2 = document.getElementById("radio2");
 
-var image1;
-var image2;
+let image1;
+let image2;
 
 document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", borrarBanner);
@@ -17,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   radio1.addEventListener("change", radioChanged);
   radio2.addEventListener("change", radioChanged);
   tipoAccion.addEventListener("change", changeAction);
+  tipoProducto.addEventListener("change", changeProducto);
 });
 
 async function enviarFormulario(evt) {
@@ -105,13 +107,35 @@ function changeAction() {
   }
 }
 
+function changeProducto() {
+  const inputDesigner = document.getElementById("autor");
+  const labelDesigner = document.getElementById("autorLabel");
+  const inputColor = document.getElementById("color");
+  const colorContenedor = document.getElementsByClassName("campo-color");
+  const enlaceContenedor = document.getElementsByClassName("enlace");
+  console.log(enlaceContenedor[0].style);
+  if (tipoProducto.value == "1") {
+    enlaceContenedor[0].style.gridColumn = "2 / 3";
+    colorContenedor[0].style.display = "flex";
+    labelDesigner.textContent = "Marca*:";
+    inputDesigner.setAttribute("name", "marca");
+    inputColor.removeAttribute("disabled");
+  } else {
+    enlaceContenedor[0].style.gridColumn = "1 / 3";
+    colorContenedor[0].style.display = "none";
+    labelDesigner.textContent = "Autor*:";
+    inputDesigner.setAttribute("name", "autor");
+    inputColor.setAttribute("disabled", "");
+  }
+}
+
 function borrarBanner() {
   const anchoVentana = document.documentElement.clientWidth;
   const altoVentana = document.documentElement.clientHeight;
   const imagenHeader = document.getElementById("headerPrincipal");
-  let formulario = document.querySelector("form");
-  let titulo = document.querySelector("h1");
-  if (anchoVentana <= 950) {
+  const formulario = document.querySelector("form");
+  const titulo = document.querySelector("h1");
+  if (anchoVentana <= 950 || altoVentana <= 640) {
     imagenHeader.style.display = "none";
     if (anchoVentana > altoVentana) {
       titulo.style.fontSize = "0.875rem";
