@@ -1,31 +1,4 @@
-search.grid-search
-  form(action='aplicar a la vista')
-    fieldset
-      p Filtros:
-      span 
-        label Precio ascendente: 
-          input#ordenAsc(type='checkbox' name='ordenar_precio')
-        label Precio descendente: 
-          input#ordenDes(type='checkbox' name='ordenar_precio')
-        if filtros.length > 0
-          if filtros[0].marca 
-            div.contenedor-select-filtro Marca:
-              select#filtro
-                option(value="" selected)
-                  each filtro in filtros
-                    option(value=filtro.marca) #{filtro.marca}
-          else
-            div.contenedor-select-filtro Autor:
-              select#filtro
-                option(value="" selected)
-                  each filtro in filtros
-                    option(value=filtro.autor) #{filtro.autor}  
-        else
-          div.contenedor-select-marca Filtro:
-            select#filtro
-              option(value="" selected)
-article.grid-layout-content
-  each producto in productos
+each producto in productos
     .grid-box(data-id=producto.id) 
       .image-container
         button.delete-button

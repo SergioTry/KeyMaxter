@@ -73,9 +73,27 @@ app.get("/teclados", async (req, res, next) => {
   }
 });
 
-app.get("/tecladosAutores", async (req, res, next) => {
+app.get("/teclados/autores", async (req, res, next) => {
   try {
     res.send(await db.listarAutoresTeclados());
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/switchs", async (req, res, next) => {
+  try {
+    const marca = req.query.marca;
+    const orden = req.query.orden;
+    res.send(await db.listarProductos(marca, orden));
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/switchs/marcas", async (req, res, next) => {
+  try {
+    res.send(await db.listarMarcasSwitchs());
   } catch (err) {
     next(err);
   }

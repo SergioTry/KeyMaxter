@@ -4,19 +4,21 @@ const botonesTeclados = document.getElementsByClassName("boton-teclados");
 const botonesSwitchs = document.getElementsByClassName("boton-switchs");
 const botonesSimulador = document.getElementsByClassName("boton-simulador");
 const mainElement = document.querySelector("main");
+let ordenAscendente;
+let ordenDescendente;
+let selectFiltro;
 
 document.addEventListener("DOMContentLoaded", function () {
   for (botonT of botonesTeclados) {
-    botonT.addEventListener("click", cargarProductos);
+    botonT.addEventListener("click", getTeclados);
   }
   for (botonS of botonesSwitchs) {
-    botonS.addEventListener("click", cargarProductos);
+    botonS.addEventListener("click", getSwitchs);
   }
   for (botonSimu of botonesSimulador) {
     botonSimu.addEventListener("click", mostrarSimulador);
   }
   mainElement.addEventListener("click", outputClicado);
-
   window.addEventListener("scroll", situarBotonesHorizontales);
   window.addEventListener("load", situarBotonesHorizontales);
 });
@@ -52,10 +54,19 @@ function situarBotonesHorizontales() {
   }
 }
 
-async function cargarProductos() {
-  const mainElement = document.querySelector("main");
+async function getTeclados() {
   const respProductos = await fetch("/teclados", { method: "GET" });
-  const respAutores = await fetch("/tecladosAutores", { method: "GET" });
+  const respAutores = await fetch("/teclados/autores", { method: "GET" });
+  await cargarProductos(respProductos, respAutores);
+}
+
+async function getSwitchs() {
+  const respSwitchs = await fetch("/switchs", { method: "GET" });
+  const respMarcas = await fetch("/switchs/marcas", { method: "GET" });
+  await cargarProductos(respSwitchs, respMarcas);
+}
+
+async function cargarProductos(respProductos, respFiltro) {
   const productos = await respProductos.json();
   const prefix = "/Images/Products/";
 
@@ -69,9 +80,60 @@ async function cargarProductos() {
     }
   });
 
-  const autores = await respAutores.json();
-  const html = crearTeclados({ filtros: autores, productos: productos });
+  const filtros = await respFiltro.json();
+  const html = crearTeclados({ filtros: filtros, productos: productos });
   mainElement.innerHTML = html;
+
+  ordenAscendente = document.getElementById("ordenAsc");
+  ordenDescendente = document.getElementById("ordenDes");
+  selectFiltro = document.getElementById("filtro");
+  selectFiltro.addEventListener("change", aplicarFiltro);
+  ordenAscendente.addEventListener("change", aplicarFiltro);
+  ordenDescendente.addEventListener("change", aplicarFiltro);
+}
+
+async function aplicarFiltro(evt) {
+  // Este método valida si el radio pulsado está ya seleccionado
+  // y en caso positivo lo deselecciona.
+  validarActivacion(evt);
+  let ruta;
+  if (ordenAscendente.checked) {
+    ruta = "/teclados?orden=1";
+    if (selectFiltro.value != "") {
+      ruta = ruta + `?autor=${selectFiltro.value}`;
+    }
+  } else {
+    if (ordenDescendente.checked) {
+      ruta = "/teclados?orden=0";
+      if (selectFiltro.value != "") {
+        ruta = ruta + `?autor=${selectFiltro.value}`;
+      }
+    } else {
+      ruta = "/teclados";
+      if (selectFiltro.value != "") {
+        ruta = ruta + `?autor=${selectFiltro.value}`;
+      }
+    }
+  }
+  console.log(ruta);
+  const articleLocation = document.querySelector("article");
+  const respProductos = await fetch(ruta, { method: "GET" });
+  const productos = await respProductos.json();
+  const html = cargarTecladosFiltrados({ productos: productos });
+  articleLocation.innerHTML = html;
+}
+
+function validarActivacion(evt) {
+  const checkBoxSelected = evt.target.id;
+  if (checkBoxSelected == "ordenAsc") {
+    if (ordenDescendente.checked) {
+      ordenDescendente.checked = false;
+    }
+  } else {
+    if (ordenAscendente.checked) {
+      ordenAscendente.checked = false;
+    }
+  }
 }
 
 async function outputClicado(evt) {
@@ -79,7 +141,7 @@ async function outputClicado(evt) {
     const item = evt.target.closest(".grid-box");
     const id = item.dataset.id;
 
-    const confir = confirm("¿Estás seguro de que quierers borrarlo?");
+    const confir = confirm("¿Estás seguro de que quieres borrarlo?");
     if (confir == true) {
       const resp = await fetch(`/teclados/${id}`, {
         method: "DELETE",

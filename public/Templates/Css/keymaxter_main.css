@@ -519,7 +519,7 @@ iframe {
   .flex-layout-content {
     font-size: 1.5rem;
   }
-  .contenedor-select-marca {
+  .contenedor-select-filtro {
     flex-direction: column;
   }
 }

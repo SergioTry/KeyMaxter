@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "run": "node app.js",
-    "comp": "pug -c -D -n crearTeclados -o public/Templates/Js plant_productos.pug"
+    "pug1": "pug -c -D -n crearTeclados -o public/Templates/Js plant_productos.pug",
+    "pug2": "pug -c -D -n cargarTecladosFiltrados -o public/Templates/Js plant_productos_filtrados.pug"
   },
   "keywords": [],
   "author": "",

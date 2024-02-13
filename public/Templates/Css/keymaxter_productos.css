@@ -58,11 +58,11 @@
   background-color: rgba(2, 228, 231, 0.8);
 }
 
-.contenedor-select-marca {
+.contenedor-select-filtro {
   display: flex;
 }
 
-#marca {
+#filtro {
   width: 15ch;
   font-size: 0.8em;
 }
@@ -111,7 +111,7 @@
 .grid-box .enlace-producto,
 .grid-box .modelo-producto,
 .grid-box .multicampo-contenedor,
-.grid-box .marca-producto {
+.grid-box .filtro-producto {
   padding: 0.3125em;
 }
 .grid-box p {
