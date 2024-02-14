@@ -48,7 +48,7 @@ const fileFilter = function (req, file, cb) {
   }
 };
 
-// Inicializar el middleware de Multer
+// Inicializa el middleware de Multer
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.get("/teclados", async (req, res, next) => {

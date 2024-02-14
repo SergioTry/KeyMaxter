@@ -1,5 +1,6 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
+let settingItem = document.getElementById("settingsItem");
 const imagenSideBar = document.getElementById("imagenSideBar");
 const audioEtiqueta = document.querySelector("audio");
 const botonesTeclados = document.getElementsByClassName("boton-teclados");
@@ -10,7 +11,10 @@ let ordenAscendente;
 let ordenDescendente;
 let selectFiltro;
 
+let isAdmin;
+
 document.addEventListener("DOMContentLoaded", function () {
+  validateAdmin();
   imagenSideBar.addEventListener("click", reproducirSonido);
   for (botonT of botonesTeclados) {
     botonT.addEventListener("click", getTeclados);
@@ -25,6 +29,17 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("scroll", situarBotonesHorizontales);
   window.addEventListener("load", situarBotonesHorizontales);
 });
+
+function validateAdmin() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const adminValue = urlParams.get("admin");
+  if (adminValue) {
+    if (adminValue == "true") {
+      isAdmin = true;
+      settingItem.style.display = "block";
+    }
+  }
+}
 
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
@@ -84,7 +99,10 @@ async function cargarProductos(respProductos, respFiltro) {
   });
 
   const filtros = await respFiltro.json();
-  const html = crearTeclados({ filtros: filtros, productos: productos });
+  const html = isAdmin
+    ? crearTeclados({ filtros: filtros, productos: productos, admin: true })
+    : crearTeclados({ filtros: filtros, productos: productos, admin: false });
+
   mainElement.innerHTML = html;
 
   ordenAscendente = document.getElementById("ordenAsc");
@@ -123,7 +141,10 @@ async function aplicarFiltro(evt) {
   const articleLocation = document.querySelector("article");
   const respProductos = await fetch(ruta, { method: "GET" });
   const productos = await respProductos.json();
-  const html = cargarTecladosFiltrados({ productos: productos });
+  const html = isAdmin
+    ? cargarTecladosFiltrados({ productos: productos, admin: true })
+    : cargarTecladosFiltrados({ productos: productos, admin: false });
+
   articleLocation.innerHTML = html;
 }
 

@@ -3,6 +3,10 @@
   --frames: 62;
 }
 
+.display-none{
+  display: none;
+}
+
 .grid-search {
   color: black;
   margin-bottom: 0.09em;

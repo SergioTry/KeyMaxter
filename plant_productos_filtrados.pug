@@ -1,8 +1,11 @@
 each producto in productos
   .grid-box(data-id=producto.id) 
     .image-container
-      button.delete-button
-        img(src='/Media/delete.png' alt='Icono de borrado')
+      if admin 
+        button.delete-button
+          img(src='/Media/delete.png' alt='Icono de borrado')
+      else
+        button.delete-button.display-none
       if producto.image1 && !producto.image2
         img.imagen-alone-producto(src=producto.image1 alt='Imagen del producto')
       else
