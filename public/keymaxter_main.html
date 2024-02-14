@@ -6,7 +6,7 @@
     <title>Key Maxter</title>
     <link
       rel="icon"
-      href="/Images/GarfieldMorado-circulo_32.png"
+      href="/Media/GarfieldMorado-circulo_32.png"
       type="image/png"
     />
     <link href="Css/keymaxter_main.css" rel="stylesheet" />
@@ -17,7 +17,7 @@
       <div id="headerPrincipal">
         <img
           id="imagenHeader"
-          src="/Images/bannerKeymaxter2.png"
+          src="/Media/bannerKeymaxter2.png"
           alt="Banner de KeyMaxter"
         />
       </div>
@@ -29,19 +29,16 @@
             <li>
               <a class="icon-login">
                 <img
-                  src="/Images/account_settings.ico"
+                  src="/Media/account_settings.ico"
                   alt="Icono de ajustes del usuario"
                 />
               </a>
             </li>
             <li>
-              <a
-                class="icon-login"
-                href="/Templates/keymaxter_form_products.html"
-              >
+              <a class="icon-login" href="/keymaxter_form_products.html">
                 <img
                   class="rotate"
-                  src="/Images/settings.ico"
+                  src="/Media/settings.ico"
                   alt="Icono de ajustes del usuario"
                 />
               </a>
@@ -62,7 +59,7 @@
               <button class="enlace-side-bar">
                 <img
                   class="iconos-side-bar"
-                  src="/Images/info_icon_sidebar.png"
+                  src="/Media/info_icon_sidebar.png"
                   alt="Icono de información"
                 />
                 <p class="button-text">Teclados custom</p>
@@ -72,7 +69,7 @@
               <div class="enlace-side-bar productos-button-contanier">
                 <img
                   class="iconos-side-bar"
-                  src="/Images/teclado_icon_sidebar.png"
+                  src="/Media/teclado_icon_sidebar.png"
                   alt="Icono de productos"
                 />
                 <div class="sub-button-container">
@@ -90,7 +87,7 @@
               <button class="enlace-side-bar boton-simulador">
                 <img
                   class="iconos-side-bar"
-                  src="/Images/edit_icon_sidebar.png"
+                  src="/Media/edit_icon_sidebar.png"
                   alt="Icono de simulador"
                 />
                 <p class="button-text">Diséñalo tú mismo</p>
@@ -103,10 +100,11 @@
         <div class="contenedor-menu-lateral">
           <aside class="menu-lateral">
             <img
-              class="imagen-side-bar"
-              src="/Images/GarfieldMorado.jpg"
+              id="imagenSideBar"
+              src="/Media/GarfieldMorado.jpg"
               alt="Logo secundario de KeyMaxter"
             />
+            <audio src=""></audio>
             <hr />
             <nav>
               <ul>
@@ -115,7 +113,7 @@
                     <div class="contenedor-enlace">
                       <img
                         class="iconos-side-bar"
-                        src="/Images/info_icon_sidebar.png"
+                        src="/Media/info_icon_sidebar.png"
                         alt="Icono de información"
                       />
                       <p class="button-text">Teclados custom</p>
@@ -127,7 +125,7 @@
                     <div class="contenedor-enlace productos-button-contanier">
                       <img
                         class="iconos-side-bar"
-                        src="/Images/teclado_icon_sidebar.png"
+                        src="/Media/teclado_icon_sidebar.png"
                         alt="Icono de productos"
                       />
                       <div class="sub-button-container">
@@ -147,7 +145,7 @@
                     <div class="contenedor-enlace">
                       <img
                         class="iconos-side-bar"
-                        src="/Images/edit_icon_sidebar.png"
+                        src="/Media/edit_icon_sidebar.png"
                         alt="Icono de simulador"
                       />
                       <p class="button-text">Diséñalo tú mismo</p>
@@ -159,87 +157,7 @@
           </aside>
         </div>
       </div>
-      <main>
-        <!--<search class="grid-search">
-          <form action="aplicar a la vista">
-            <fieldset>
-              <p>Filtros:</p>
-              <span>
-                <label
-                  >Precio ascendente<input
-                    type="checkbox"
-                    name="ordenar_precio"
-                    value="asc"
-                /></label>
-                <label
-                  >Precio descendente<input
-                    type="checkbox"
-                    name="ordenar_precio"
-                    value="desc"
-                /></label>
-                <div class="contenedor-select-filtro">
-                  Marca:
-                  <select id="filtro">
-                    <option value="marca1">Marca 1</option>
-                    <option value="marca2">Marca 2</option>
-                    <option value="marca3">Marca 3</option>
-                  </select>
-                </div>
-              </span>
-            </fieldset>
-          </form>
-        </search>
-        <article class="grid-layout-content">
-          <div class="grid-box">
-            <div class="image-container">
-              <button class="delete-button">
-                <img src="/Images/delete.ico" alt="Icono de galería" />
-              </button>
-              <img
-                class="imagen-1-producto"
-                src="/Images/teclado.avif"
-                alt="Icono de rss"
-              />
-              <img
-                class="imagen-2-producto"
-                src="/Images/boceto.png"
-                alt="Icono de rss"
-              />
-            </div>
-            <p class="modelo-producto">Mk3</p>
-            <a class="enlace-producto">Pc Componentes</a>
-            <p class="marca-producto">Mars Gaming</p>
-            <div class="multicampo-contenedor">
-              <p class="precio-producto">45$</p>
-
-              <label class="like">
-                <input type="checkbox" />
-                <div class="hearth"></div>
-              </label>
-            </div>
-          </div>
-          <div class="grid-box">
-            <div class="image-container">
-              <img
-                class="imagen-alone-producto"
-                src="/Images/teclado.avif"
-                alt="Icono de rss"
-              />
-            </div>
-            <p class="modelo-producto">Mk45</p>
-            <a class="enlace-producto">Enlace</a>
-            <p class="marca-producto">Mars Gaming</p>
-            <div class="multicampo-contenedor">
-              <p class="precio-producto">45$</p>
-              <p class="color-switch">Red</p>
-              <label class="like">
-                <input type="checkbox" />
-                <div class="hearth"></div>
-              </label>
-            </div>
-          </div>
-        </article> -->
-      </main>
+      <main></main>
     </div>
     <footer>
       <div class="footer-content">
@@ -302,7 +220,7 @@
 
       <!-- <a href="https://www.google.com/?hl=es"
         ><img
-          src="/public/Images/sugerencias.ico"
+          src="/public/Media/sugerencias.ico"
           alt="Icono de sugerencias"
         />Sugerencias</a
       > -->

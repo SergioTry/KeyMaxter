@@ -6,7 +6,7 @@ var pug_match_html=/["&<>]/;function cargarTecladosFiltrados(locals) {var pug_ht
   if ('number' == typeof $$obj.length) {
       for (var pug_index0 = 0, $$l = $$obj.length; pug_index0 < $$l; pug_index0++) {
         var producto = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FMedia\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
 if (producto.image1 && !producto.image2) {
 pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-alone-producto\""+pug_attr("src", producto.image1, true, false)+" alt=\"Imagen del producto\"") + "\u002F\u003E";
 }
@@ -18,7 +18,7 @@ pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-2-producto\""+pug_attr("sr
 }
 }
 else {
-pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FImages\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
+pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FMedia\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
@@ -39,7 +39,7 @@ pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(nu
     for (var pug_index0 in $$obj) {
       $$l++;
       var producto = $$obj[pug_index0];
-pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FImages\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
+pug_html = pug_html + "\u003Cdiv" + (" class=\"grid-box\""+pug_attr("data-id", producto.id, true, false)) + "\u003E \u003Cdiv class=\"image-container\"\u003E\u003Cbutton class=\"delete-button\"\u003E\u003Cimg src=\"\u002FMedia\u002Fdelete.png\" alt=\"Icono de borrado\"\u002F\u003E\u003C\u002Fbutton\u003E";
 if (producto.image1 && !producto.image2) {
 pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-alone-producto\""+pug_attr("src", producto.image1, true, false)+" alt=\"Imagen del producto\"") + "\u002F\u003E";
 }
@@ -51,7 +51,7 @@ pug_html = pug_html + "\u003Cimg" + (" class=\"imagen-2-producto\""+pug_attr("sr
 }
 }
 else {
-pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FImages\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
+pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FMedia\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";

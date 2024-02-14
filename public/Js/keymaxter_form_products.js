@@ -66,7 +66,7 @@ async function enviarFormulario(evt) {
     form.reset();
     image1 = undefined;
     image2 = undefined;
-    newImage.src = "/Images/add_photo.png";
+    newImage.src = "/Media/add_photo.png";
     imgLocation.style.border = "dashed";
     alert("Todo ha ido bien");
   } else {
@@ -90,7 +90,7 @@ function radioChanged() {
     if (image1) {
       cargarPreview(image1, newImage);
     } else {
-      newImage.src = "/Images/add_photo.png";
+      newImage.src = "/Media/add_photo.png";
       imgLocation.style.border = "dashed";
     }
   } else {
@@ -98,7 +98,7 @@ function radioChanged() {
       if (image2) {
         cargarPreview(image2, newImage);
       } else {
-        newImage.src = "/Images/add_photo.png";
+        newImage.src = "/Media/add_photo.png";
         imgLocation.style.border = "dashed";
       }
     }

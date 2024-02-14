@@ -1,5 +1,7 @@
 const menuHorizontal = document.getElementById("menuHorizontal");
 const imagenHeader = document.getElementById("imagenHeader");
+const imagenSideBar = document.getElementById("imagenSideBar");
+const audioEtiqueta = document.querySelector("audio");
 const botonesTeclados = document.getElementsByClassName("boton-teclados");
 const botonesSwitchs = document.getElementsByClassName("boton-switchs");
 const botonesSimulador = document.getElementsByClassName("boton-simulador");
@@ -9,6 +11,7 @@ let ordenDescendente;
 let selectFiltro;
 
 document.addEventListener("DOMContentLoaded", function () {
+  imagenSideBar.addEventListener("click", reproducirSonido);
   for (botonT of botonesTeclados) {
     botonT.addEventListener("click", getTeclados);
   }
@@ -68,7 +71,7 @@ async function getSwitchs() {
 
 async function cargarProductos(respProductos, respFiltro) {
   const productos = await respProductos.json();
-  const prefix = "/Images/Products/";
+  const prefix = "/Media/Products/";
 
   productos.forEach((producto) => {
     console.log(producto);
@@ -159,4 +162,9 @@ async function outputClicado(evt) {
       }
     }
   }
+}
+
+function reproducirSonido() {
+  audioEtiqueta.setAttribute("src", "/Media/cat_sound.mp3");
+  audioEtiqueta.play();
 }

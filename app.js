@@ -14,11 +14,11 @@ const HTTP_NOT_FOUND = 404;
 const HTTP_INTERNAL_SERVER_ERROR = 500;
 
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("public", { index: "keymaxter_main.html" }));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public/Images/Products");
+    cb(null, "public/Media/Products");
   },
   filename: function (req, file, cb) {
     let fechaActual = new Date(Date.now());
@@ -215,13 +215,13 @@ app.delete("/teclados/:id", async (req, res, next) => {
     if (borrado >= 1) {
       if (tecladoBorrado.image1) {
         borrarImagen(
-          "public/Images/Products/" + tecladoBorrado[0].image1,
+          "public/Media/Products/" + tecladoBorrado[0].image1,
           tecladoBorrado[0].image1
         );
       }
       if (tecladoBorrado.image2) {
         borrarImagen(
-          "public/Images/Products/" + tecladoBorrado[0].image2,
+          "public/Media/Products/" + tecladoBorrado[0].image2,
           tecladoBorrado[0].image2
         );
       }
@@ -245,13 +245,13 @@ app.delete("/switchs/:id", async (req, res, next) => {
     if (borrado >= 1) {
       if (switchBorrado[0].image1) {
         borrarImagen(
-          "public/Images/Products/" + switchBorrado[0].image1,
+          "public/Media/Products/" + switchBorrado[0].image1,
           switchBorrado[0].image1
         );
       }
       if (switchBorrado[0].image2) {
         borrarImagen(
-          "public/Images/Products/" + switchBorrado[0].image2,
+          "public/Media/Products/" + switchBorrado[0].image2,
           switchBorrado[0].image2
         );
       }
@@ -288,10 +288,10 @@ app.use(function (err, req, res, next) {
 function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
   if (tipoProducto == "teclado") {
     return {
-      modelo: modelo == undefined ? req.body.modelo : modelo,
-      enlace: req.body.enlace,
-      precio: req.body.precio,
-      autor: req.body.autor,
+      modelo: modelo == undefined ? req.body.modelo.trim() : modelo,
+      enlace: req.body.enlace.trim(),
+      precio: req.body.precio.trim(),
+      autor: req.body.autor.trim(),
       image1:
         req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
       image2:
@@ -299,11 +299,11 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
     };
   } else {
     return {
-      modelo: modelo == undefined ? req.body.modelo : modelo,
-      enlace: req.body.enlace,
-      precio: req.body.precio,
-      marca: req.body.marca,
-      color: req.body.color,
+      modelo: modelo == undefined ? req.body.modelo.trim() : modelo,
+      enlace: req.body.enlace.trim(),
+      precio: req.body.precio.trim(),
+      marca: req.body.marca.trim(),
+      color: req.body.color.trim(),
       image1:
         req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
       image2:
@@ -324,7 +324,7 @@ function borrarImagen(ruta, imageName) {
 
 function crearCarpetaSiNoExiste() {
   // Verificar si la carpeta no existe
-  const ruta = "public/Images/Products";
+  const ruta = "public/Media/Products";
   if (!fs.existsSync(ruta)) {
     fs.mkdirSync(ruta);
     console.log("Se ha creado la carpeta Products");
