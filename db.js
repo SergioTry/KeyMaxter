@@ -85,6 +85,16 @@ const ModeloSwitch = sequelize.define(
         len: [0, 15],
       },
     },
+    color: {
+      field: "COLOR",
+      type: DataTypes.STRING(15),
+      allowNull: false,
+      validate: {
+        isIn: [
+          ["ROJO", "AMARILLO", "NEGRO", "AZUL", "VERDE", "MARRON", "BLANCO"],
+        ],
+      },
+    },
     image1: {
       field: "IMAGE_1",
       type: DataTypes.STRING,
@@ -148,10 +158,7 @@ exports.modificarSwitch = async function (datosSwitch) {
   });
 };
 
-exports.listarProductos = async function (
-  orden = undefined,
-  autor = undefined
-) {
+exports.listarTeclados = async function (autor = undefined, orden = undefined) {
   await sincronizarDB();
   if (autor) {
     if (orden) {
@@ -160,18 +167,14 @@ exports.listarProductos = async function (
           where: {
             autor: autor,
           },
-          order: {
-            precio: "DESC",
-          },
+          order: [["precio", "DESC"]],
         });
       } else {
         return await ModeloTeclado.findAll({
           where: {
             autor: autor,
           },
-          order: {
-            precio: "ASC",
-          },
+          order: [["precio", "ASC"]],
         });
       }
     } else {
@@ -185,15 +188,11 @@ exports.listarProductos = async function (
   if (orden) {
     if (orden == 1) {
       return await ModeloTeclado.findAll({
-        order: {
-          precio: "DESC",
-        },
+        order: [["precio", "DESC"]],
       });
     } else {
       return await ModeloTeclado.findAll({
-        order: {
-          precio: "ASC",
-        },
+        order: [["precio", "ASC"]],
       });
     }
   }
@@ -208,17 +207,71 @@ exports.listarAutoresTeclados = async function () {
   });
 };
 
+exports.listarSwitchs = async function (marca = undefined, orden = undefined) {
+  await sincronizarDB();
+  if (marca) {
+    if (orden) {
+      if (orden == 1) {
+        return await ModeloSwitch.findAll({
+          where: {
+            marca: marca,
+          },
+          order: [["precio", "DESC"]],
+        });
+      } else {
+        return await ModeloSwitch.findAll({
+          where: {
+            marca: marca,
+          },
+          order: [["precio", "ASC"]],
+        });
+      }
+    } else {
+      return await ModeloSwitch.findAll({
+        where: {
+          marca: marca,
+        },
+      });
+    }
+  }
+  if (orden) {
+    if (orden == 1) {
+      return await ModeloSwitch.findAll({
+        order: [["precio", "DESC"]],
+      });
+    } else {
+      return await ModeloSwitch.findAll({
+        order: [["precio", "ASC"]],
+      });
+    }
+  }
+  return await ModeloSwitch.findAll();
+};
+
 exports.listarMarcasSwitchs = async function () {
   await sincronizarDB();
   return await ModeloSwitch.findAll({
     attributes: ["marca"],
-    group: ["marca"],
+    group: ["MARCA"],
   });
 };
 
-exports.listarSwitchs = async function () {
+exports.getTecladoById = async function (id) {
   await sincronizarDB();
-  return await ModeloSwitch.findAll();
+  return await ModeloTeclado.findAll({
+    where: {
+      id: id,
+    },
+  });
+};
+
+exports.getSwitchById = async function (id) {
+  await sincronizarDB();
+  return await ModeloSwitch.findAll({
+    where: {
+      id: id,
+    },
+  });
 };
 
 async function validacionAlta(datosProducto, modelo) {

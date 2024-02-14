@@ -3,6 +3,7 @@ const tipoProducto = document.getElementById("tipoProducto");
 const boton = document.getElementById("button");
 const inputImg = document.getElementById("image");
 const imgLocation = document.getElementById("image-location");
+const newImage = document.getElementById("newImage");
 const form = document.querySelector("form");
 const radio1 = document.getElementById("radio1");
 const radio2 = document.getElementById("radio2");
@@ -34,23 +35,39 @@ async function enviarFormulario(evt) {
 
   let resp;
   if (tipoAccion.value == "0") {
-    console.log("add");
-    resp = await fetch("/teclados", {
-      method: "POST",
-      body: formData,
-    });
+    if (tipoProducto.value == "0") {
+      resp = await fetch("/teclados", {
+        method: "POST",
+        body: formData,
+      });
+    } else {
+      resp = await fetch("/switchs", {
+        method: "POST",
+        body: formData,
+      });
+    }
   } else {
-    console.log("mod");
-    resp = await fetch(`/teclados/${formData.get("modelo")}`, {
-      method: "PUT",
-      body: formData,
-    });
+    if (tipoProducto.value == "0") {
+      resp = await fetch(`/teclados/${formData.get("modelo")}`, {
+        method: "PUT",
+        body: formData,
+      });
+    } else {
+      resp = await fetch(`/switchs/${formData.get("modelo")}`, {
+        method: "PUT",
+        body: formData,
+      });
+    }
   }
   const data = await resp.text();
 
   console.log(data);
   if (resp.ok) {
     form.reset();
+    image1 = undefined;
+    image2 = undefined;
+    newImage.src = "/Images/add_photo.png";
+    imgLocation.style.border = "dashed";
     alert("Todo ha ido bien");
   } else {
     alert(resp.status + ": " + data);
@@ -69,7 +86,6 @@ function saveImg() {
 }
 
 function radioChanged() {
-  var newImage = document.getElementById("newImage");
   if (radio1.checked) {
     if (image1) {
       cargarPreview(image1, newImage);

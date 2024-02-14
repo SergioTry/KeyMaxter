@@ -3,7 +3,7 @@ function pug_escape(e){var a=""+e,t=pug_match_html.exec(a);if(!t)return e;var r,
 var pug_match_html=/["&<>]/;function crearTeclados(locals) {var pug_html = "", pug_mixins = {}, pug_interp;;var locals_for_with = (locals || {});(function (filtros, productos) {pug_html = pug_html + "\u003Csearch class=\"grid-search\"\u003E\u003Cform action=\"aplicar a la vista\"\u003E\u003Cfieldset\u003E\u003Cp\u003EFiltros:\u003C\u002Fp\u003E\u003Cspan\u003E \u003Clabel\u003EPrecio ascendente: \u003Cinput id=\"ordenAsc\" type=\"checkbox\" name=\"ordenar_precio\"\u002F\u003E\u003C\u002Flabel\u003E\u003Clabel\u003EPrecio descendente: \u003Cinput id=\"ordenDes\" type=\"checkbox\" name=\"ordenar_precio\"\u002F\u003E\u003C\u002Flabel\u003E";
 if (filtros.length > 0) {
 if (filtros[0].marca) {
-pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-filtro\"\u003EMarca:\u003Cselect id=\"filtro\"\u003E\u003Coption" + (" value=\"\""+pug_attr("selected", true, true, false)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-filtro\"\u003EMarca:\u003Cselect id=\"filtro\" data-name=\"marca\"\u003E\u003Coption" + (" value=\"\""+pug_attr("selected", true, true, false)) + "\u003E";
 // iterate filtros
 ;(function(){
   var $$obj = filtros;
@@ -25,7 +25,7 @@ pug_html = pug_html + "\u003Coption" + (pug_attr("value", filtro.marca, true, fa
 pug_html = pug_html + "\u003C\u002Foption\u003E\u003C\u002Fselect\u003E\u003C\u002Fdiv\u003E";
 }
 else {
-pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-filtro\"\u003EAutor:\u003Cselect id=\"filtro\"\u003E\u003Coption" + (" value=\"\""+pug_attr("selected", true, true, false)) + "\u003E";
+pug_html = pug_html + "\u003Cdiv class=\"contenedor-select-filtro\"\u003EAutor:\u003Cselect id=\"filtro\" data-name=\"autor\"\u003E\u003Coption" + (" value=\"\""+pug_attr("selected", true, true, false)) + "\u003E";
 // iterate filtros
 ;(function(){
   var $$obj = filtros;
@@ -73,17 +73,17 @@ pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FIma
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
-if (producto.marca) {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+if (producto.autor) {
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 else {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003ECustom\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
-pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003EColor:" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\" name=\"hearth\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
@@ -106,17 +106,17 @@ pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FIma
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
-if (producto.marca) {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+if (producto.autor) {
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 else {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003ECustom\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
-pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003EColor:" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\" name=\"hearth\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);

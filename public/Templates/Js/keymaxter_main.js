@@ -96,26 +96,27 @@ async function aplicarFiltro(evt) {
   // Este método valida si el radio pulsado está ya seleccionado
   // y en caso positivo lo deselecciona.
   validarActivacion(evt);
+  const direccion =
+    selectFiltro.dataset.name == "autor" ? "teclados" : "switchs";
   let ruta;
   if (ordenAscendente.checked) {
-    ruta = "/teclados?orden=1";
+    ruta = `/${direccion}?orden=0`;
     if (selectFiltro.value != "") {
-      ruta = ruta + `?autor=${selectFiltro.value}`;
+      ruta = ruta + `&${selectFiltro.dataset.name}=${selectFiltro.value}`;
     }
   } else {
     if (ordenDescendente.checked) {
-      ruta = "/teclados?orden=0";
+      ruta = `/${direccion}?orden=1`;
       if (selectFiltro.value != "") {
-        ruta = ruta + `?autor=${selectFiltro.value}`;
+        ruta = ruta + `&${selectFiltro.dataset.name}=${selectFiltro.value}`;
       }
     } else {
-      ruta = "/teclados";
+      ruta = `/${direccion}`;
       if (selectFiltro.value != "") {
-        ruta = ruta + `?autor=${selectFiltro.value}`;
+        ruta = ruta + `?${selectFiltro.dataset.name}=${selectFiltro.value}`;
       }
     }
   }
-  console.log(ruta);
   const articleLocation = document.querySelector("article");
   const respProductos = await fetch(ruta, { method: "GET" });
   const productos = await respProductos.json();
@@ -141,15 +142,18 @@ async function outputClicado(evt) {
     const item = evt.target.closest(".grid-box");
     const id = item.dataset.id;
 
+    const direccion =
+      selectFiltro.dataset.name == "autor" ? "teclados" : "switchs";
     const confir = confirm("¿Estás seguro de que quieres borrarlo?");
+    console.log(direccion);
     if (confir == true) {
-      const resp = await fetch(`/teclados/${id}`, {
+      const resp = await fetch(`/${direccion}/${id}`, {
         method: "DELETE",
         body: id,
       });
       const data = await resp.text();
       if (resp.ok) {
-        cargarProductos();
+        aplicarFiltro(evt);
       } else {
         alert(resp.status + ": " + data);
       }

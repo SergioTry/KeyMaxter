@@ -22,17 +22,17 @@ pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FIma
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
-if (producto.marca) {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+if (producto.autor) {
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 else {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003ECustom\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
 pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\" name=\"hearth\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
       }
   } else {
     var $$l = 0;
@@ -55,17 +55,17 @@ pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FIma
 }
 }
 pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
-if (producto.marca) {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
+if (producto.autor) {
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 else {
-pug_html = pug_html + "\u003Cp class=\"marca-producto\"\u003ECustom\u003C\u002Fp\u003E";
+pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.marca) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
 pug_html = pug_html + "\u003Cdiv class=\"multicampo-contenedor\"\u003E";
 if (producto.color) {
 pug_html = pug_html + "\u003Cp class=\"color-switch\"\u003E" + (pug_escape(null == (pug_interp = producto.color) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
-pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
+pug_html = pug_html + "\u003Cp class=\"precio-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.precio) ? "" : pug_interp)) + "€\u003C\u002Fp\u003E\u003Clabel class=\"like\"\u003E\u003Cinput type=\"checkbox\" name=\"hearth\"\u002F\u003E\u003Cdiv class=\"hearth\"\u003E\u003C\u002Fdiv\u003E\u003C\u002Flabel\u003E\u003C\u002Fdiv\u003E\u003C\u002Fdiv\u003E";
     }
   }
 }).call(this);

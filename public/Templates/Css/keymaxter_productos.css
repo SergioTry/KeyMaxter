@@ -121,6 +121,7 @@
 
 .grid-box a {
   color: #26d9d9;
+  text-align: center;
   text-decoration: underline;
 }
 
@@ -181,7 +182,7 @@
 }
 
 .grid-box .color-switch {
-  margin-top: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 .grid-box .multicampo-contenedor {

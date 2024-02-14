@@ -1,27 +1,27 @@
 each producto in productos
-    .grid-box(data-id=producto.id) 
-      .image-container
-        button.delete-button
-          img(src='/Images/delete.png' alt='Icono de borrado')
-        if producto.image1 && !producto.image2
-          img.imagen-alone-producto(src=producto.image1 alt='Imagen del producto')
-        else
-          if producto.image1
-            img.imagen-1-producto(src=producto.image1 alt='Imagen 1 de producto')
-            if producto.image2
-              img.imagen-2-producto(src=producto.image2 alt='Imagen 2 de producto')
-          else
-            img.imagen-alone-producto(src='/Images/default_no_image.png' alt='No hay imagen disponible')
-      p.modelo-producto #{producto.modelo}
-      a.enlace-producto(href=producto.enlace) Enlace
-      if producto.marca
-        p.marca-producto #{producto.marca}
+  .grid-box(data-id=producto.id) 
+    .image-container
+      button.delete-button
+        img(src='/Images/delete.png' alt='Icono de borrado')
+      if producto.image1 && !producto.image2
+        img.imagen-alone-producto(src=producto.image1 alt='Imagen del producto')
       else
-        p.marca-producto Custom
-      .multicampo-contenedor
-        if producto.color
-          p.color-switch #{producto.color}
-        p.precio-producto #{producto.precio}€
-        label.like
-          input(type='checkbox')
-          .hearth
+        if producto.image1
+          img.imagen-1-producto(src=producto.image1 alt='Imagen 1 de producto')
+          if producto.image2
+            img.imagen-2-producto(src=producto.image2 alt='Imagen 2 de producto')
+        else
+          img.imagen-alone-producto(src='/Images/default_no_image.png' alt='No hay imagen disponible')
+    p.modelo-producto #{producto.modelo}
+    a.enlace-producto(href=producto.enlace) Enlace
+    if producto.autor
+      p.filtro-producto #{producto.autor}
+    else
+      p.filtro-producto #{producto.marca}
+    .multicampo-contenedor
+      if producto.color
+        p.color-switch #{producto.color}
+      p.precio-producto #{producto.precio}€
+      label.like
+        input(type='checkbox' name='hearth')
+        .hearth

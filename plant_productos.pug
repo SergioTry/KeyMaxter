@@ -10,13 +10,13 @@ search.grid-search
         if filtros.length > 0
           if filtros[0].marca 
             div.contenedor-select-filtro Marca:
-              select#filtro
+              select#filtro(data-name='marca')
                 option(value="" selected)
                   each filtro in filtros
                     option(value=filtro.marca) #{filtro.marca}
           else
             div.contenedor-select-filtro Autor:
-              select#filtro
+              select#filtro(data-name='autor')
                 option(value="" selected)
                   each filtro in filtros
                     option(value=filtro.autor) #{filtro.autor}  
@@ -40,14 +40,14 @@ article.grid-layout-content
             img.imagen-alone-producto(src='/Images/default_no_image.png' alt='No hay imagen disponible')
       p.modelo-producto #{producto.modelo}
       a.enlace-producto(href=producto.enlace) Enlace
-      if producto.marca
-        p.marca-producto #{producto.marca}
+      if producto.autor
+        p.filtro-producto #{producto.autor}
       else
-        p.marca-producto Custom
+        p.filtro-producto #{producto.marca}
       .multicampo-contenedor
         if producto.color
-          p.color-switch #{producto.color}
+          p.color-switch Color:#{producto.color}
         p.precio-producto #{producto.precio}€
         label.like
-          input(type='checkbox')
+          input(type='checkbox' name='hearth')
           .hearth
