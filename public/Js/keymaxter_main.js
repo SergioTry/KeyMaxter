@@ -37,6 +37,8 @@ function validateAdmin() {
     if (adminValue == "true") {
       isAdmin = true;
       settingItem.style.display = "block";
+    } else {
+      alert("Username or password incorrects");
     }
   }
 }
@@ -117,6 +119,7 @@ async function aplicarFiltro(evt) {
   // Este método valida si el radio pulsado está ya seleccionado
   // y en caso positivo lo deselecciona.
   validarActivacion(evt);
+  const prefix = "/Media/Products/";
   const direccion =
     selectFiltro.dataset.name == "autor" ? "teclados" : "switchs";
   let ruta;
@@ -141,6 +144,17 @@ async function aplicarFiltro(evt) {
   const articleLocation = document.querySelector("article");
   const respProductos = await fetch(ruta, { method: "GET" });
   const productos = await respProductos.json();
+
+  productos.forEach((producto) => {
+    console.log(producto);
+    if (producto.image1) {
+      producto.image1 = prefix + producto.image1;
+      if (producto.image2) {
+        producto.image2 = prefix + producto.image2;
+      }
+    }
+  });
+
   const html = isAdmin
     ? cargarTecladosFiltrados({ productos: productos, admin: true })
     : cargarTecladosFiltrados({ productos: productos, admin: false });

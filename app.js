@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
 const { Sequelize } = require("sequelize");
+const bodyParser = require("body-parser");
 const db = require("./db.js");
 
 const app = express();
@@ -9,12 +10,16 @@ const app = express();
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;
 const HTTP_NO_CONTENT = 204;
+const HTTP_MODIFIED = 301;
+const HTTP_NOT_MODIFIED = 304;
 const HTTP_BAD_REQUEST = 400;
 const HTTP_NOT_FOUND = 404;
 const HTTP_INTERNAL_SERVER_ERROR = 500;
 
 app.use(express.json());
 app.use(express.static("public", { index: "keymaxter_main.html" }));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -53,12 +58,19 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post("/login", async (req, res, next) => {
   try {
-    const username = req.query.username;
-    const password = req.query.password;
+    console.log(req.body);
+    const username = req.body.username;
+    const password = req.body.password;
     if (username == "admin" && password == "admin") {
-      res.redirect(301, "http://localhost:5500/keymaxter_main.html?admin=true");
+      res.redirect(
+        HTTP_MODIFIED,
+        "http://localhost:5500/keymaxter_main.html?admin=true"
+      );
     } else {
-      res.sendStatus(HTTP_BAD_REQUEST);
+      res.redirect(
+        HTTP_MODIFIED,
+        "http://localhost:5500/keymaxter_main.html?admin=false"
+      );
     }
   } catch (err) {
     next(err);
