@@ -6,7 +6,6 @@
 
 body {
   background-image: url("/Media/key_rain_purple.jpg");
-  backdrop-filter: blur(2.5px);
 }
 
 html {
@@ -19,7 +18,15 @@ html {
   width: 65rem;
   object-fit: none;
 }
-
+.prueba {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  
+}
+dialog::backdrop {
+  backdrop-filter: blur(4px);
+}
 #settingsItem {
   display: none;
 }
@@ -153,12 +160,13 @@ html {
   border: 0.1rem solid #26d9d9;
   transition: border 0.3s ease;
 }
-.contenedor-menu-horizontal nav .menu-horizontal li a {
+.contenedor-menu-horizontal nav .menu-horizontal li a,
+.contenedor-menu-horizontal nav .menu-horizontal li button{
   display: flex;
   width: 100%;
   height: 100%;
 }
-.contenedor-menu-horizontal nav .menu-horizontal li a img {
+.contenedor-menu-horizontal nav .menu-horizontal li img {
   height: 75%;
   width: 75%;
   object-fit: cover;

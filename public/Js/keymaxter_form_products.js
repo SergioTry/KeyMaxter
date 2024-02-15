@@ -63,7 +63,12 @@ async function enviarFormulario(evt) {
 
   console.log(data);
   if (resp.ok) {
-    form.reset();
+    // Hago esto en vez de resetear el formulario entero
+    // para no resetear los select
+    var fieldsToReset = document.querySelectorAll("input");
+    for (var i = 0; i < fieldsToReset.length; i++) {
+      fieldsToReset[i].value = null;
+    }
     image1 = undefined;
     image2 = undefined;
     newImage.src = "/Media/add_photo.png";

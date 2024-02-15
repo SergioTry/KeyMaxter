@@ -51,6 +51,20 @@ const fileFilter = function (req, file, cb) {
 // Inicializa el middleware de Multer
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
+app.post("/login", async (req, res, next) => {
+  try {
+    const username = req.query.username;
+    const password = req.query.password;
+    if (username == "admin" && password == "admin") {
+      res.redirect(301, "http://localhost:5500/keymaxter_main.html?admin=true");
+    } else {
+      res.sendStatus(HTTP_BAD_REQUEST);
+    }
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get("/teclados", async (req, res, next) => {
   // /teclados?marca=hola
   try {

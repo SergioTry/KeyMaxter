@@ -18,56 +18,65 @@
         />
       </div>
     </header>
-    <form id="contenedorLogin">
-      <button id="closeLogin" type="button">
+    <dialog popover id="my-popover">
+      <form id="contenedorLogin" action="/login" method="post">
+        <button
+          id="closeLogin"
+          popovertarget="my-popover"
+          popovertargetaction="hide"
+          type="button"
+        >
+          <img
+            id="backArrowImg"
+            src="/Media/back_arrow.ico"
+            alt="Logo secundario de KeyMaxter"
+          />
+        </button>
         <img
-          id="backArrowImg"
-          src="/Media/back_arrow.ico"
+          id="imagenLogin"
+          src="/Media/GarfieldMorado.jpg"
           alt="Logo secundario de KeyMaxter"
         />
-      </button>
-      <img
-        id="imagenLogin"
-        src="/Media/GarfieldMorado.jpg"
-        alt="Logo secundario de KeyMaxter"
-      />
-      <div class="login-input-container">
-        <label id="login" for="autor">Username: </label>
-        <input
-          id="login"
-          name="login"
-          placeholder="Alberto Álvarez"
-          class="input-text"
-          required
-        />
-      </div>
-      <div class="login-input-container">
-        <label id="password" for="autor">Password:</label>
-        <input
-          id="password"
-          name="password"
-          placeholder="password"
-          class="input-text"
-          required
-        />
-      </div>
-      <div class="contenedor-button">
-        <button type="submit" id="button">
-          <p>Login</p>
-        </button>
-      </div>
-    </form>
+        <div class="login-input-container">
+          <label for="username">Username: </label>
+          <input
+            id="username"
+            autocapitalize
+            name="username"
+            placeholder="Alberto Álvarez"
+            class="input-text"
+            required
+          />
+        </div>
+        <div class="login-input-container">
+          <label for="autor">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="password"
+            class="input-text"
+            required
+          />
+        </div>
+        <div class="contenedor-button">
+          <button type="submit" id="button">
+            <p>Login</p>
+          </button>
+        </div>
+      </form>
+    </dialog>
     <div class="contenedor-general">
       <div class="contenedor-menu-horizontal" id="menuHorizontal">
         <nav>
           <ul class="menu-horizontal">
             <li>
-              <a class="icon-login">
+              <button class="icon-login" popovertarget="my-popover">
                 <img
                   src="/Media/account_settings.ico"
                   alt="Icono de ajustes del usuario"
                 />
-              </a>
+              </button>
             </li>
             <li id="settingsItem">
               <a class="icon-login" href="/keymaxter_form_products.html">
