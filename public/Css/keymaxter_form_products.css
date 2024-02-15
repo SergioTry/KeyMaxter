@@ -34,7 +34,7 @@ body {
 a {
   display: flex;
   height: 100%;
-  width: 70%;
+  width: 95%;
 }
 
 #imagenHeader {
@@ -75,6 +75,29 @@ form {
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
   border-radius: 0.4rem;
   transition: 0.5s;
+}
+
+#closeLogin {
+  all: unset;
+  position: absolute;
+  cursor: pointer;
+  top: -1px;
+  left: 5px;
+}
+
+#backArrowImg {
+  width: 0.8em;
+}
+
+#imagenLogin {
+  margin: 0.3125em;
+  margin-bottom: 0.7em;
+  width: 5em;
+  border-radius: 48%;
+  border: white 4px outset;
+  height: auto;
+  box-shadow: 7px 9px 10px 0px rgba(0, 0, 0, 0.75);
+  object-fit: cover;
 }
 
 .contenedor-select {
@@ -170,7 +193,7 @@ option {
   width: 100%;
 }
 
-button {
+.contenedor-button button {
   height: 1.5rem;
   width: 40%;
   border-radius: 0.4rem;
@@ -228,6 +251,16 @@ button:active p {
     flex-direction: column;
     width: 85%;
     align-items: center;
+
+    #closeLogin {
+      top: 5px;
+      left: 6px;
+    }
+
+    #backArrowImg {
+      width: 1.1em;
+    }
+
     .contenedor-select {
       flex-direction: column;
     }
