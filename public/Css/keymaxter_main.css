@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
 }
+/* #c4b5db */
 
 body {
   background-image: url("/Media/key_rain_purple.jpg");
@@ -22,7 +23,6 @@ html {
   width: 100px;
   height: 100px;
   background-color: red;
-  
 }
 dialog::backdrop {
   backdrop-filter: blur(4px);
@@ -161,7 +161,7 @@ dialog::backdrop {
   transition: border 0.3s ease;
 }
 .contenedor-menu-horizontal nav .menu-horizontal li a,
-.contenedor-menu-horizontal nav .menu-horizontal li button{
+.contenedor-menu-horizontal nav .menu-horizontal li button {
   display: flex;
   width: 100%;
   height: 100%;
@@ -266,7 +266,7 @@ dialog::backdrop {
 }
 
 .contenedor-menu-lateral .menu-lateral nav ul,
-.burger nav ul {
+.burger-button nav ul {
   list-style: none;
   margin: 0;
   margin-inline: 0;
@@ -278,14 +278,14 @@ dialog::backdrop {
   z-index: -1;
 }
 .contenedor-menu-lateral .menu-lateral nav ul li,
-.burger nav ul li {
+.burger-button nav ul li {
   list-style: none;
   text-align: center;
   width: 100%;
   margin-bottom: 0.375rem;
 }
 .contenedor-menu-lateral .menu-lateral nav ul li .button-text,
-.burger nav ul li .button-text {
+.burger-button nav ul li .button-text {
   color: white;
   transition: 0.5s;
 }
@@ -373,9 +373,9 @@ button {
   margin: 0.3125em;
   width: 9em;
   border-radius: 48%;
-  border: white 6px outset;
+  border: white 0.1875em outset;
   height: auto;
-  box-shadow: 11px 10px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0.34375em 0.3125em 0.3125em 0px rgba(0, 0, 0, 0.75);
   object-fit: cover;
 }
 
@@ -384,9 +384,9 @@ button {
   margin-bottom: 0.7em;
   width: 5em;
   border-radius: 48%;
-  border: white 4px outset;
+  border: white 0.125em outset;
   height: auto;
-  box-shadow: 7px 9px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0.21875em 0.28125em 0.3125em 0px rgba(0, 0, 0, 0.75);
   object-fit: cover;
 }
 
@@ -400,27 +400,84 @@ button {
 /* Productos */
 main {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   width: 100%;
   margin-left: 0.25em;
   overflow: hidden;
-  align-items: center;
 }
 
-.burger {
+output {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+#loader {
+  position: absolute;
+  top: 50%;
+  width: 4px;
+  color: #26d9d9;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: 19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px, 19px 0 0 5px,
+    38px 0 0 5px, 57px 0 0 5px, 19px 19px 0 0px, 38px 19px 0 0px,
+    57px 19px 0 0px;
+  transform: translateX(-38px);
+  animation: l26 2s infinite linear;
+  visibility: hidden;
+}
+
+#loader.cargando {
+  visibility: visible;
+}
+@keyframes l26 {
+  12.5% {
+    box-shadow: 19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 5px,
+      19px 0 0 5px, 38px 0 0 0px, 57px 0 0 5px, 19px 19px 0 0px, 38px 19px 0 0px,
+      57px 19px 0 0px;
+  }
+  25% {
+    box-shadow: 19px -19px 0 5px, 38px -19px 0 0px, 57px -19px 0 5px,
+      19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px, 19px 19px 0 0px, 38px 19px 0 5px,
+      57px 19px 0 0px;
+  }
+  50% {
+    box-shadow: 19px -19px 0 5px, 38px -19px 0 5px, 57px -19px 0 0px,
+      19px 0 0 0px, 38px 0 0 0px, 57px 0 0 0px, 19px 19px 0 0px, 38px 19px 0 0px,
+      57px 19px 0 5px;
+  }
+  62.5% {
+    box-shadow: 19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px,
+      19px 0 0 5px, 38px 0 0 0px, 57px 0 0 0px, 19px 19px 0 0px, 38px 19px 0 5px,
+      57px 19px 0 5px;
+  }
+  75% {
+    box-shadow: 19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+      19px 0 0 0px, 38px 0 0 0px, 57px 0 0 5px, 19px 19px 0 0px, 38px 19px 0 0px,
+      57px 19px 0 5px;
+  }
+  87.5% {
+    box-shadow: 19px -19px 0 0px, 38px -19px 0 5px, 57px -19px 0 0px,
+      19px 0 0 0px, 38px 0 0 5px, 57px 0 0 0px, 19px 19px 0 5px, 38px 19px 0 0px,
+      57px 19px 0 0px;
+  }
+}
+
+.burger-button {
   display: none;
   overflow: hidden;
 }
 
-.burger input {
+.burger-button input {
   display: none;
 }
 
-.burger nav {
+.burger-button nav {
   width: 100%;
   height: 100%;
 }
-.burger .btn_span {
+.burger-button .btn_span {
   position: absolute;
   top: 0.37rem;
   width: 2.7rem;
@@ -444,43 +501,43 @@ main {
   cursor: pointer;
 }
 
-.burger input:checked ~ .btn_menu {
+.burger-button input:checked ~ .btn_menu {
   background-color: rgba(2, 0, 36, 1);
   border-bottom: 0px solid black;
 }
 
-.burger input:checked ~ .btn_menu .btn_span {
+.burger-button input:checked ~ .btn_menu .btn_span {
   background: blueviolet;
 }
 
-.burger .cont-span {
+.burger-button .cont-span {
   display: flex;
 }
 
-.burger .btn_span:nth-child(2) {
+.burger-button .btn_span:nth-child(2) {
   top: 1.259rem;
 }
-.burger .btn_span:nth-child(3) {
+.burger-button .btn_span:nth-child(3) {
   top: 2.074rem;
 }
 
-.burger input:checked ~ .btn_menu #btn_span_1 {
+.burger-button input:checked ~ .btn_menu #btn_span_1 {
   top: 1.259rem;
   transform: rotate(45deg);
 }
-.burger input:checked ~ .btn_menu #btn_span_2 {
+.burger-button input:checked ~ .btn_menu #btn_span_2 {
   opacity: 0;
 }
-.burger input:checked ~ .btn_menu #btn_span_3 {
+.burger-button input:checked ~ .btn_menu #btn_span_3 {
   top: 1.259rem;
   transform: rotate(-45deg);
 }
 
-.burger ul {
+.burger-button ul {
   display: none;
 }
 
-.burger input:checked ~ ul {
+.burger-button input:checked ~ ul {
   width: 100%;
   height: 100%;
   display: flex;
@@ -498,22 +555,22 @@ main {
   border-bottom-left-radius: 5%;
   border: 0.148rem solid black;
 }
-.burger li {
+.burger-button li {
   color: white;
   border: blueviolet 0.296rem outset;
   border-radius: 1.481rem;
   transition: border 0.4s ease;
 }
 
-.burger li:hover {
+.burger-button li:hover {
   color: white;
   border: white 0.296rem outset;
   background-color: blueviolet;
 }
-.burger li p {
+.burger-button li p {
   color: white;
 }
-.burger li a {
+.burger-button li a {
   display: flex;
   align-items: center;
 }
@@ -601,6 +658,9 @@ iframe {
   #contenedorLogin {
     top: 50dvh;
   }
+  #loader {
+    top: 50dvh;
+  }
   .menu-horizontal {
     flex-direction: column;
   }
@@ -619,7 +679,8 @@ iframe {
     display: flex;
     align-items: center;
   }
-  .burger {
+
+  .burger-button {
     display: block;
     position: fixed;
     top: 5.9rem;

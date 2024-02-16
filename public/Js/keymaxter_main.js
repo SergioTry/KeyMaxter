@@ -3,10 +3,13 @@ const imagenHeader = document.getElementById("imagenHeader");
 let settingItem = document.getElementById("settingsItem");
 const imagenSideBar = document.getElementById("imagenSideBar");
 const audioEtiqueta = document.querySelector("audio");
+const menuDesplegable = document.getElementById("menuDesplegable");
 const botonesTeclados = document.getElementsByClassName("boton-teclados");
 const botonesSwitchs = document.getElementsByClassName("boton-switchs");
 const botonesSimulador = document.getElementsByClassName("boton-simulador");
-const mainElement = document.querySelector("main");
+const output = document.querySelector("output");
+const loader = document.getElementById("loader");
+
 let ordenAscendente;
 let ordenDescendente;
 let selectFiltro;
@@ -25,9 +28,10 @@ document.addEventListener("DOMContentLoaded", function () {
   for (botonSimu of botonesSimulador) {
     botonSimu.addEventListener("click", mostrarSimulador);
   }
-  mainElement.addEventListener("click", outputClicado);
-  window.addEventListener("scroll", situarBotonesHorizontales);
+  output.addEventListener("click", outputClicado);
   window.addEventListener("load", situarBotonesHorizontales);
+  window.addEventListener("scroll", situarBotonesHorizontales);
+  window.addEventListener("wheel", situarBotonesHorizontales);
 });
 
 function validateAdmin() {
@@ -46,9 +50,10 @@ function validateAdmin() {
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
 function mostrarSimulador() {
+  cerrarDesplegable();
   const enlaceSimulador =
     '<iframe src="https://keyboardsimulator.xyz/" title="Contenido incrustado" allowfullscreen="true" ></iframe>';
-  mainElement.innerHTML = enlaceSimulador;
+  output.innerHTML = enlaceSimulador;
 }
 
 function esElementoNoVisible(elemento) {
@@ -69,43 +74,37 @@ function situarBotonesHorizontales() {
     }
   } else {
     menuHorizontal.style.position = "fixed";
-    menuHorizontal.style.top = "1rem";
     menuHorizontal.style.right = "0.5rem";
+    menuHorizontal.style.top = "3rem";
   }
 }
 
 async function getTeclados() {
+  cerrarDesplegable();
+  loader.className = "cargando";
   const respProductos = await fetch("/teclados", { method: "GET" });
   const respAutores = await fetch("/teclados/autores", { method: "GET" });
   await cargarProductos(respProductos, respAutores);
 }
 
 async function getSwitchs() {
+  cerrarDesplegable();
   const respSwitchs = await fetch("/switchs", { method: "GET" });
   const respMarcas = await fetch("/switchs/marcas", { method: "GET" });
   await cargarProductos(respSwitchs, respMarcas);
 }
 
 async function cargarProductos(respProductos, respFiltro) {
-  const productos = await respProductos.json();
-  const prefix = "/Media/Products/";
-
-  productos.forEach((producto) => {
-    console.log(producto);
-    if (producto.image1) {
-      producto.image1 = prefix + producto.image1;
-      if (producto.image2) {
-        producto.image2 = prefix + producto.image2;
-      }
-    }
-  });
+  let productos = await respProductos.json();
+  productos = asociarImagenesProductos(productos);
 
   const filtros = await respFiltro.json();
+
   const html = isAdmin
     ? crearTeclados({ filtros: filtros, productos: productos, admin: true })
     : crearTeclados({ filtros: filtros, productos: productos, admin: false });
-
-  mainElement.innerHTML = html;
+  loader.className = "";
+  output.innerHTML = html;
 
   ordenAscendente = document.getElementById("ordenAsc");
   ordenDescendente = document.getElementById("ordenDes");
@@ -119,7 +118,7 @@ async function aplicarFiltro(evt) {
   // Este método valida si el radio pulsado está ya seleccionado
   // y en caso positivo lo deselecciona.
   validarActivacion(evt);
-  const prefix = "/Media/Products/";
+  loader.className = "cargando";
   const direccion =
     selectFiltro.dataset.name == "autor" ? "teclados" : "switchs";
   let ruta;
@@ -143,8 +142,19 @@ async function aplicarFiltro(evt) {
   }
   const articleLocation = document.querySelector("article");
   const respProductos = await fetch(ruta, { method: "GET" });
-  const productos = await respProductos.json();
+  let productos = await respProductos.json();
 
+  productos = asociarImagenesProductos(productos);
+
+  const html = isAdmin
+    ? cargarTecladosFiltrados({ productos: productos, admin: true })
+    : cargarTecladosFiltrados({ productos: productos, admin: false });
+  loader.className = "";
+  articleLocation.innerHTML = html;
+}
+
+function asociarImagenesProductos(productos) {
+  const prefix = "/Media/Products/";
   productos.forEach((producto) => {
     console.log(producto);
     if (producto.image1) {
@@ -154,12 +164,13 @@ async function aplicarFiltro(evt) {
       }
     }
   });
+  return productos;
+}
 
-  const html = isAdmin
-    ? cargarTecladosFiltrados({ productos: productos, admin: true })
-    : cargarTecladosFiltrados({ productos: productos, admin: false });
-
-  articleLocation.innerHTML = html;
+function cerrarDesplegable() {
+  if (menuDesplegable.checked) {
+    menuDesplegable.checked = false;
+  }
 }
 
 function validarActivacion(evt) {

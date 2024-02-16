@@ -6,16 +6,19 @@
     <title>Key Maxter</title>
     <link rel="icon" href="/Media/K-modified.png" type="image/png" />
     <link href="Css/keymaxter_main.css" rel="stylesheet" />
+    <link href="Css/keymaxter_info.css" rel="stylesheet" />
     <link href="Css/keymaxter_productos.css" rel="stylesheet" />
   </head>
   <body>
     <header>
       <div id="headerPrincipal">
-        <img
-          id="imagenHeader"
-          src="/Media/bannerKeymaxter2.png"
-          alt="Banner de KeyMaxter"
-        />
+        <a href="keymaxter_main.html">
+          <img
+            id="imagenHeader"
+            src="/Media/bannerKeymaxter2.png"
+            alt="Banner de KeyMaxter"
+          />
+        </a>
       </div>
     </header>
     <dialog popover id="my-popover">
@@ -42,7 +45,7 @@
           <input
             id="username"
             name="username"
-            placeholder="Alberto Álvarez"
+            placeholder="agustin_007"
             class="input-text"
             autocomplete="off"
             required
@@ -91,10 +94,10 @@
           </ul>
         </nav>
       </div>
-      <div class="burger">
+      <div class="burger-button">
         <nav>
-          <input type="checkbox" id="menu" />
-          <label for="menu" class="btn_menu flex_column">
+          <input type="checkbox" id="menuDesplegable" />
+          <label for="menuDesplegable" class="btn_menu flex_column">
             <span id="btn_span_1" class="btn_span"></span>
             <span id="btn_span_2" class="btn_span"></span>
             <span id="btn_span_3" class="btn_span"></span>
@@ -202,7 +205,21 @@
           </aside>
         </div>
       </div>
-      <main></main>
+      <main>
+        <output>
+          <article class="contenedor-info">
+            <h1>¿Qué son los teclados custom?</h1>
+            <h3>
+              Los teclados custom representan a los amantes de los teclados que
+              no se conforman con los teclados comerciales. Estos teclados son
+              aquellos que montas por ti mismo eligiendo desde la cantidad de
+              teclas hasta el sonido de las pulsaciones.
+            </h3>
+            <h2>¿Cómo están formados?</h2>
+          </article>
+        </output>
+        <div id="loader"></div>
+      </main>
     </div>
     <footer>
       <div class="footer-content">
