@@ -193,7 +193,6 @@ app.put(
         req.params.modelo
       );
       const nuevo = await db.modificarTeclado(nuevoTeclado);
-
       // Número de productos modificados
       if (nuevo[0] >= 1) {
         res.status(HTTP_OK).send("Teclado modificado.");

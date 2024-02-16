@@ -14,14 +14,14 @@
 }
 
 .contenedor-info h2 {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   font-weight: normal;
   text-decoration: underline;
-  text-align: justify;
+  text-align: center;
   margin-top: 2.5rem;
 }
 
-.contenedor-info h3 {
+.contenedor-info .introduccion {
   font-size: 1.3rem;
   font-weight: normal;
   text-align: justify;
@@ -51,4 +51,22 @@
   width: 100%;
   margin-top: 2rem;
   padding-left: 3rem;
+}
+
+.partes-teclado img {
+  width: 16rem;
+  height: 15rem;
+  border-radius: 7%;
+}
+
+.partes-teclado h3 {
+  text-decoration: underline;
+  font-weight: unset;
+  font-size: 1.5rem;
+}
+
+.partes-teclado .contenedor-imagenes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
