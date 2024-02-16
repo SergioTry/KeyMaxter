@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const multer = require("multer");
 const fs = require("fs");
@@ -6,6 +7,8 @@ const bodyParser = require("body-parser");
 const db = require("./db.js");
 
 const app = express();
+
+const PORT = process.env.PORT || 5500;
 
 const HTTP_OK = 200;
 const HTTP_CREATED = 201;
@@ -130,6 +133,7 @@ app.post(
       // en files se encuentran los archivos subidos
       // en body se encuentran los campos de texto
       const nuevoTeclado = crearNuevoProducto(req, "teclado");
+      console.log(nuevoTeclado);
       const nuevo = await db.altaTeclado(nuevoTeclado);
       res
         .status(HTTP_CREATED)
@@ -158,6 +162,7 @@ app.post(
   async (req, res, next) => {
     try {
       const nuevoSwitch = crearNuevoProducto(req, "switch");
+      console.log(nuevoSwitch);
       const nuevo = await db.altaSwitch(nuevoSwitch);
       res
         .status(HTTP_CREATED)
@@ -239,13 +244,13 @@ app.delete("/teclados/:id", async (req, res, next) => {
     const borrado = await db.borrarTeclado(id);
     // Número de productos borrados
     if (borrado >= 1) {
-      if (tecladoBorrado.image1) {
+      if (tecladoBorrado[0].image1) {
         borrarImagen(
           "public/Media/Products/" + tecladoBorrado[0].image1,
           tecladoBorrado[0].image1
         );
       }
-      if (tecladoBorrado.image2) {
+      if (tecladoBorrado[0].image2) {
         borrarImagen(
           "public/Media/Products/" + tecladoBorrado[0].image2,
           tecladoBorrado[0].image2
@@ -359,8 +364,8 @@ function crearCarpetaSiNoExiste() {
 
 crearCarpetaSiNoExiste();
 
-app.listen(5500, () => {
+app.listen(PORT, () => {
   try {
-    console.log("Servicio escuchando");
+    console.log(`Servicio escuchando en el puerto: ${PORT}`);
   } catch {}
 });

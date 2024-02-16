@@ -30,3 +30,25 @@
   margin-inline: 0px;
   margin-block: 0px;
 }
+
+.indice-partes-teclado {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+.indice-partes-teclado ol {
+  font-size: 1.2rem;
+  width: 30%;
+}
+
+.indice-partes-teclado img {
+  width: 50%;
+}
+
+.partes-teclado{
+  width: 100%;
+  margin-top: 2rem;
+  padding-left: 3rem;
+}

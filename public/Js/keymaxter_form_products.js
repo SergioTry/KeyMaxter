@@ -34,6 +34,7 @@ async function enviarFormulario(evt) {
   if (image2) formData.append("imagen2", image2);
 
   let resp;
+  console.log(formData);
   if (tipoAccion.value == "0") {
     if (tipoProducto.value == "0") {
       resp = await fetch("/teclados", {
@@ -63,20 +64,26 @@ async function enviarFormulario(evt) {
 
   console.log(data);
   if (resp.ok) {
-    // Hago esto en vez de resetear el formulario entero
-    // para no resetear los select
-    var fieldsToReset = document.querySelectorAll("input");
-    for (var i = 0; i < fieldsToReset.length; i++) {
-      fieldsToReset[i].value = null;
-    }
-    image1 = undefined;
-    image2 = undefined;
-    newImage.src = "/Media/add_photo.png";
-    imgLocation.style.border = "dashed";
+    resetInputs();
     alert("Todo ha ido bien");
   } else {
     alert(resp.status + ": " + data);
   }
+}
+
+function resetInputs() {
+  // Hago esto en vez de resetear el formulario entero
+  // para no resetear los select
+  var fieldsToReset = document.querySelectorAll("input");
+  for (var i = 0; i < fieldsToReset.length; i++) {
+    fieldsToReset[i].value = null;
+  }
+  radio1.checked = true;
+  radio2.checked = false;
+  image1 = undefined;
+  image2 = undefined;
+  newImage.src = "/Media/add_photo.png";
+  imgLocation.style.border = "dashed";
 }
 
 function saveImg() {
