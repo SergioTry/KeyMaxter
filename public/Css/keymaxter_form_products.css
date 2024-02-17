@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nova+Square&display=swap");
 
 * {
   box-sizing: border-box;
@@ -130,6 +131,7 @@ form {
 }
 
 select {
+  font-family: "Fredoka", sans-serif;
   font-size: 0.6rem;
   padding: 0px;
   letter-spacing: none;
@@ -151,6 +153,7 @@ option {
 }
 
 .input-text {
+  font-family: "Fredoka", sans-serif;
   font-size: 0.5rem;
   margin: 0.2rem;
 }

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nova+Square&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nova+Square&display=swap");
 
 * {
   box-sizing: border-box;
@@ -61,11 +61,13 @@ dialog::backdrop {
 }
 
 .login-input-container {
+  font-family: "Fredoka", sans-serif;
   display: flex;
   flex-direction: column;
 }
 
 .input-text {
+  font-family: "Fredoka", sans-serif;
   font-size: 1rem;
   width: 9rem;
 }

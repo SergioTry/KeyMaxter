@@ -150,12 +150,14 @@ function changeProducto() {
     colorContenedor[0].style.display = "flex";
     labelDesigner.textContent = "Marca*:";
     inputDesigner.setAttribute("name", "marca");
+    inputDesigner.setAttribute("placeholder", "Gateron");
     inputColor.removeAttribute("disabled");
   } else {
     enlaceContenedor[0].style.gridColumn = "1 / 3";
     colorContenedor[0].style.display = "none";
     labelDesigner.textContent = "Autor*:";
     inputDesigner.setAttribute("name", "autor");
+    inputDesigner.setAttribute("placeholder", "Alberto Álvarez");
     inputColor.setAttribute("disabled", "");
   }
 }
