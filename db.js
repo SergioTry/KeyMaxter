@@ -1,5 +1,4 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const multer = require("multer");
 
 const sequelize = new Sequelize("XE", "keymaxter", "deamu", {
   host: "localhost",

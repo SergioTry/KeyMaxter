@@ -34,7 +34,7 @@ async function enviarFormulario(evt) {
   if (image2) formData.append("imagen2", image2);
 
   let resp;
-  console.log(formData);
+
   if (tipoAccion.value == "0") {
     if (tipoProducto.value == "0") {
       resp = await fetch("/teclados", {
@@ -87,10 +87,13 @@ function resetInputs() {
 }
 
 function saveImg() {
+  console.log("saveImg");
   if (inputImg.files && inputImg.files[0]) {
     if (radio1.checked) {
+      console.log("radio1.checked");
       image1 = inputImg.files[0];
     } else {
+      console.log("radio2.checked");
       image2 = inputImg.files[0];
     }
     cargarPreview(inputImg.files[0], newImage);

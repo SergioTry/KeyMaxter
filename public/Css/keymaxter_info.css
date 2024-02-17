@@ -11,6 +11,7 @@
 
 .contenedor-info h1 {
   font-size: 2rem;
+  text-align: center;
 }
 
 .contenedor-info h2 {
@@ -47,7 +48,7 @@
   width: 50%;
 }
 
-.partes-teclado{
+.partes-teclado {
   width: 100%;
   margin-top: 2rem;
   padding-left: 3rem;
@@ -69,4 +70,8 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+
+.seccion-informacion {
+  margin: 2rem;
 }

@@ -156,7 +156,6 @@ async function aplicarFiltro(evt) {
 function asociarImagenesProductos(productos) {
   const prefix = "/Media/Products/";
   productos.forEach((producto) => {
-    console.log(producto);
     if (producto.image1) {
       producto.image1 = prefix + producto.image1;
       if (producto.image2) {

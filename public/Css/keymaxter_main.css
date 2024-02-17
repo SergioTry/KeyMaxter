@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nova+Square&display=swap');
 
 * {
   box-sizing: border-box;
 }
-/* #c4b5db */
 
 body {
   background-image: url("/Media/key_rain_purple.jpg");

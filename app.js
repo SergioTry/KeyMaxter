@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
 });
 
 const fileFilter = function (req, file, cb) {
-  // Verificar el tipo MIME del archivo
+  // Verifica el tipo MIME del archivo
   if (file.mimetype.startsWith("image/")) {
     cb(null, true); // Aceptar el archivo
   } else {
@@ -323,9 +323,17 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
       precio: req.body.precio.trim(),
       autor: req.body.autor.trim(),
       image1:
-        req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
+        req.files && req.files.imagen1
+          ? req.files.imagen1[0].filename
+          : req.files.imagen2
+          ? req.files.imagen2[0].filename
+          : null,
       image2:
-        req.files && req.files.imagen2 ? req.files.imagen2[0].filename : null,
+        req.files && req.files.imagen2
+          ? req.files.imagen1
+            ? req.files.imagen2[0].filename
+            : null
+          : null,
     };
   } else {
     return {
@@ -335,9 +343,17 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
       marca: req.body.marca.trim(),
       color: req.body.color.trim(),
       image1:
-        req.files && req.files.imagen1 ? req.files.imagen1[0].filename : null,
+        req.files && req.files.imagen1
+          ? req.files.imagen1[0].filename
+          : req.files.imagen2
+          ? req.files.imagen2[0].filename
+          : null,
       image2:
-        req.files && req.files.imagen2 ? req.files.imagen2[0].filename : null,
+        req.files && req.files.imagen2
+          ? req.files.imagen1
+            ? req.files.imagen2[0].filename
+            : null
+          : null,
     };
   }
 }
