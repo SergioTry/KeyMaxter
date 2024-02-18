@@ -50,8 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
 let timeout;
 function debounce(funcion, args) {
-  if (timeout) clearTimeout(timeout);
-  timeout = setTimeout(() => funcion(args), TIEMPO_DEBOUNCE_MS);
+  if (tipoAccion.value == "1") {
+    if (timeout) clearTimeout(timeout);
+    timeout = setTimeout(() => funcion(args), TIEMPO_DEBOUNCE_MS);
+  }
 }
 
 async function buscarProducto() {
@@ -75,16 +77,20 @@ function rellenarCampos(producto) {
   inputColor.value = producto.color ? producto.color : null;
   if (producto.image1) {
     const prefix = "/Media/Products/";
-    image1 = producto.image1;
-    image2 = producto.image2 ? producto.image2 : null;
-    newImage.src = prefix + image1;
+    image1 = prefix + producto.image1;
+    image2 = producto.image2 ? prefix + producto.image2 : null;
+    newImage.src = image1;
     imgLocation.style.border = "none";
   }
   inputAutor.disabled = false;
   inputImg.disabled = false;
   inputPrecio.disabled = false;
   inputEnlace.disabled = false;
-  inputColor.disabled = false;
+  if (tipoProducto.value == "1") {
+    inputColor.disabled = false;
+  } else {
+    inputColor.disabled = true;
+  }
 }
 
 async function enviarFormulario(evt) {
@@ -152,7 +158,6 @@ function resetInputs() {
 }
 
 function saveImg() {
-  console.log("saveImg");
   if (inputImg.files && inputImg.files[0]) {
     if (radio1.checked) {
       console.log("radio1.checked");
@@ -186,13 +191,18 @@ function radioChanged() {
 }
 
 function cargarPreview(file, imgElement) {
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    imgElement.src = e.target.result;
+  if (file instanceof File) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      imgElement.src = e.target.result;
+      imgLocation.style.border = "none";
+    };
+    // Leer el archivo como una URL de datos
+    reader.readAsDataURL(file);
+  } else {
+    imgElement.src = file;
     imgLocation.style.border = "none";
-  };
-  // Leer el archivo como una URL de datos
-  reader.readAsDataURL(file);
+  }
 }
 
 function changeAction() {
@@ -210,7 +220,11 @@ function changeAction() {
     inputImg.disabled = false;
     inputPrecio.disabled = false;
     inputEnlace.disabled = false;
-    inputColor.disabled = false;
+    if (tipoProducto.value == "1") {
+      inputColor.disabled = false;
+    } else {
+      inputColor.disabled = true;
+    }
   }
 }
 
@@ -220,21 +234,32 @@ function changeProducto() {
   const inputColor = document.getElementById("color");
   const colorContenedor = document.getElementsByClassName("campo-color");
   const enlaceContenedor = document.getElementsByClassName("enlace");
-  console.log(enlaceContenedor[0].style);
+
+  resetInputs();
+  if (tipoAccion.value == "1") {
+    inputAutor.disabled = true;
+    inputImg.disabled = true;
+    inputPrecio.disabled = true;
+    inputEnlace.disabled = true;
+  }
   if (tipoProducto.value == "1") {
     enlaceContenedor[0].style.gridColumn = "2 / 3";
     colorContenedor[0].style.display = "flex";
     labelDesigner.textContent = "Marca*:";
     inputDesigner.setAttribute("name", "marca");
     inputDesigner.setAttribute("placeholder", "Gateron");
-    inputColor.removeAttribute("disabled");
+    if (tipoAccion.value == "1") {
+      inputColor.disabled = true;
+    } else {
+      inputColor.disabled = false;
+    }
   } else {
     enlaceContenedor[0].style.gridColumn = "1 / 3";
     colorContenedor[0].style.display = "none";
     labelDesigner.textContent = "Autor*:";
     inputDesigner.setAttribute("name", "autor");
     inputDesigner.setAttribute("placeholder", "Alberto Álvarez");
-    inputColor.setAttribute("disabled", "");
+    inputColor.disabled = true;
   }
 }
 
