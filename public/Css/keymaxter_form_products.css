@@ -6,7 +6,7 @@
 }
 
 html {
-  font-size: 32px;
+  font-size: 52px;
   font-family: "Nova Square", sans-serif;
 }
 
@@ -238,7 +238,7 @@ button:active p {
   background-color: transparent;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 975px) {
   html {
     font-size: 24px;
   }

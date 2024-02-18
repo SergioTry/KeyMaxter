@@ -100,6 +100,15 @@ app.get("/teclados/autores", async (req, res, next) => {
   }
 });
 
+app.get("/teclados/:modelo", async (req, res, next) => {
+  try {
+    const modelo = req.params.modelo;
+    res.send(await db.getTecladoByModelo(modelo));
+  } catch (err) {
+    next(err);
+  }
+});
+
 app.get("/switchs", async (req, res, next) => {
   try {
     const marca = req.query.marca;
@@ -113,6 +122,15 @@ app.get("/switchs", async (req, res, next) => {
 app.get("/switchs/marcas", async (req, res, next) => {
   try {
     res.send(await db.listarMarcasSwitchs());
+  } catch (err) {
+    next(err);
+  }
+});
+
+app.get("/switchs/:modelo", async (req, res, next) => {
+  try {
+    const modelo = req.params.modelo;
+    res.send(await db.getSwitchByModelo(modelo));
   } catch (err) {
     next(err);
   }

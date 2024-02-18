@@ -1,19 +1,45 @@
-const tipoAccion = document.getElementById("tipoAccion");
-const tipoProducto = document.getElementById("tipoProducto");
-const boton = document.getElementById("button");
-const inputImg = document.getElementById("image");
-const imgLocation = document.getElementById("image-location");
-const newImage = document.getElementById("newImage");
-const form = document.querySelector("form");
-const radio1 = document.getElementById("radio1");
-const radio2 = document.getElementById("radio2");
+const TIEMPO_DEBOUNCE_MS = 1000;
+
+let tipoAccion;
+let tipoProducto;
+let boton;
+
+let inputImg;
+let inputModelo;
+let inputAutor;
+let inputPrecio;
+let inputColor;
+let inputEnlace;
+
+let imgLocation;
+let newImage;
+let form;
+let radio1;
+let radio2;
 
 let image1;
 let image2;
 
 document.addEventListener("DOMContentLoaded", function () {
+  tipoAccion = document.getElementById("tipoAccion");
+  tipoProducto = document.getElementById("tipoProducto");
+  boton = document.getElementById("button");
+  inputImg = document.getElementById("image");
+  inputModelo = document.getElementById("modelo");
+  inputAutor = document.getElementById("autor");
+  inputPrecio = document.getElementById("precio");
+  inputColor = document.getElementById("color");
+  inputEnlace = document.getElementById("enlace");
+  imgLocation = document.getElementById("image-location");
+  newImage = document.getElementById("newImage");
+  form = document.querySelector("form");
+  radio1 = document.getElementById("radio1");
+  radio2 = document.getElementById("radio2");
+
   window.addEventListener("load", borrarBanner);
   window.addEventListener("resize", borrarBanner);
+  window.addEventListener("wheel", borrarBanner);
+  inputModelo.addEventListener("keyup", (evt) => debounce(buscarProducto, evt));
   inputImg.addEventListener("change", saveImg);
   form.addEventListener("submit", enviarFormulario);
   radio1.addEventListener("change", radioChanged);
@@ -21,6 +47,45 @@ document.addEventListener("DOMContentLoaded", function () {
   tipoAccion.addEventListener("change", changeAction);
   tipoProducto.addEventListener("change", changeProducto);
 });
+
+let timeout;
+function debounce(funcion, args) {
+  if (timeout) clearTimeout(timeout);
+  timeout = setTimeout(() => funcion(args), TIEMPO_DEBOUNCE_MS);
+}
+
+async function buscarProducto() {
+  let direccion = tipoProducto.value == "1" ? "switchs" : "teclados";
+  const modelo = inputModelo.value;
+  console.log(`/${direccion}/${modelo}`);
+  const resp = await fetch(`/${direccion}/${modelo}`, {
+    method: "GET",
+  });
+
+  const producto = await resp.json();
+  if (resp.ok && producto.length == 1) {
+    rellenarCampos(producto[0]);
+  }
+}
+
+function rellenarCampos(producto) {
+  inputAutor.value = producto.autor ? producto.autor : producto.marca;
+  inputPrecio.value = producto.precio;
+  inputEnlace.value = producto.enlace;
+  inputColor.value = producto.color ? producto.color : null;
+  if (producto.image1) {
+    const prefix = "/Media/Products/";
+    image1 = producto.image1;
+    image2 = producto.image2 ? producto.image2 : null;
+    newImage.src = prefix + image1;
+    imgLocation.style.border = "none";
+  }
+  inputAutor.disabled = false;
+  inputImg.disabled = false;
+  inputPrecio.disabled = false;
+  inputEnlace.disabled = false;
+  inputColor.disabled = false;
+}
 
 async function enviarFormulario(evt) {
   evt.preventDefault();
@@ -131,10 +196,21 @@ function cargarPreview(file, imgElement) {
 }
 
 function changeAction() {
+  resetInputs();
   if (tipoAccion.value == "1") {
     boton.childNodes[1].textContent = "Modificar";
+    inputAutor.disabled = true;
+    inputImg.disabled = true;
+    inputPrecio.disabled = true;
+    inputEnlace.disabled = true;
+    inputColor.disabled = true;
   } else {
     boton.childNodes[1].textContent = "Añadir";
+    inputAutor.disabled = false;
+    inputImg.disabled = false;
+    inputPrecio.disabled = false;
+    inputEnlace.disabled = false;
+    inputColor.disabled = false;
   }
 }
 
@@ -168,14 +244,15 @@ function borrarBanner() {
   const imagenHeader = document.getElementById("headerPrincipal");
   const formulario = document.querySelector("form");
   const titulo = document.querySelector("h1");
-  if (anchoVentana <= 950 || altoVentana <= 640) {
+  const unidadRemAncho = remToPixels(29.67);
+  const unidadRemVentana = remToPixels(32.5);
+  if (anchoVentana <= unidadRemAncho || altoVentana <= unidadRemVentana) {
     imagenHeader.style.display = "none";
     if (anchoVentana > altoVentana) {
       titulo.style.fontSize = "0.875rem";
       formulario.style.overflowY = "scroll";
       formulario.style.gridTemplateRows = "none";
       formulario.style.marginBottom = "0.3rem";
-    } else {
     }
   } else {
     imagenHeader.style.display = "flex";
@@ -183,4 +260,8 @@ function borrarBanner() {
     formulario.style.overflowY = "hidden";
     formulario.style.marginBottom = "none";
   }
+}
+
+function remToPixels(rem) {
+  return rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 }

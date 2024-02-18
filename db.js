@@ -264,11 +264,29 @@ exports.getTecladoById = async function (id) {
   });
 };
 
+exports.getTecladoByModelo = async function (modelo) {
+  await sincronizarDB();
+  return await ModeloTeclado.findAll({
+    where: {
+      modelo: modelo,
+    },
+  });
+};
+
 exports.getSwitchById = async function (id) {
   await sincronizarDB();
   return await ModeloSwitch.findAll({
     where: {
       id: id,
+    },
+  });
+};
+
+exports.getSwitchByModelo = async function (modelo) {
+  await sincronizarDB();
+  return await ModeloSwitch.findAll({
+    where: {
+      modelo: modelo,
     },
   });
 };
