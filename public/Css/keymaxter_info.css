@@ -60,6 +60,12 @@
   padding-left: 3rem;
 }
 
+.partes-teclado .gif {
+  width: auto;
+  height: auto;
+  border-radius: 0.9375rem;
+}
+
 .partes-teclado img {
   width: 16rem;
   height: 15rem;
@@ -77,6 +83,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 0.5rem;
 }
 
 .seccion-informacion {
@@ -89,4 +96,19 @@
 
 .partes-teclado h5 {
   font-family: "Fredoka", sans-serif;
+  font-size: 0.95rem;
+  margin-block: 0px;
+  margin-inline: 0px;
+}
+
+.rojo {
+  color: red;
+}
+
+.azul {
+  color: blue;
+}
+
+.marron {
+  color: rgb(79, 49, 20);
 }
