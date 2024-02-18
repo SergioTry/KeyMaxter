@@ -4,6 +4,7 @@ let settingItem = document.getElementById("settingsItem");
 const imagenSideBar = document.getElementById("imagenSideBar");
 const audioEtiqueta = document.querySelector("audio");
 const menuDesplegable = document.getElementById("menuDesplegable");
+const botonesInfo = document.getElementsByClassName("boton-info");
 const botonesTeclados = document.getElementsByClassName("boton-teclados");
 const botonesSwitchs = document.getElementsByClassName("boton-switchs");
 const botonesSimulador = document.getElementsByClassName("boton-simulador");
@@ -19,6 +20,9 @@ let isAdmin;
 document.addEventListener("DOMContentLoaded", function () {
   validateAdmin();
   imagenSideBar.addEventListener("click", reproducirSonido);
+  for (botonI of botonesInfo) {
+    botonI.addEventListener("click", mostrarInformacion);
+  }
   for (botonT of botonesTeclados) {
     botonT.addEventListener("click", getTeclados);
   }
@@ -48,6 +52,17 @@ function validateAdmin() {
 }
 
 var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
+
+async function mostrarInformacion() {
+  cerrarDesplegable();
+  try {
+    const response = await fetch("info.html");
+    const html = await response.text();
+    output.innerHTML = html;
+  } catch (error) {
+    alert("Error al cargar el archivo:", error);
+  }
+}
 
 function mostrarSimulador() {
   cerrarDesplegable();

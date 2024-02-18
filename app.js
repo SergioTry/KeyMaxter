@@ -5,6 +5,28 @@ const fs = require("fs");
 const { Sequelize } = require("sequelize");
 const bodyParser = require("body-parser");
 const db = require("./db.js");
+const os = require("os");
+
+// Obtiene la lista de interfaces de red
+const interfaces = os.networkInterfaces();
+
+// Filtra las interfaces para encontrar la dirección IP del adaptador Ethernet
+const ethernetInterface =
+  interfaces.eth0 ||
+  interfaces.en0 ||
+  interfaces["Ethernet"] ||
+  interfaces["Local Area Connection"];
+
+// Obtener la dirección IP
+let ipAddress = null;
+if (ethernetInterface && ethernetInterface.length > 0) {
+  for (const iface of ethernetInterface) {
+    if (iface.family === "IPv4") {
+      ipAddress = iface.address;
+      break;
+    }
+  }
+}
 
 const app = express();
 
@@ -67,12 +89,12 @@ app.post("/login", async (req, res, next) => {
     if (username == "admin" && password == "admin") {
       res.redirect(
         HTTP_MODIFIED,
-        "http://localhost:5500/keymaxter_main.html?admin=true"
+        `http://${ipAddress}:5500/keymaxter_main.html?admin=true`
       );
     } else {
       res.redirect(
         HTTP_MODIFIED,
-        "http://localhost:5500/keymaxter_main.html?admin=false"
+        `http://${ipAddress}:5500/keymaxter_main.html?admin=false`
       );
     }
   } catch (err) {
@@ -399,6 +421,8 @@ crearCarpetaSiNoExiste();
 
 app.listen(PORT, () => {
   try {
-    console.log(`Servicio escuchando en el puerto: ${PORT}`);
+    console.log(
+      `Servicio escuchando en el puerto: ${PORT}, en la direccion: ${ipAddress}`
+    );
   } catch {}
 });

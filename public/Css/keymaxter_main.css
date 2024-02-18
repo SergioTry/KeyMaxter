@@ -706,4 +706,8 @@ iframe {
   .contenedor-select-filtro {
     flex-direction: column;
   }
+
+  .partes-teclado {
+    padding-left: 0.5rem !important;
+  }
 }

@@ -79,11 +79,20 @@
   font-size: 1.5rem;
 }
 
-.partes-teclado .contenedor-imagenes {
+.contenedor-imagenes {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 0.5rem;
+}
+
+.contenedor-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0.5rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .seccion-informacion {
@@ -111,4 +120,13 @@
 
 .marron {
   color: rgb(79, 49, 20);
+}
+
+.referencias {
+  width: 100%;
+}
+
+.link-yt {
+  width: 18rem;
+  height: 10rem;
 }
