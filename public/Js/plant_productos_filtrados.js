@@ -27,7 +27,7 @@ else {
 pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FMedia\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
 }
 }
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)+" rel=\"noopener noreferrer\"") + "\u003EEnlace\u003C\u002Fa\u003E";
 if (producto.autor) {
 pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }
@@ -66,7 +66,7 @@ else {
 pug_html = pug_html + "\u003Cimg class=\"imagen-alone-producto\" src=\"\u002FMedia\u002Fdefault_no_image.png\" alt=\"No hay imagen disponible\"\u002F\u003E";
 }
 }
-pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)) + "\u003EEnlace\u003C\u002Fa\u003E";
+pug_html = pug_html + "\u003C\u002Fdiv\u003E\u003Cp class=\"modelo-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.modelo) ? "" : pug_interp)) + "\u003C\u002Fp\u003E\u003Ca" + (" class=\"enlace-producto\""+pug_attr("href", producto.enlace, true, false)+" rel=\"noopener noreferrer\"") + "\u003EEnlace\u003C\u002Fa\u003E";
 if (producto.autor) {
 pug_html = pug_html + "\u003Cp class=\"filtro-producto\"\u003E" + (pug_escape(null == (pug_interp = producto.autor) ? "" : pug_interp)) + "\u003C\u002Fp\u003E";
 }

@@ -16,7 +16,7 @@ each producto in productos
         else
           img.imagen-alone-producto(src='/Media/default_no_image.png' alt='No hay imagen disponible')
     p.modelo-producto #{producto.modelo}
-    a.enlace-producto(href=producto.enlace) Enlace
+    a.enlace-producto(href=producto.enlace rel="noopener noreferrer") Enlace
     if producto.autor
       p.filtro-producto #{producto.autor}
     else

@@ -1,15 +1,16 @@
-const menuHorizontal = document.getElementById("menuHorizontal");
-const imagenHeader = document.getElementById("imagenHeader");
+let menuHorizontal = document.getElementById("menuHorizontal");
+let menuHorizontalPosicionInicial;
+let imagenHeader = document.getElementById("imagenHeader");
 let settingItem = document.getElementById("settingsItem");
-const imagenSideBar = document.getElementById("imagenSideBar");
-const audioEtiqueta = document.querySelector("audio");
-const menuDesplegable = document.getElementById("menuDesplegable");
-const botonesInfo = document.getElementsByClassName("boton-info");
-const botonesTeclados = document.getElementsByClassName("boton-teclados");
-const botonesSwitchs = document.getElementsByClassName("boton-switchs");
-const botonesSimulador = document.getElementsByClassName("boton-simulador");
-const output = document.querySelector("output");
-const loader = document.getElementById("loader");
+let imagenSideBar = document.getElementById("imagenSideBar");
+let audioEtiqueta = document.querySelector("audio");
+let menuDesplegable = document.getElementById("menuDesplegable");
+let botonesInfo = document.getElementsByClassName("boton-info");
+let botonesTeclados = document.getElementsByClassName("boton-teclados");
+let botonesSwitchs = document.getElementsByClassName("boton-switchs");
+let botonesSimulador = document.getElementsByClassName("boton-simulador");
+let output = document.querySelector("output");
+let loader = document.getElementById("loader");
 
 let ordenAscendente;
 let ordenDescendente;
@@ -18,6 +19,19 @@ let selectFiltro;
 let isAdmin;
 
 document.addEventListener("DOMContentLoaded", function () {
+  menuHorizontal = document.getElementById("menuHorizontal");
+  menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
+  imagenHeader = document.getElementById("imagenHeader");
+  settingItem = document.getElementById("settingsItem");
+  imagenSideBar = document.getElementById("imagenSideBar");
+  audioEtiqueta = document.querySelector("audio");
+  menuDesplegable = document.getElementById("menuDesplegable");
+  botonesInfo = document.getElementsByClassName("boton-info");
+  botonesTeclados = document.getElementsByClassName("boton-teclados");
+  botonesSwitchs = document.getElementsByClassName("boton-switchs");
+  botonesSimulador = document.getElementsByClassName("boton-simulador");
+  output = document.querySelector("output");
+  loader = document.getElementById("loader");
   validateAdmin();
   imagenSideBar.addEventListener("click", reproducirSonido);
   for (botonI of botonesInfo) {
@@ -50,8 +64,6 @@ function validateAdmin() {
     }
   }
 }
-
-var menuHorizontalPosicionInicial = menuHorizontal.offsetTop;
 
 async function mostrarInformacion() {
   cerrarDesplegable();
@@ -130,8 +142,9 @@ async function cargarProductos(respProductos, respFiltro) {
 }
 
 async function aplicarFiltro(evt) {
-  // Este método valida si el radio pulsado está ya seleccionado
-  // y en caso positivo lo deselecciona.
+  // Este método valida si el checkbox pulsado está ya seleccionado
+  // y en caso positivo lo deselecciona. Si se selecciona otro, en caso
+  // de que haya uno ya seleccionado este se desactiva.
   validarActivacion(evt);
   loader.className = "cargando";
   const direccion =

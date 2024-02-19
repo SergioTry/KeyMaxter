@@ -124,7 +124,7 @@
 }
 
 .grid-box a {
-  color: #26d9d9;
+  color: var(--color_cyan);
   text-align: center;
   text-decoration: underline;
 }

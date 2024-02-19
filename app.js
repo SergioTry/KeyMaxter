@@ -83,7 +83,6 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post("/login", async (req, res, next) => {
   try {
-    console.log(req.body);
     const username = req.body.username;
     const password = req.body.password;
     if (username == "admin" && password == "admin") {
@@ -107,7 +106,6 @@ app.get("/teclados", async (req, res, next) => {
   try {
     const autor = req.query.autor;
     const orden = req.query.orden;
-    console.log(autor, orden);
     res.send(await db.listarTeclados(autor, orden));
   } catch (err) {
     next(err);
@@ -173,7 +171,6 @@ app.post(
       // en files se encuentran los archivos subidos
       // en body se encuentran los campos de texto
       const nuevoTeclado = crearNuevoProducto(req, "teclado");
-      console.log(nuevoTeclado);
       const nuevo = await db.altaTeclado(nuevoTeclado);
       res
         .status(HTTP_CREATED)
@@ -202,7 +199,6 @@ app.post(
   async (req, res, next) => {
     try {
       const nuevoSwitch = crearNuevoProducto(req, "switch");
-      console.log(nuevoSwitch);
       const nuevo = await db.altaSwitch(nuevoSwitch);
       res
         .status(HTTP_CREATED)
@@ -362,18 +358,8 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
       enlace: req.body.enlace.trim(),
       precio: req.body.precio.trim(),
       autor: req.body.autor.trim(),
-      image1:
-        req.files && req.files.imagen1
-          ? req.files.imagen1[0].filename
-          : req.files.imagen2
-          ? req.files.imagen2[0].filename
-          : null,
-      image2:
-        req.files && req.files.imagen2
-          ? req.files.imagen1
-            ? req.files.imagen2[0].filename
-            : null
-          : null,
+      image1: comprovacionImagen(req, 1),
+      image2: comprovacionImagen(req, 2),
     };
   } else {
     return {
@@ -382,19 +368,61 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
       precio: req.body.precio.trim(),
       marca: req.body.marca.trim(),
       color: req.body.color.trim(),
-      image1:
-        req.files && req.files.imagen1
-          ? req.files.imagen1[0].filename
-          : req.files.imagen2
-          ? req.files.imagen2[0].filename
-          : null,
-      image2:
-        req.files && req.files.imagen2
-          ? req.files.imagen1
-            ? req.files.imagen2[0].filename
-            : null
-          : null,
+      image1: comprovacionImagen(req, 1),
+      image2: comprovacionImagen(req, 2),
     };
+  }
+}
+
+// Este método es necesario para comprobar si la imagen no ha sido modificada
+// o si es para introducir una nueva.
+function comprovacionImagen(req, number) {
+  if (req.files && (req.files.imagen1 || req.files.imagen2)) {
+    if (number == 1) {
+      if (req.files.imagen1) {
+        return req.files.imagen1[0].filename;
+      } else {
+        if (req.files.imagen2) {
+          return req.files.imagen2[0].filename;
+        } else {
+          return null;
+        }
+      }
+    } else {
+      if (req.files.imagen2) {
+        if (req.files.imagen1) {
+          return req.files.imagen2[0].filename;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    }
+  } else {
+    if (number == 1) {
+      if (req.body.imagen1) {
+        // Se va a recibir con la ruta de la carpeta que no es necesaria.
+        // Utilizo el replace en formato regex para quitar la ruta del principio.
+        return req.body.imagen1.replace(/^\/Media\/Products\//, "");
+      } else {
+        if (req.body.imagen2) {
+          return req.body.imagen2.replace(/^\/Media\/Products\//, "");
+        } else {
+          return null;
+        }
+      }
+    } else {
+      if (req.body.imagen2) {
+        if (req.body.imagen1) {
+          return req.body.imagen1;
+        } else {
+          return null;
+        }
+      } else {
+        return null;
+      }
+    }
   }
 }
 

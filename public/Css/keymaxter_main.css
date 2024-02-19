@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Nova+Square&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nova+Square&display=swap");
 
+:root {
+  --color_cyan: #26d9d9;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -19,14 +23,11 @@ html {
   width: 65rem;
   object-fit: none;
 }
-.prueba {
-  width: 100px;
-  height: 100px;
-  background-color: red;
-}
+
 dialog::backdrop {
   backdrop-filter: blur(4px);
 }
+
 #settingsItem {
   display: none;
 }
@@ -159,7 +160,7 @@ dialog::backdrop {
   background-color: blueviolet;
   border-radius: 50%;
   overflow: hidden;
-  border: 0.1rem solid #26d9d9;
+  border: 0.1rem solid var(--color_cyan);
   transition: border 0.3s ease;
 }
 .contenedor-menu-horizontal nav .menu-horizontal li a,
@@ -204,7 +205,7 @@ dialog::backdrop {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: #26d9d9; /* Cambia los colores según tu preferencia */
+  background: var(--color_cyan); /* Cambia los colores según tu preferencia */
   transition: left 0.3s ease;
 }
 
@@ -335,7 +336,7 @@ dialog::backdrop {
       border-radius: 0.625rem;
       box-shadow: 0.09375rem 0.1875rem 0.3125rem black;
       z-index: 34252345;
-      border: #26d9d9 0.1875rem outset;
+      border: var(--color_cyan) 0.1875rem outset;
       background-color: white;
       transition: 0.5s;
       p {
@@ -419,7 +420,7 @@ output {
   position: absolute;
   top: 50%;
   width: 4px;
-  color: #26d9d9;
+  color: var(--color_cyan);
   aspect-ratio: 1;
   border-radius: 50%;
   box-shadow: 19px -19px 0 0px, 38px -19px 0 0px, 57px -19px 0 0px, 19px 0 0 5px,
@@ -599,7 +600,7 @@ footer {
   margin-bottom: 0.4rem;
 }
 .rss-icon {
-  fill: #26d9d9;
+  fill: var(--color_cyan);
   margin: 0.2rem;
 }
 .rss-icon:hover {

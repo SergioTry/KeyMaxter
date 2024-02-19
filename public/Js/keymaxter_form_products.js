@@ -1,4 +1,4 @@
-const TIEMPO_DEBOUNCE_MS = 1000;
+const TIEMPO_DEBOUNCE_MS = 700;
 
 let tipoAccion;
 let tipoProducto;
@@ -59,7 +59,6 @@ function debounce(funcion, args) {
 async function buscarProducto() {
   let direccion = tipoProducto.value == "1" ? "switchs" : "teclados";
   const modelo = inputModelo.value;
-  console.log(`/${direccion}/${modelo}`);
   const resp = await fetch(`/${direccion}/${modelo}`, {
     method: "GET",
   });
@@ -91,6 +90,7 @@ function rellenarCampos(producto) {
   } else {
     inputColor.disabled = true;
   }
+  inputModelo.readOnly = true;
 }
 
 async function enviarFormulario(evt) {
@@ -133,7 +133,6 @@ async function enviarFormulario(evt) {
   }
   const data = await resp.text();
 
-  console.log(data);
   if (resp.ok) {
     resetInputs();
     alert("Todo ha ido bien");
@@ -153,6 +152,7 @@ function resetInputs() {
   radio2.checked = false;
   image1 = undefined;
   image2 = undefined;
+  inputModelo.readOnly = false;
   newImage.src = "/Media/add_photo.png";
   imgLocation.style.border = "dashed";
 }
@@ -160,10 +160,8 @@ function resetInputs() {
 function saveImg() {
   if (inputImg.files && inputImg.files[0]) {
     if (radio1.checked) {
-      console.log("radio1.checked");
       image1 = inputImg.files[0];
     } else {
-      console.log("radio2.checked");
       image2 = inputImg.files[0];
     }
     cargarPreview(inputImg.files[0], newImage);
