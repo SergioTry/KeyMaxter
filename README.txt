@@ -24,4 +24,8 @@ para que otros dispositivos de la red se puedan conectar.
 3. Para acceder como admin y mostrar la opción de delete o el icono para acceder al formulario para
 la gestión de productos debes introducir usuario: admin y contraseña: admin en el formulario de inicio de sesión.
 
+4. Los enlaces de las redes sociales no me ha dado tiempo ha dejarlos como quería porque no he tenido tiempo de 
+crear las cuentas ni de hacer el sistema de sugerencias por correo que quería implementar. Tampoco me ha dado tiempo
+a implementar el campo para cambiar de idioma.
+
 Te dejo una carpeta PreCarga con imagenes de productos que puedes usar para probarla.
