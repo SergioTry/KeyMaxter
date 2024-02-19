@@ -118,6 +118,7 @@ async function getTeclados() {
 
 async function getSwitchs() {
   cerrarDesplegable();
+  loader.className = "cargando";
   const respSwitchs = await fetch("/switchs", { method: "GET" });
   const respMarcas = await fetch("/switchs/marcas", { method: "GET" });
   await cargarProductos(respSwitchs, respMarcas);

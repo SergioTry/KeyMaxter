@@ -59,13 +59,15 @@ function debounce(funcion, args) {
 async function buscarProducto() {
   let direccion = tipoProducto.value == "1" ? "switchs" : "teclados";
   const modelo = inputModelo.value;
-  const resp = await fetch(`/${direccion}/${modelo}`, {
-    method: "GET",
-  });
+  if (inputModelo.value != "") {
+    const resp = await fetch(`/${direccion}/${modelo}`, {
+      method: "GET",
+    });
 
-  const producto = await resp.json();
-  if (resp.ok && producto.length == 1) {
-    rellenarCampos(producto[0]);
+    const producto = await resp.json();
+    if (resp.ok && producto.length == 1) {
+      rellenarCampos(producto[0]);
+    }
   }
 }
 
@@ -105,7 +107,6 @@ async function enviarFormulario(evt) {
   if (image2) formData.append("imagen2", image2);
 
   let resp;
-
   if (tipoAccion.value == "0") {
     if (tipoProducto.value == "0") {
       resp = await fetch("/teclados", {
@@ -135,6 +136,9 @@ async function enviarFormulario(evt) {
 
   if (resp.ok) {
     resetInputs();
+    if (tipoAccion.value == "1") {
+      changeAction();
+    }
     alert("Todo ha ido bien");
   } else {
     alert(resp.status + ": " + data);

@@ -5,28 +5,6 @@ const fs = require("fs");
 const { Sequelize } = require("sequelize");
 const bodyParser = require("body-parser");
 const db = require("./db.js");
-const os = require("os");
-
-// Obtiene la lista de interfaces de red
-const interfaces = os.networkInterfaces();
-
-// Filtra las interfaces para encontrar la dirección IP del adaptador Ethernet
-const ethernetInterface =
-  interfaces.eth0 ||
-  interfaces.en0 ||
-  interfaces["Ethernet"] ||
-  interfaces["Local Area Connection"];
-
-// Obtener la dirección IP
-let ipAddress = null;
-if (ethernetInterface && ethernetInterface.length > 0) {
-  for (const iface of ethernetInterface) {
-    if (iface.family === "IPv4") {
-      ipAddress = iface.address;
-      break;
-    }
-  }
-}
 
 const app = express();
 
@@ -36,7 +14,6 @@ const HTTP_OK = 200;
 const HTTP_CREATED = 201;
 const HTTP_NO_CONTENT = 204;
 const HTTP_MODIFIED = 301;
-const HTTP_NOT_MODIFIED = 304;
 const HTTP_BAD_REQUEST = 400;
 const HTTP_NOT_FOUND = 404;
 const HTTP_INTERNAL_SERVER_ERROR = 500;
@@ -83,18 +60,12 @@ const upload = multer({ storage: storage, fileFilter: fileFilter });
 
 app.post("/login", async (req, res, next) => {
   try {
-    const username = req.body.username;
-    const password = req.body.password;
+    const username = req.body.username.toLowerCase();
+    const password = req.body.password.toLowerCase();
     if (username == "admin" && password == "admin") {
-      res.redirect(
-        HTTP_MODIFIED,
-        `http://${ipAddress}:5500/keymaxter_main.html?admin=true`
-      );
+      res.redirect(HTTP_MODIFIED, "/keymaxter_main.html?admin=true");
     } else {
-      res.redirect(
-        HTTP_MODIFIED,
-        `http://${ipAddress}:5500/keymaxter_main.html?admin=false`
-      );
+      res.redirect(HTTP_MODIFIED, "/keymaxter_main.html?admin=false");
     }
   } catch (err) {
     next(err);
@@ -377,23 +348,62 @@ function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
 // Este método es necesario para comprobar si la imagen no ha sido modificada
 // o si es para introducir una nueva.
 function comprovacionImagen(req, number) {
+  let imagenTemporal;
   if (req.files && (req.files.imagen1 || req.files.imagen2)) {
     if (number == 1) {
-      if (req.files.imagen1) {
-        return req.files.imagen1[0].filename;
+      if (req.files.imagen1 || req.body.imagen1) {
+        if (req.files.imagen1) {
+          imagenTemporal = req.files.imagen1[0].filename;
+          delete req.files.imagen1;
+          req.added = true;
+          return imagenTemporal;
+        } else {
+          imagenTemporal = req.body.imagen1.replace(/^\/Media\/Products\//, "");
+          delete req.body.imagen1;
+          req.added = true;
+          return imagenTemporal;
+        }
       } else {
-        if (req.files.imagen2) {
-          return req.files.imagen2[0].filename;
+        if (req.files.imagen2 || req.body.imagen2) {
+          if (req.files.imagen2) {
+            imagenTemporal = req.files.imagen2[0].filename;
+            delete req.files.imagen2;
+            req.added = true;
+            return imagenTemporal;
+          } else {
+            imagenTemporal = req.body.imagen2.replace(
+              /^\/Media\/Products\//,
+              ""
+            );
+            delete req.body.imagen2;
+            req.added = true;
+            return imagenTemporal;
+          }
         } else {
           return null;
         }
       }
     } else {
-      if (req.files.imagen2) {
-        if (req.files.imagen1) {
-          return req.files.imagen2[0].filename;
+      if (req.files.imagen2 || req.body.imagen2) {
+        if (req.files.imagen2) {
+          if (req.added) {
+            imagenTemporal = req.files.imagen2[0].filename;
+            delete req.files.imagen2;
+            return imagenTemporal;
+          } else {
+            return null;
+          }
         } else {
-          return null;
+          if (req.added) {
+            imagenTemporal = req.body.imagen2.replace(
+              /^\/Media\/Products\//,
+              ""
+            );
+            delete req.body.imagen2;
+            return imagenTemporal;
+          } else {
+            return null;
+          }
         }
       } else {
         return null;
@@ -404,18 +414,27 @@ function comprovacionImagen(req, number) {
       if (req.body.imagen1) {
         // Se va a recibir con la ruta de la carpeta que no es necesaria.
         // Utilizo el replace en formato regex para quitar la ruta del principio.
-        return req.body.imagen1.replace(/^\/Media\/Products\//, "");
+        imagenTemporal = req.body.imagen1.replace(/^\/Media\/Products\//, "");
+        delete req.body.imagen1;
+        req.added = true;
+        return imagenTemporal;
       } else {
         if (req.body.imagen2) {
-          return req.body.imagen2.replace(/^\/Media\/Products\//, "");
+          imagenTemporal = req.body.imagen2.replace(/^\/Media\/Products\//, "");
+          delete req.body.imagen2;
+          req.added = true;
+          return imagenTemporal;
         } else {
           return null;
         }
       }
     } else {
       if (req.body.imagen2) {
-        if (req.body.imagen1) {
-          return req.body.imagen1;
+        if (req.added) {
+          imagenTemporal = req.body.imagen2.replace(/^\/Media\/Products\//, "");
+          delete req.body.imagen2;
+          req.added = true;
+          return imagenTemporal;
         } else {
           return null;
         }
@@ -449,8 +468,6 @@ crearCarpetaSiNoExiste();
 
 app.listen(PORT, () => {
   try {
-    console.log(
-      `Servicio escuchando en el puerto: ${PORT}, en la direccion: ${ipAddress}`
-    );
+    console.log(`Servicio escuchando en el puerto: ${PORT}.`);
   } catch {}
 });

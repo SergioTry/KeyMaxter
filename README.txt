@@ -18,8 +18,6 @@ de los archivos js, haciendo refactorización y asignando los valores a las vari
 vez cargado el DOM. He mejorado la estructura semántica de algunos archivos html, como por ejemplo
 en el keymaxter_main.html he añadido la etiqueta output para mostrar el contenido dinámico de la
 web.
-He cambiado los links de algunos recursos que usaban "localhost" por la dirección IP del servidor
-para que otros dispositivos de la red se puedan conectar.
 
 3. Para acceder como admin y mostrar la opción de delete o el icono para acceder al formulario para
 la gestión de productos debes introducir usuario: admin y contraseña: admin en el formulario de inicio de sesión.
