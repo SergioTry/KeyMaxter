@@ -10,21 +10,18 @@
         create user keymaxter identified by deamu;
         grant connect, resource to keymaxter;
         ALTER USER keymaxter QUOTA UNLIMITED ON USERS;
-2. Me falta por amplicar mucho la documentación y actualizarla porque
-debido a la excasez de tiempo no voy a poder cumplirlo todo, pero también se han
-añadido cambios que no están reflejados en la documentación.
 
-3. Me falta por mejorar la estructura y organización de los ficheros html y css
-mejorando algunas etiquetas semánticas, entre ellas añadir la etiqueta 
-"output". Mejorar la funcionalidad del menú desplegable en la vista móvil,
-mejorar la funcionalidad del formulario en lo referido a actualizar los produtos,
-implementar un spinner, añadir un fichero .env para establecer el puerto e incluso 
-si me da tiempo implementaré el cambio de idioma pero no creo sinceramente.
-El cambio más grande que falta por implementar es añadir el contenido de información 
-sobre teclados y switch que corresponde al primer botón de la barra lateral que aún no está 
-implementado.
+2. En esta entrega he cambiado casi por completo el funcionamiendo y la interfaz de 
+modificación de produtos. He corregido muchos errores en el alta de productos. He 
+añadido la sección de información de teclados mecánicos. He mejorado la estructura 
+de los archivos js, haciendo refactorización y asignando los valores a las variables una
+vez cargado el DOM. He mejorado la estructura semántica de algunos archivos html, como por ejemplo
+en el keymaxter_main.html he añadido la etiqueta output para mostrar el contenido dinámico de la
+web.
+He cambiado los links de algunos recursos que usaban "localhost" por la dirección IP del servidor
+para que otros dispositivos de la red se puedan conectar.
 
-Para acceder como admin y mostrar la opción de delete o el icono para acceder al formulario para
+3. Para acceder como admin y mostrar la opción de delete o el icono para acceder al formulario para
 la gestión de productos debes introducir usuario: admin y contraseña: admin en el formulario de inicio de sesión.
 
 Te dejo una carpeta PreCarga con imagenes de productos que puedes usar para probarla.
