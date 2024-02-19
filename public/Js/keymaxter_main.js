@@ -50,6 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", situarBotonesHorizontales);
   window.addEventListener("scroll", situarBotonesHorizontales);
   window.addEventListener("wheel", situarBotonesHorizontales);
+
+  mostrarInformacion();
 });
 
 function validateAdmin() {
