@@ -25,7 +25,8 @@ para que otros dispositivos de la red se puedan conectar.
 la gestión de productos debes introducir usuario: admin y contraseña: admin en el formulario de inicio de sesión.
 
 4. Los enlaces de las redes sociales no me ha dado tiempo ha dejarlos como quería porque no he tenido tiempo de 
-crear las cuentas ni de hacer el sistema de sugerencias por correo que quería implementar. Tampoco me ha dado tiempo
-a implementar el campo para cambiar de idioma.
+crear las cuentas ni de hacer el sistema de sugerencias por correo que quería implementar. Tan solo he añadido el enlace 
+a gitHub correspondiente al repositorio de este proyecto.
+Tampoco me ha dado tiempo a implementar el campo para cambiar de idioma.
 
 Te dejo una carpeta PreCarga con imagenes de productos que puedes usar para probarla.
