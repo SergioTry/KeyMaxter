@@ -39,9 +39,10 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("load", borrarBanner);
   window.addEventListener("resize", borrarBanner);
   window.addEventListener("wheel", borrarBanner);
+  form.addEventListener("submit", enviarFormulario);
   inputModelo.addEventListener("keyup", (evt) => debounce(buscarProducto, evt));
   inputImg.addEventListener("change", saveImg);
-  form.addEventListener("submit", enviarFormulario);
+  inputColor.addEventListener("input", comprobarCaracter);
   radio1.addEventListener("change", radioChanged);
   radio2.addEventListener("change", radioChanged);
   tipoAccion.addEventListener("change", changeAction);
@@ -68,6 +69,18 @@ async function buscarProducto() {
     if (resp.ok && producto.length == 1) {
       rellenarCampos(producto[0]);
     }
+  }
+}
+
+function comprobarCaracter(evt) {
+  const ultimoCaracter = inputColor.value.slice(-1);
+
+  if (!isNaN(ultimoCaracter)) {
+    console.log("digito");
+    inputColor.value = inputColor.value.slice(0, -1);
+  } else {
+    inputColor.value =
+      inputColor.value.slice(0, -1) + ultimoCaracter.toUpperCase();
   }
 }
 

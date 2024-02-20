@@ -305,9 +305,7 @@ app.delete("/switchs/:id", async (req, res, next) => {
 app.use(function (err, req, res, next) {
   console.error(err);
   if (err instanceof multer.MulterError)
-    res
-      .status(HTTP_BAD_REQUEST)
-      .send("Error al subir el archivo: " + err.message);
+    res.status(HTTP_BAD_REQUEST).send("Error al subir el archivo: " + err.code);
   else {
     // El ValidationError valida que los campos son correctos
     // (valida que no se intentan añadir campos diferentes a los de la db
@@ -316,6 +314,8 @@ app.use(function (err, req, res, next) {
       res.status(HTTP_BAD_REQUEST).send("Datos incorrectos, " + err.message);
     if (err instanceof Sequelize.DatabaseError)
       res.status(HTTP_INTERNAL_SERVER_ERROR).send("Error en la base de datos.");
+    if ((err = "noCampReceived"))
+      res.status(HTTP_BAD_REQUEST).send("Campos requeridos no encontrados");
     res.status(HTTP_INTERNAL_SERVER_ERROR).send("Error interno del servidor");
   }
 });
@@ -324,19 +324,42 @@ app.use(function (err, req, res, next) {
 // sino lo saco del body
 function crearNuevoProducto(req, tipoProducto, modelo = undefined) {
   if (tipoProducto == "teclado") {
+    if (
+      !req.body.enlace ||
+      !req.body.modelo ||
+      !req.body.precio ||
+      !req.body.autor
+    ) {
+      throw "noCampReceived";
+    }
     return {
       modelo: modelo == undefined ? req.body.modelo.trim() : modelo,
       enlace: req.body.enlace.trim(),
-      precio: req.body.precio.trim(),
+      precio:
+        typeof req.body.precio != "number"
+          ? req.body.precio.trim()
+          : req.body.precio,
       autor: req.body.autor.trim(),
       image1: comprovacionImagen(req, 1),
       image2: comprovacionImagen(req, 2),
     };
   } else {
+    if (
+      !req.body.enlace ||
+      !req.body.modelo ||
+      !req.body.precio ||
+      !req.body.marca ||
+      !req.body.color
+    ) {
+      throw "noCampReceived";
+    }
     return {
       modelo: modelo == undefined ? req.body.modelo.trim() : modelo,
       enlace: req.body.enlace.trim(),
-      precio: req.body.precio.trim(),
+      precio:
+        typeof req.body.precio != "number"
+          ? req.body.precio.trim()
+          : req.body.precio,
       marca: req.body.marca.trim(),
       color: req.body.color.trim(),
       image1: comprovacionImagen(req, 1),
