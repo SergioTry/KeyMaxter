@@ -646,7 +646,7 @@ iframe {
   width: 100%;
 }
 
-@media screen and (max-width: 1306px) {
+@media (max-width: 1306px) {
   html {
     font-size: 16px;
   }
